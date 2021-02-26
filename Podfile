@@ -5,4 +5,6 @@ source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'MangoFixUtil' do
 
+pod 'MangoFix', '= 1.4.4'
+  
 end

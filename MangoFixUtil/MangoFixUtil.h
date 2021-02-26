@@ -1,5 +1,5 @@
 //
-//  EDMangoFix.h
+//  MangoFixUtil.h
 //  Easyder
 //
 //  Created by xuhonggui on 2020/4/9.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EDMangoFixUtil : NSObject
+@interface MangoFixUtil : NSObject
 
 + (instancetype)sharedUtil;
 

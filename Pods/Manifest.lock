@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: 1caca39128df4cc3a140dc839e61e4249d50155f
+PODS:
+  - MangoFix (1.4.4):
+    - symdl
+  - symdl (0.6.0)
+
+DEPENDENCIES:
+  - MangoFix (= 1.4.4)
+
+SPEC REPOS:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - MangoFix
+    - symdl
+
+SPEC CHECKSUMS:
+  MangoFix: 3331b01698e8cf0ef285cbd1e3136652218af20c
+  symdl: 1906f396fff3f7530074ecfc226e17006b12d0a0
+
+PODFILE CHECKSUM: 094bdf4c99002381962bb6ee5a8d834f8558fb3a
 
 COCOAPODS: 1.10.1

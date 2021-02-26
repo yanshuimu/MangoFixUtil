@@ -1,19 +1,19 @@
 //
-//  EDMangoFix.m
+//  MangoFixUtil.m
 //  Easyder
 //
 //  Created by xuhonggui on 2020/4/9.
 //  Copyright © 2020 xuhonggui. All rights reserved.
 //
 
-#import "EDMangoFixUtil.h"
+#import "MangoFixUtil.h"
 #import <objc/message.h>
 
 #define EDStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
 typedef void(^CompleteBlock)(NSDictionary *dict);
 
-@interface EDMangoFixUtil ()
+@interface MangoFixUtil ()
 //
 @property (nonatomic, copy) NSString *appId;
 //
@@ -22,11 +22,11 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
 @property (nonatomic, copy) NSString *privateKey;
 @end
 
-@implementation EDMangoFixUtil
+@implementation MangoFixUtil
 
 + (instancetype)sharedUtil
 {
-    static EDMangoFixUtil *mangoFixUtil = nil;
+    static MangoFixUtil *mangoFixUtil = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
         mangoFixUtil = [[self alloc] init];
@@ -263,7 +263,7 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
             
             if ([data writeToFile:filePath atomically:YES]) {
                 NSLog(@"remote file save success!");
-                if (data.length > 0 && completion) {
+                if (completion) {
                     completion(nil);
                 }
             }
