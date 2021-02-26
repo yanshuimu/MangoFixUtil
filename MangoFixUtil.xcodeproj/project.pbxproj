@@ -7,28 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0458397825E89B8000BBACF2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458397725E89B8000BBACF2 /* AppDelegate.m */; };
-		0458397B25E89B8000BBACF2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458397A25E89B8000BBACF2 /* SceneDelegate.m */; };
-		0458397E25E89B8000BBACF2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458397D25E89B8000BBACF2 /* ViewController.m */; };
-		0458398125E89B8000BBACF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0458397F25E89B8000BBACF2 /* Main.storyboard */; };
-		0458398325E89B8300BBACF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0458398225E89B8300BBACF2 /* Assets.xcassets */; };
-		0458398625E89B8300BBACF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0458398425E89B8300BBACF2 /* LaunchScreen.storyboard */; };
-		0458398925E89B8300BBACF2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458398825E89B8300BBACF2 /* main.m */; };
+		045839A125E8A11D00BBACF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0458399525E8A11D00BBACF2 /* Assets.xcassets */; };
+		045839A225E8A11D00BBACF2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458399625E8A11D00BBACF2 /* ViewController.m */; };
+		045839A625E8A11D00BBACF2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458399C25E8A11D00BBACF2 /* main.m */; };
+		045839A725E8A11D00BBACF2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0458399D25E8A11D00BBACF2 /* AppDelegate.m */; };
+		045839AC25E8A13400BBACF2 /* EDMangoFixUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 045839AA25E8A13300BBACF2 /* EDMangoFixUtil.m */; };
+		045839B525E8A27C00BBACF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */; };
+		045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B425E8A27C00BBACF2 /* Main.storyboard */; };
+		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0458397325E89B8000BBACF2 /* MangoFixUtil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangoFixUtil.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0458397625E89B8000BBACF2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0458397725E89B8000BBACF2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0458397925E89B8000BBACF2 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		0458397A25E89B8000BBACF2 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		0458397C25E89B8000BBACF2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0458397D25E89B8000BBACF2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0458398025E89B8000BBACF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0458398225E89B8300BBACF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0458398525E89B8300BBACF2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0458398725E89B8300BBACF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0458398825E89B8300BBACF2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0458399425E8A11D00BBACF2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0458399525E8A11D00BBACF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0458399625E8A11D00BBACF2 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		0458399C25E8A11D00BBACF2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0458399D25E8A11D00BBACF2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0458399E25E8A11D00BBACF2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0458399F25E8A11D00BBACF2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		045839AA25E8A13300BBACF2 /* EDMangoFixUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDMangoFixUtil.m; sourceTree = "<group>"; };
+		045839AB25E8A13300BBACF2 /* EDMangoFixUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDMangoFixUtil.h; sourceTree = "<group>"; };
+		045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		045839B425E8A27C00BBACF2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.release.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
+		6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.debug.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
+		D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,8 +50,11 @@
 		0458396A25E89B8000BBACF2 = {
 			isa = PBXGroup;
 			children = (
+				0458399325E8A11D00BBACF2 /* Example */,
 				0458397525E89B8000BBACF2 /* MangoFixUtil */,
 				0458397425E89B8000BBACF2 /* Products */,
+				487E55EB605A8FAB0C113598 /* Pods */,
+				269CCA9F5CB34089B3D48BB0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,19 +69,43 @@
 		0458397525E89B8000BBACF2 /* MangoFixUtil */ = {
 			isa = PBXGroup;
 			children = (
-				0458397625E89B8000BBACF2 /* AppDelegate.h */,
-				0458397725E89B8000BBACF2 /* AppDelegate.m */,
-				0458397925E89B8000BBACF2 /* SceneDelegate.h */,
-				0458397A25E89B8000BBACF2 /* SceneDelegate.m */,
-				0458397C25E89B8000BBACF2 /* ViewController.h */,
-				0458397D25E89B8000BBACF2 /* ViewController.m */,
-				0458397F25E89B8000BBACF2 /* Main.storyboard */,
-				0458398225E89B8300BBACF2 /* Assets.xcassets */,
-				0458398425E89B8300BBACF2 /* LaunchScreen.storyboard */,
-				0458398725E89B8300BBACF2 /* Info.plist */,
-				0458398825E89B8300BBACF2 /* main.m */,
+				045839AB25E8A13300BBACF2 /* EDMangoFixUtil.h */,
+				045839AA25E8A13300BBACF2 /* EDMangoFixUtil.m */,
 			);
 			path = MangoFixUtil;
+			sourceTree = "<group>";
+		};
+		0458399325E8A11D00BBACF2 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */,
+				045839B425E8A27C00BBACF2 /* Main.storyboard */,
+				0458399425E8A11D00BBACF2 /* AppDelegate.h */,
+				0458399D25E8A11D00BBACF2 /* AppDelegate.m */,
+				0458399525E8A11D00BBACF2 /* Assets.xcassets */,
+				0458399E25E8A11D00BBACF2 /* Info.plist */,
+				0458399C25E8A11D00BBACF2 /* main.m */,
+				0458399F25E8A11D00BBACF2 /* ViewController.h */,
+				0458399625E8A11D00BBACF2 /* ViewController.m */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		269CCA9F5CB34089B3D48BB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		487E55EB605A8FAB0C113598 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */,
+				298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +115,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0458398C25E89B8300BBACF2 /* Build configuration list for PBXNativeTarget "MangoFixUtil" */;
 			buildPhases = (
+				AD72DC48F7A1A78ADBAA6D08 /* [CP] Check Pods Manifest.lock */,
 				0458396F25E89B8000BBACF2 /* Sources */,
 				0458397025E89B8000BBACF2 /* Frameworks */,
 				0458397125E89B8000BBACF2 /* Resources */,
@@ -132,46 +165,52 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0458398625E89B8300BBACF2 /* LaunchScreen.storyboard in Resources */,
-				0458398325E89B8300BBACF2 /* Assets.xcassets in Resources */,
-				0458398125E89B8000BBACF2 /* Main.storyboard in Resources */,
+				045839B525E8A27C00BBACF2 /* LaunchScreen.storyboard in Resources */,
+				045839A125E8A11D00BBACF2 /* Assets.xcassets in Resources */,
+				045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AD72DC48F7A1A78ADBAA6D08 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MangoFixUtil-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0458396F25E89B8000BBACF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0458397E25E89B8000BBACF2 /* ViewController.m in Sources */,
-				0458397825E89B8000BBACF2 /* AppDelegate.m in Sources */,
-				0458398925E89B8300BBACF2 /* main.m in Sources */,
-				0458397B25E89B8000BBACF2 /* SceneDelegate.m in Sources */,
+				045839A725E8A11D00BBACF2 /* AppDelegate.m in Sources */,
+				045839AC25E8A13400BBACF2 /* EDMangoFixUtil.m in Sources */,
+				045839A625E8A11D00BBACF2 /* main.m in Sources */,
+				045839A225E8A11D00BBACF2 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0458397F25E89B8000BBACF2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0458398025E89B8000BBACF2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0458398425E89B8300BBACF2 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0458398525E89B8300BBACF2 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0458398A25E89B8300BBACF2 /* Debug */ = {
@@ -288,37 +327,41 @@
 		};
 		0458398D25E89B8300BBACF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZPQWLDDE8X;
-				INFOPLIST_FILE = MangoFixUtil/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.easyder.www.MangoFixUtil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		0458398E25E89B8300BBACF2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZPQWLDDE8X;
-				INFOPLIST_FILE = MangoFixUtil/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.easyder.www.MangoFixUtil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
