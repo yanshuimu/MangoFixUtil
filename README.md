@@ -39,4 +39,4 @@ pod 'MangoFixUtil'
 
 ### Manually
 
-Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFix/` to your project.
+Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFixUtil/` to your project.
