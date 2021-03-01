@@ -1,5 +1,7 @@
 # MangoFixUtil
 
+依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行完整流程，提供拉取补丁、执行远程补丁、执行本地补丁、执行本地未加密补丁、生成加密补丁等方法。
+
 ## Example
 
 ```objc
