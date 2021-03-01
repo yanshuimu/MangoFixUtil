@@ -16,9 +16,9 @@
 #define RSAPublicKey @"-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdxLme77t5TdLNtOuziDOFEeHmjEbYQc5wNueLPLktjkO1hCaoasSlCLM0MFX6twYY8Tf9YbJS1MLJEpY3zHwR6G/fhW2TANmIC2dFbeJIjpP0U3n7k7LYyJwaGv11vyF/2BPau8BmopB4rA37PvJiL6XeynnZrKNs193o1pph0wIDAQAB-----END PUBLIC KEY-----"
 #endif
 
-#define MANGOFIXUTIL_APPID @"8c97497aeafe4513bbf830bb0b558f40"
+#define APPID @"8c97497aeafe4513bbf830bb0b558f40"
 
-#define Url_MangoFix @"http://1.15.68.8:8080/mangofix/api/getmangofile"
+#define Url_MangoFile @"http://1.15.68.8:8080/mangofix/api/getmangofile"
 
 @interface AppDelegate ()
 
@@ -28,32 +28,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor clearColor];
-    
-    //建议放在其它方法之前，APP启动后先执行补丁
     [self setupMangoFixUtil];
     
-    [self gotoHome];
-    
-    return YES;
-}
-
-- (void)gotoHome {
-    
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[[ViewController alloc] init]];
-    self.window.rootViewController = nav;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
+            
+    return YES;
 }
 
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    mangoFixUtil.url = Url_MangoFix;
-    [mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
+    mangoFixUtil.url = Url_MangoFile;
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
     [mangoFixUtil evalRemoteMangoScript];
 }
 

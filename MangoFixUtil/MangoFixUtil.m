@@ -79,7 +79,7 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
             }
         }
         else {
-            NSLog(@"file not exist!");
+            NSLog(@"local file not exist!");
         }
     }];
 }
