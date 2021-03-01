@@ -20,8 +20,8 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    mangoFixUtil.url = Url_MangoFix;
-    [mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
+    mangoFixUtil.url = Url_MangoFile;
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
     [mangoFixUtil evalRemoteMangoScript];
 }
 
@@ -56,5 +56,11 @@ mangoFixUtil.url = Url_MangoFix;
 
 // exec local mangofix file
 [mangoFixUtil evalLocalMangoScript];
+
+// exec local unEncrypted mangofix file
+[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
+
+// encrypt plain mangofix file to documentDirectory
+[mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
 
 ```
