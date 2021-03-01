@@ -37,7 +37,6 @@
 
 ```ruby
 # Your Podfile
-pod 'MangoFix'
 pod 'MangoFixUtil'
 ```
 
