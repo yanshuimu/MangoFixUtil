@@ -40,3 +40,21 @@ pod 'MangoFixUtil'
 ### Manually
 
 Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFixUtil/` to your project.
+
+## Usage
+
+### Objective-C
+1. `#import "MangoFixUtil.h"`
+
+```objc
+MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
+mangoFixUtil.url = Url_MangoFix;
+[mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
+
+// exec mangofix file from network
+[mangoFixUtil evalRemoteMangoScript];
+
+// exec local mangofix file
+[mangoFixUtil evalLocalMangoScript];
+
+```
