@@ -27,3 +27,16 @@
 
 @end
 ```
+## Installation
+
+### CocoaPods
+
+```ruby
+# Your Podfile
+pod 'MangoFix'
+pod 'MangoFixUtil'
+```
+
+### Manually
+
+Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFix/` to your project.
