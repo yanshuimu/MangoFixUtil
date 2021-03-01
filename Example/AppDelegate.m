@@ -18,7 +18,7 @@
 
 #define MANGOFIXUTIL_APPID @"8c97497aeafe4513bbf830bb0b558f40"
 
-#define Url_MangoFix @"http://47.115.42.149:8080/mangofix/api/getmangofile"
+#define Url_MangoFix @"http://1.15.68.8:8080/mangofix/api/getmangofile"
 
 @interface AppDelegate ()
 
@@ -54,14 +54,7 @@
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
     mangoFixUtil.url = Url_MangoFix;
     [mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
-    //[mangoFixUtil evalRemoteMangoScript];
-    
-#if RELEASE
-    
-#else
-    [mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
-//    [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
-#endif
+    [mangoFixUtil evalRemoteMangoScript];
 }
 
 @end
