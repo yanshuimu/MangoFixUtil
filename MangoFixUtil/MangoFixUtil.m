@@ -181,9 +181,6 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
 
 #pragma mark - objc
 
-/**
- * 获取MFContext
- */
 - (id)context {
     
     id context = ((id (*) (id, SEL))objc_msgSend)(objc_getClass("MFContext"), sel_registerName("alloc"));
@@ -197,9 +194,6 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     return context;
 }
 
-/**
- * 执行补丁
- */
 - (void)evalMangoScriptWithRSAEncryptedBase64String:(NSString*)script context:(id)context {
     
     if (!context) {
@@ -208,9 +202,6 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     ((void (*) (id, SEL, id))objc_msgSend)(context, sel_registerName("evalMangoScriptWithRSAEncryptedBase64String:"), script);
 }
 
-/**
- * 加密字符串
- */
 - (id)encryptString:(NSString*)string publicKey:(NSString*)publicKey {
     
     return ((id (*)(id, SEL, id, id))objc_msgSend)(objc_getClass("MFRSA"), sel_registerName("encryptString:publicKey:"), string, publicKey);
@@ -254,7 +245,6 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        //后台定义返回statusCode，以实际情况为准
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
         if (data && httpResponse.statusCode == weakSelf.statusCode) {
             

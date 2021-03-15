@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedUtil;
 
-//url
 @property (nonatomic, copy) NSString *url;
 //成功状态码，默认201
 @property (nonatomic, assign) NSInteger statusCode;
@@ -25,35 +24,25 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
 
 /**
- * 初始化
- */
-- (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug;
-
-/**
- * 执行步骤：
- * 1、如果沙盒中存在旧补丁，执行1次
- * 2、拉取远程补丁，并保存至沙盒中
- * 3、执行1次新补丁
- * 补丁名称：demo.mg
+ * 执行远程补丁
  */
 - (void)evalRemoteMangoScript;
 
 /**
- * 执行本地补丁
- * 补丁名称：encrypted_demo.mg
+ * 执行本地补丁（已加密），默认查找本地文件名为encrypted_demo.mg的补丁并执行
  */
 - (void)evalLocalMangoScript;
 
 /**
- * 获取本地名称为demo.mg的补丁内容，传入publicKey进行加密后执行
- * publicKey必须与privateKey相对应
+ * 执行本地补丁（未加密），默认查找本地文件名为demo.mg的补丁并执行
+ * @param publicKey 公钥
  */
 - (void)evalLocalUnEncryptedMangoScriptWithPublicKey:(NSString*)publicKey;
 
 /**
- * 获取本地名称为demo.mg的补丁内容，传入publicKey进行加密后保存至沙盒，保存名称为encrypted_demo.mg
- * 返回值为encrypted_demo.mg在沙盒中的路径
- * publicKey必须与privateKey相对应
+ * 加密补丁，默认查找本地文件名为demo.mg的补丁，并加密至Document
+ * @param publicKey 公钥
+ * @return 已加密补丁路径
  */
 - (NSString*)encryptPlainScirptToDocumentWithPublicKey:(NSString*)publicKey;
 
