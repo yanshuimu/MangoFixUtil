@@ -2,7 +2,7 @@
 
 依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行完整流程，提供拉取补丁、执行远程补丁、执行本地补丁、执行本地未加密补丁、生成加密补丁等方法。
 
-欢迎使用作者维护的[后台](http://1.15.68.8:8080/mangofix/login)，具有应用创建、补丁发布、撤回、重发等功能。
+欢迎使用作者维护的[补丁管理后台](http://1.15.68.8:8080/mangofix/login)。
 
 ## Example
 
@@ -37,7 +37,6 @@
 
 ```ruby
 # Your Podfile
-pod 'MangoFix'
 pod 'MangoFixUtil'
 ```
 
@@ -68,3 +67,5 @@ mangoFixUtil.url = Url_MangoFix;
 [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
 
 ```
+## Thanks for
+[Mango](https://github.com/YPLiang19/Mango)
