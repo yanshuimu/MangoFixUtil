@@ -8,6 +8,8 @@ MangoFixUtil在公司项目中实战已经近1年，第一个补丁诞生于2020
 
 如遇CocoaPods方式报错（1.0.3版本及以下），请用手动导入方式。
 
+[公私钥在线生成](http://www.metools.info/code/c80.html)，密钥长度：1024 bit，密钥格式：PKCS#8
+
 ## Example
 
 ```objc
