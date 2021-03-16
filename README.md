@@ -1,6 +1,6 @@
 # MangoFixUtil
 
-依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行完整流程，提供拉取补丁、执行远程补丁、执行本地补丁、执行本地未加密补丁、生成加密补丁等方法。
+依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行完整流程，另外提供本地加密或未加密补丁执行、生成加密补丁等方法。。
 
 欢迎使用作者维护的[补丁管理后台](http://1.15.68.8:8080/mangofix/login)。
 
