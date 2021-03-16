@@ -41,6 +41,7 @@ MangoFixUtil在公司项目中实战已经近1年，第一个补丁诞生于2020
 
 ```ruby
 # Your Podfile
+pod 'MangoFix'
 pod 'MangoFixUtil'
 ```
 
