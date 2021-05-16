@@ -11,7 +11,13 @@
 
 #define EDStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
-typedef void(^CompleteBlock)(NSDictionary *dict);
+#ifdef RELEASE
+    #define MFLog(FORMAT, ...) nil
+#else
+    #define MFLog(FORMAT, ...) fprintf(stderr,"MangoFixUtil：%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])
+#endif
+
+typedef void(^CompleteBlock)(NSDictionary *dict, BOOL isLastTime);
 
 @interface MangoFixUtil ()
 //
@@ -56,11 +62,11 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
 - (void)evalRemoteMangoScript {
     
     if (EDStringIsEmpty(_privateKey)) {
-        NSLog(@"privateKey is null or empty");
+        MFLog(@"privateKey is null or empty");
         return;
     }
         
-    [self checkRemoteFixWithCompletion:^(NSDictionary *dict) {
+    [self checkRemoteFixWithCompletion:^(NSDictionary *dict, BOOL isLastTime) {
         
         NSString *fileName = @"demo.mg";
         NSString *fileDirectory = [self fixFileDirectory];
@@ -70,16 +76,15 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
             
             NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
             if (script && script.length > 0) {
-                
                 [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
-                NSLog(@"eval remote script success!");
+                MFLog(@"eval %@remote script success!", isLastTime ? @"last time " : @"");
             }
             else {
-                NSLog(@"script is null or empty");
+                MFLog(@"script is null or empty");
             }
         }
         else {
-            NSLog(@"local file not exist!");
+            MFLog(@"local file not exist!");
         }
     }];
 }
@@ -87,7 +92,7 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
 - (void)evalLocalMangoScript {
         
     if (EDStringIsEmpty(_privateKey)) {
-        NSLog(@"privateKey is null or empty");
+        MFLog(@"privateKey is null or empty");
         return;
     }
         
@@ -96,17 +101,17 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     if (!EDStringIsEmpty(script)) {
         
         [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
-        NSLog(@"eval local script success!");
+        MFLog(@"eval local script success!");
     }
     else {
-        NSLog(@"script is null or empty");
+        MFLog(@"script is null or empty");
     }
 }
 
 - (void)evalLocalUnEncryptedMangoScriptWithPublicKey:(NSString*)publicKey {
         
     if (EDStringIsEmpty(_privateKey)) {
-        NSLog(@"privateKey is null or empty");
+        MFLog(@"privateKey is null or empty");
         return;
     }
         
@@ -114,10 +119,10 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     if (!EDStringIsEmpty(script)) {
         
         [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
-        NSLog(@"eval local script success!");
+        MFLog(@"eval local script success!");
     }
     else {
-        NSLog(@"script is null or empty");
+        MFLog(@"script is null or empty");
     }
 }
 
@@ -136,7 +141,7 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     }
     
     err:
-    if (outErr) NSLog(@"%@",outErr);
+    if (outErr) MFLog(@"%@",outErr);
     return result;
 }
 
@@ -160,12 +165,12 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
         if (![fileManager fileExistsAtPath:encryptedPath]) {
             [fileManager createFileAtPath:encryptedPath contents:nil attributes:nil];
         }
-        NSLog(@"file path: %@", encryptedPath);
+        MFLog(@"encrypted file path: %@", encryptedPath);
         writeResult = [encryptedScriptString writeToFile:encryptedPath atomically:YES encoding:NSUTF8StringEncoding error:&outErr];
     }
     
     err:
-    if (outErr) NSLog(@"%@",outErr);
+    if (outErr) MFLog(@"%@",outErr);
     return encryptedPath;
 }
 
@@ -179,16 +184,30 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     return [infoDict valueForKey:@"CFBundleShortVersionString"];
 }
 
+- (void)deleteLocalMangoScript {
+    
+    NSError *outErr = nil;
+    NSString *filePath= [(NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"encrypted_demo.mg"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath]) {
+        [fileManager removeItemAtPath:filePath error:&outErr];
+    }
+    if (outErr) goto err;
+    {
+        MFLog(@"delete local mango script success!");
+    }
+    err:
+    if (outErr) MFLog(@"%@",outErr);
+}
+
 #pragma mark - objc
 
 - (id)context {
     
     id context = ((id (*) (id, SEL))objc_msgSend)(objc_getClass("MFContext"), sel_registerName("alloc"));
-    
     if (!context) {
         return nil;
     }
-    
     ((void (*) (id, SEL, id))objc_msgSend)(context, sel_registerName("initWithRSAPrivateKey:"), _privateKey);
     
     return context;
@@ -213,11 +232,11 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
         
     @try {
         if (completion) {
-            completion(nil);
+            completion(nil, YES);
         }
     }
     @catch (NSException *exception) {
-        NSLog(@"%@", exception.reason);
+        MFLog(@"%@", exception.reason);
     }
     @finally {
         [self remoteMangoFixFileWithCompletion:completion];
@@ -229,7 +248,7 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
     __weak typeof(self) weakSelf = self;
     
     if (EDStringIsEmpty(_url)) {
-        NSLog(@"url is null or empty");
+        MFLog(@"url is null or empty");
         return;
     }
     
@@ -250,19 +269,18 @@ typedef void(^CompleteBlock)(NSDictionary *dict);
             
             NSString *cachesPath = [self fixFileDirectory];
             NSString *filePath = [cachesPath stringByAppendingPathComponent:@"demo.mg"];
-            
             if ([data writeToFile:filePath atomically:YES]) {
-                NSLog(@"remote file save success!");
+                MFLog(@"remote file save success!");
                 if (completion) {
-                    completion(nil);
+                    completion(nil, NO);
                 }
             }
             else {
-                NSLog(@"remote file save fail!");
+                MFLog(@"remote file save fail!");
             }
         }
         if (error) {
-            NSLog(@"fetch remote file fail, error:%@", error);
+            MFLog(@"fetch remote file fail, error:%@", error);
         }
     }];
     [task resume];

@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//  MYYManager
+//
+//  Created by mac on 2019/4/12.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <UIKit/UIKit.h>
+
+
+
+// 判断是否为刘海屏
+#define IPHONE_X \
+({BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);})
+
+/**
+ * 原生控件高度
+ */
+#define EDNavBar_H (IPHONE_X ? 88.0f:64.0f)
+#define EDTabBar_H (IPHONE_X ? 83.0f:49.0f)
+#define EDMistake_H (IPHONE_X ? 58.0f:0.0f)
+#define EDViewTop_H (IPHONE_X ? 44.0f:0.0f)
+#define EDViewBottom_H (IPHONE_X ? 34.0f:0.0f)
+#define EDStatus_H (IPHONE_X ? 44.0f:20.0f)
+
+#define SCREEN_W ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_H ([UIScreen mainScreen].bounds.size.height)
+
+/// 第一个参数是当下的控制器适配iOS11 一下的，第二个参数表示scrollview或子类
+#define AdjustsScrollViewInsetNever(controller,view) if(@available(iOS 11.0, *)) {view.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;} else if([controller isKindOfClass:[UIViewController class]]) {controller.automaticallyAdjustsScrollViewInsets = false;}
+
+#endif /* PrefixHeader_pch */

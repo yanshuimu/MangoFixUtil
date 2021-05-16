@@ -18,6 +18,7 @@
 		045839C425E8A9A200BBACF2 /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 045839C225E8A9A200BBACF2 /* demo.mg */; };
 		045839C525E8A9A200BBACF2 /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 045839C325E8A9A200BBACF2 /* encrypted_demo.mg */; };
 		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
+		EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E12AD264FE8D6008E7F4D /* BugFixController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,9 @@
 		298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.release.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
 		6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.debug.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
 		D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		EF2E12AC264FE8D5008E7F4D /* BugFixController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BugFixController.h; sourceTree = "<group>"; };
+		EF2E12AD264FE8D6008E7F4D /* BugFixController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BugFixController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 		0458399325E8A11D00BBACF2 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */,
 				045839C225E8A9A200BBACF2 /* demo.mg */,
 				045839C325E8A9A200BBACF2 /* encrypted_demo.mg */,
 				045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */,
@@ -96,6 +101,8 @@
 				0458399C25E8A11D00BBACF2 /* main.m */,
 				0458399F25E8A11D00BBACF2 /* ViewController.h */,
 				0458399625E8A11D00BBACF2 /* ViewController.m */,
+				EF2E12AC264FE8D5008E7F4D /* BugFixController.h */,
+				EF2E12AD264FE8D6008E7F4D /* BugFixController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -219,6 +226,7 @@
 				045839AC25E8A13400BBACF2 /* MangoFixUtil.m in Sources */,
 				045839A625E8A11D00BBACF2 /* main.m in Sources */,
 				045839A225E8A11D00BBACF2 /* ViewController.m in Sources */,
+				EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +354,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZPQWLDDE8X;
 				EXCLUDED_ARCHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -368,6 +378,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZPQWLDDE8X;
 				EXCLUDED_ARCHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

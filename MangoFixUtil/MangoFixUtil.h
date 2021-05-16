@@ -46,6 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString*)encryptPlainScirptToDocumentWithPublicKey:(NSString*)publicKey;
 
+/**
+ * 删除Document中已拉取的远程补丁或本地生成的加密补丁
+ */
+- (void)deleteLocalMangoScript;
+
 @end
 
 NS_ASSUME_NONNULL_END
