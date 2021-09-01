@@ -48,7 +48,7 @@
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
     mangoFixUtil.url = Url_MangoFile;
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:NO];
     
     /*
      步骤：
@@ -60,8 +60,7 @@
     //[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
     
     //② 生成加密补丁，第①步调试完成后，执行改方法生成加密补丁，复制路径，在Finder中ctrl+shift+g进入目录中拿到加密补丁，替换项目中encrypted_demo.mg文件
-    //示例：Users/xhg/Library/Developer/CoreSimulator/Devices/D7C4BE7A-85E2-4C9A-B88D-C283BBF0D451/data/Containers/Data/Application/6647FC68-0242-49D4-96AF-E070CB969A0C/Documents/encrypted_demo.mg，路径拷贝至/Documents/即可
-    //[mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
+    [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
     
     //③ 执行加密补丁，执行第②步生成的加密补丁，测试补丁是否正常，一般跑一遍即可
     //[mangoFixUtil evalLocalMangoScript];

@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
 
+- (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug;
+
 /**
  * 执行远程补丁
  */
