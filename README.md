@@ -74,5 +74,10 @@ mangoFixUtil.url = Url_MangoFix;
 [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
 
 ```
+## Update
+
+v1.0.6
+1、增加开发预览、全量下发模式
+
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
