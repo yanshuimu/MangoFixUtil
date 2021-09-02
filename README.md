@@ -76,7 +76,8 @@ mangoFixUtil.url = Url_MangoFix;
 ```
 ## Update
 
-v1.0.6
+V1.0.6
+
 1、增加开发预览、全量下发模式
 
 ## Thanks for
