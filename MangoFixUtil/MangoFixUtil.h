@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
 
+/**
+ * 初始化
+ * @param debug 开发预览
+ */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug;
 
 /**

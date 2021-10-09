@@ -18,10 +18,7 @@
  */
 
 //在后台创建应用后获取APPID
-#define APPID @"8c97497aeafe4513bbf830bb0b558f40"
-
-//拉取补丁接口
-#define Url_MangoFile @"http://patchhub.top/mangofix/api/getmangofile"
+#define APPID @"9264d1091e634e15"
 
 @interface AppDelegate ()
 
@@ -47,8 +44,7 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    mangoFixUtil.url = Url_MangoFile;
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:NO];
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
     
     /*
      步骤：
@@ -60,13 +56,13 @@
     //[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
     
     //② 生成加密补丁，第①步调试完成后，执行改方法生成加密补丁，复制路径，在Finder中ctrl+shift+g进入目录中拿到加密补丁，替换项目中encrypted_demo.mg文件
-    [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
+//    [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
     
     //③ 执行加密补丁，执行第②步生成的加密补丁，测试补丁是否正常，一般跑一遍即可
     //[mangoFixUtil evalLocalMangoScript];
     
     //④ 执行远程补丁，第③步测试正常，即可通过补丁管理后台发布补丁
-    //[mangoFixUtil evalRemoteMangoScript];
+    [mangoFixUtil evalRemoteMangoScript];
 }
 
 @end
