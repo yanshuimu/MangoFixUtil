@@ -56,7 +56,6 @@ Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFixUtil/` to your project.
 
 ```objc
 MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-mangoFixUtil.url = Url_MangoFix;
 [mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
 
 // exec mangofix file from network
@@ -76,6 +75,9 @@ mangoFixUtil.url = Url_MangoFix;
 
 ### V1.0.6
 1. 增加开发预览、全量下发模式
+
+### V2.0.0
+1. 增加激活设备、激活补丁统计
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
