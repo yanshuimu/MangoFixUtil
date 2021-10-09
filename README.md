@@ -4,9 +4,7 @@
 
 欢迎使用作者维护的[补丁管理后台](http://patchhub.top/mangofix/login)。
 
-MangoFixUtil在公司项目中实战已经近1年，基本很稳定，也会不断继续完善。第一个补丁诞生于2020-03-09，最初是用PostMan操作，后来有了界面，也是比较简陋，一直处于自用状态。最近才加上登录、注册功能，开放出来供有需要的同学使用。
-
-如遇CocoaPods方式报错（1.0.3版本及以下），请用手动导入方式。
+MangoFixUtil在公司项目中实战已经近1年多，基本很稳定，也会不断继续完善。第一个补丁诞生于2020-03-09，最初是用PostMan操作，后来有了界面，也是比较简陋，一直处于自用状态。最近才加上登录、注册功能，开放出来供有需要的小伙伴使用。
 
 [公私钥在线生成](http://www.metools.info/code/c80.html)，密钥长度：1024 bit，密钥格式：PKCS#8
 
@@ -74,5 +72,10 @@ mangoFixUtil.url = Url_MangoFix;
 [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
 
 ```
+## Update
+
+### V1.0.6
+1. 增加开发预览、全量下发模式
+
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
