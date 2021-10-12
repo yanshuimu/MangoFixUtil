@@ -1,12 +1,12 @@
 //
-//  MFCacroDefine.h
+//  PHCacroDefine.h
 //  MangoFixUtil
 //
 //  Created by 许鸿桂 on 2021/10/9.
 //
 
-#ifndef MFCacroDefine_h
-#define MFCacroDefine_h
+#ifndef PHCacroDefine_h
+#define PHCacroDefine_h
 
 #define MFStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
@@ -26,4 +26,4 @@
 
 #define MFPatchKey(fileId) MFStringWithFormat(@"MFPatchKey:%@", fileId);
 
-#endif /* MFCacroDefine_h */
+#endif /* PHCacroDefine_h */

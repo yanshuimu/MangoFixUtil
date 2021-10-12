@@ -14,18 +14,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedUtil;
 
+/**
+ * 补丁下载地址
+ */
 @property (nonatomic, copy) NSString *url;
-//成功状态码，默认201
+
+/**
+ * 成功状态码，默认201
+ */
 @property (nonatomic, assign) NSInteger statusCode;
 
 /**
  * 初始化
+ * debug 默认为NO
  */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
 
 /**
  * 初始化
- * @param debug 开发预览
+ * @param debug YES 开发预览 NO 全量下发
  */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug;
 
