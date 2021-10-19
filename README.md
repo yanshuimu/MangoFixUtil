@@ -28,7 +28,6 @@ MangoFixUtil在公司项目中实战已经近1年多，基本很稳定，也会�
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    mangoFixUtil.url = Url_MangoFile;
     [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
     [mangoFixUtil evalRemoteMangoScript];
 }
@@ -73,10 +72,10 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 ```
 ## Update
 
-### V1.0.6
+#### V1.0.6
 1. 增加开发预览、全量下发模式
 
-### V2.0.0
+#### V2.0.0
 1. 增加激活设备、激活补丁统计
 
 ## Thanks for
