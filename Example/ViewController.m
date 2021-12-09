@@ -48,7 +48,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -79,19 +79,16 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"执行远程补丁";
-            break;
-        case 1:
-            cell.textLabel.text = @"执行本地已加密补丁";
-            break;
-        case 2:
             cell.textLabel.text = @"执行本地未加密补丁";
             break;
-        case 3:
+        case 1:
             cell.textLabel.text = @"生成加密补丁";
             break;
-        case 4:
-            cell.textLabel.text = @"删除已拉取的远程补丁（需重启才生效）";
+        case 2:
+            cell.textLabel.text = @"执行本地已加密补丁";
+            break;
+        case 3:
+            cell.textLabel.text = @"执行远程补丁";
             break;
         default:
             break;
@@ -106,19 +103,17 @@
     
     switch (indexPath.row) {
         case 0:
-            [mangoFixUtil evalRemoteMangoScript];
-            break;
-        case 1:
-            [mangoFixUtil evalLocalMangoScript];
-            break;
-        case 2:
             [mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
             break;
-        case 3:
+        case 1:
             [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
+            
             break;
-        case 4:
-            [mangoFixUtil deleteLocalMangoScript];
+        case 2:
+            [mangoFixUtil evalLocalMangoScript];
+            break;
+        case 3:
+            [mangoFixUtil evalRemoteMangoScript];
             break;
         default:
             break;

@@ -88,12 +88,12 @@
 		0458397525E89B8000BBACF2 /* MangoFixUtil */ = {
 			isa = PBXGroup;
 			children = (
+				045839AB25E8A13300BBACF2 /* MangoFixUtil.h */,
+				045839AA25E8A13300BBACF2 /* MangoFixUtil.m */,
 				7BA94D6E271173C200872060 /* PHCacroDefine.h */,
 				7BA94D6B271173C100872060 /* PHKeyChainUtil.h */,
 				7BA94D6C271173C200872060 /* PHKeyChainUtil.m */,
 				7BA94D6D271173C200872060 /* PHNetworkDefine.h */,
-				045839AB25E8A13300BBACF2 /* MangoFixUtil.h */,
-				045839AA25E8A13300BBACF2 /* MangoFixUtil.m */,
 			);
 			path = MangoFixUtil;
 			sourceTree = "<group>";
@@ -147,6 +147,7 @@
 				0458396F25E89B8000BBACF2 /* Sources */,
 				0458397025E89B8000BBACF2 /* Frameworks */,
 				0458397125E89B8000BBACF2 /* Resources */,
+				7B9546082759C8200048CF18 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -206,6 +207,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7B9546082759C8200048CF18 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho -e \"执行脚本\"\n";
+		};
 		AD72DC48F7A1A78ADBAA6D08 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,7 +395,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
@@ -403,7 +421,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;

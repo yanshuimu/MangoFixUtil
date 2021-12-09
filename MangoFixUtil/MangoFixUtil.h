@@ -1,10 +1,17 @@
 //
 //  MangoFixUtil.h
-//  Easyder
 //
-//  Created by xuhonggui on 2020/4/9.
-//  Copyright © 2020 xuhonggui. All rights reserved.
+//  Created by 许鸿桂 on 2020/4/9.
+//  Copyright © 2020 许鸿桂. All rights reserved.
 //
+
+/*
+ 补丁管理后台：http://patchhub.top/
+ 
+ 公私钥在线生成：http://www.metools.info/code/c80.html/ 密钥长度：1024 bit，密钥格式：PKCS#8
+ 
+ 如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -15,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedUtil;
 
 /**
- * 补丁下载地址
+ * 补丁地址
  */
 @property (nonatomic, copy) NSString *url;
 
@@ -25,8 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger statusCode;
 
 /**
+ * 当检测不到补丁时（如：APP升级新版本），是否自动清除本地旧版本补丁，默认为 YES 自动清理
+ * 需重启APP生效
+ */
+@property (nonatomic, assign) BOOL autoClearLastPath;
+
+/**
  * 初始化
- * debug 默认为NO
+ * debug 默认为 NO 全量下发
  */
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
 
@@ -42,18 +55,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)evalRemoteMangoScript;
 
 /**
- * 执行本地补丁（已加密），默认查找本地文件名为encrypted_demo.mg的补丁并执行
+ * 执行本地补丁（已加密），查找本地文件名为encrypted_demo.mg的补丁并执行
  */
 - (void)evalLocalMangoScript;
 
 /**
- * 执行本地补丁（未加密），默认查找本地文件名为demo.mg的补丁并执行
+ * 执行本地补丁（未加密），查找本地文件名为demo.mg的补丁并执行
  * @param publicKey 公钥
  */
 - (void)evalLocalUnEncryptedMangoScriptWithPublicKey:(NSString*)publicKey;
 
 /**
- * 加密补丁，默认查找本地文件名为demo.mg的补丁，并加密至Document
+ * 加密补丁，查找本地文件名为demo.mg的补丁，并加密至Document中
  * @param publicKey 公钥
  * @return 已加密补丁路径
  */

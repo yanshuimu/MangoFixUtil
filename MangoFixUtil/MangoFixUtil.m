@@ -1,18 +1,20 @@
 //
 //  MangoFixUtil.m
-//  Easyder
 //
-//  Created by xuhonggui on 2020/4/9.
-//  Copyright © 2020 xuhonggui. All rights reserved.
+//  Created by 许鸿桂 on 2020/4/9.
+//  Copyright © 2020 许鸿桂. All rights reserved.
 //
 
 #import "MangoFixUtil.h"
 #import "PHKeyChainUtil.h"
 #import "PHNetworkDefine.h"
 #import "PHCacroDefine.h"
-#import <objc/message.h>
+#if __has_include(<MangoFix/MangoFix.h>)
+#import <MangoFix/MangoFix.h>
+#define Has_Include_MangoFix
+#endif
 
-typedef void(^Succ)(NSDictionary *dict);
+typedef void(^Succ)(id responseObject);
 
 typedef void(^Fail)(NSString *msg);
 
@@ -24,7 +26,7 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *appId;
 
 /**
- * 规则 YES 开发预览 NO 全量下发
+ * 规则 YES 开发设备 NO 全量设备
  */
 @property (nonatomic, assign) BOOL debug;
 
@@ -54,6 +56,7 @@ typedef void(^Fail)(NSString *msg);
 - (instancetype)init {
     if (self = [super init]) {
         _statusCode = 201;
+        _autoClearLastPath = YES;
         _url = PH_Url_GetMangoFile;
     }
     return self;
@@ -67,19 +70,22 @@ typedef void(^Fail)(NSString *msg);
     _appId = appId;
     _debug = debug;
     _privateKey = privateKey;
-    if (!_debug) [self activateDevice];
+    //激活设备
+    [self activateDevice];
 }
 
 - (void)evalRemoteMangoScript {
     
     NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
     @try {
+        //先执行上一次补丁
         [self evalLastPatch];
     }
     @catch (NSException *exception) {
         MFLog(@"%@", exception);
     }
     @finally {
+        //检测是否有新的补丁
         [self requestCheckRemotePatch];
     }
 }
@@ -89,8 +95,8 @@ typedef void(^Fail)(NSString *msg);
     NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"encrypted_demo" ofType:@"mg"];
     NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    if (!MFStringIsEmpty(script)) {
-        [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
+    if (script && script.length > 0) {
+        [self evalMangoScriptWithRSAEncryptedBase64String:script];
         MFLog(@"The local patch is successfully executed!");
     }
     else {
@@ -102,8 +108,8 @@ typedef void(^Fail)(NSString *msg);
         
     NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
     NSString *script = [self encryptScirptWithPublicKey:publicKey];
-    if (!MFStringIsEmpty(script)) {
-        [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
+    if (script && script.length > 0) {
+        [self evalMangoScriptWithRSAEncryptedBase64String:script];
         MFLog(@"The local unencrypted patch is successfully executed!");
     }
     else {
@@ -114,26 +120,26 @@ typedef void(^Fail)(NSString *msg);
 - (void)deleteLocalMangoScript {
     
     NSError *outErr = nil;
-    NSString *filePath= [(NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"encrypted_demo.mg"];
+    NSString *filePath= (NSString *)[MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:filePath]) {
+    if ([fileManager fileExistsAtPath:filePath]) {
         [fileManager removeItemAtPath:filePath error:&outErr];
+        if (outErr) goto err;
+        {
+            MFLog(@"The local patch was successfully deleted!");
+        }
+        err:
+        if (outErr) MFLog(@"%@",outErr);
     }
-    if (outErr) goto err;
-    {
-        MFLog(@"The local patch was successfully deleted!");
-    }
-    err:
-    if (outErr) MFLog(@"%@",outErr);
 }
 
 - (void)evalLastPatch {
     
-    NSString *filePath = [[self cachesDirectory] stringByAppendingPathComponent:@"demo.mg"];
+    NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         if (script && script.length > 0) {
-            [self evalMangoScriptWithRSAEncryptedBase64String:script context:[self context]];
+            [self evalMangoScriptWithRSAEncryptedBase64String:script];
             MFLog(@"The last patch is successfully executed!");
         }
         else {
@@ -148,34 +154,25 @@ typedef void(^Fail)(NSString *msg);
 - (void)evalRemotePatchWithFileId:(NSString*)fileId {
     
     __weak typeof(self) weakSelf = self;
-    [self requestRemotePatch:^(NSDictionary *dict) {
-        NSString *filePath = [[weakSelf cachesDirectory] stringByAppendingPathComponent:@"demo.mg"];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-            if (script && script.length > 0) {
-                [weakSelf evalMangoScriptWithRSAEncryptedBase64String:script context:[weakSelf context]];
-                MFLog(@"The latest patch is successfully executed!");
-                if (!MFStringIsEmpty(fileId)) {
-                    NSString *patchKey = MFPatchKey(fileId);
-                    NSString *patchValue = [PHKeyChainUtil load:patchKey];
-                    if (!MFStringIsEmpty(patchValue)) {
-                        NSArray *values = [patchValue componentsSeparatedByString:@":"];
-                        NSString *isActivated = [values lastObject];
-                        if (!isActivated.boolValue) {
-                            MFLog(@"Patch not activated!");
-                            if (!weakSelf.debug) [weakSelf activatePatchWithFileId:fileId];
-                        }
-                    }
+    
+    [self requestPostWithUrl:_url params:nil succ:^(id responseObject) {
+        NSData *data = responseObject;
+        NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
+        if ([data writeToFile:filePath atomically:YES]) {
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+                NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+                if (script && script.length > 0) {
+                    [weakSelf evalMangoScriptWithRSAEncryptedBase64String:script];
+                    MFLog(@"The latest patch is successfully executed!");
+                    //激活补丁
+                    [weakSelf activatePatchWithFileId:fileId];
                 }
-            }
-            else {
-                MFLog(@"The latest patch content is empty!");
             }
         }
         else {
-            MFLog(@"No new patch was detected!");
+            MFLog(@"Failed to save the latest patch!");
         }
-    }];
+    } fail:nil];
 }
 
 - (NSString*)encryptScirptWithPublicKey:(NSString*)publicKey {
@@ -228,56 +225,65 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)activateDevice {
     
-    NSString *deviceKey = MFDeviceKey(_appId, [self bundleShortVersion]);
-    __block NSString *deviceValue = [PHKeyChainUtil load:deviceKey];
-    if (MFStringIsEmpty(deviceValue)) {
-        deviceValue = MFStringWithFormat(@"%@%@", MFDevicePrefix, _appId);
-        deviceValue = MFStringWithFormat(@"%@:%@", deviceValue, [self bundleShortVersion]);
-        deviceValue = MFStringWithFormat(@"%@:%@", deviceValue, @"0");
-        [PHKeyChainUtil save:deviceKey data:deviceValue];
+    if (_debug) return;
+    
+    __block NSString *key = MFDeviceKey(_appId, MFBundleShortVersion);
+    __block NSString *value = [PHKeyChainUtil load:key];
+    if (MFStringIsEmpty(value)) {
+        value = MFStringWithFormat(@"%@%@", MFDevicePrefix, _appId);
+        value = MFStringWithFormat(@"%@:%@", value, MFBundleShortVersion);
+        value = MFStringWithFormat(@"%@:%@", value, @"0");
+        [PHKeyChainUtil save:key data:value];
     }
-    NSArray *values = [deviceValue componentsSeparatedByString:@":"];
+    NSArray *values = [value componentsSeparatedByString:@":"];
     NSString *isActivated = [values lastObject];
-    if (!isActivated.boolValue) {
-        MFLog(@"Device not activated!");
-        [self requestPostWithUrl:PH_Url_ActivateDevice params:nil succ:^(NSDictionary *dict) {
-            NSMutableArray *array = [NSMutableArray arrayWithArray:values];
-            [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
-            deviceValue = [array componentsJoinedByString:@":"];
-            [PHKeyChainUtil save:deviceKey data:deviceValue];
-            MFLog(@"Device is activate successfully!");
-        } fail:nil];
+    if (isActivated.boolValue) {
+        //设备已激活
+        return;
     }
+    
+    //MFLog(@"Device not activated!");
+    
+    [self requestPostWithUrl:PH_Url_ActivateDevice params:nil succ:^(id responseObject) {
+        NSMutableArray *array = [NSMutableArray arrayWithArray:values];
+        [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
+        value = [array componentsJoinedByString:@":"];
+        [PHKeyChainUtil save:key data:value];
+        //MFLog(@"Device is activate successfully!");
+    } fail:nil];
 }
 
 - (void)activatePatchWithFileId:(NSString*)fileId {
     
+    if (_debug) return;
+    
     if (MFStringIsEmpty(fileId)) {
         return;
     }
-    [self requestPostWithUrl:PH_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
-        NSString *patchKey = MFPatchKey(fileId);
-        NSString *patchValue = [PHKeyChainUtil load:patchKey];
-        if (!MFStringIsEmpty(patchValue)) {
-            NSArray *values = [patchValue componentsSeparatedByString:@":"];
-            NSString *isActivated = [values lastObject];
-            if (!isActivated.boolValue) {
-                NSMutableArray *array = [NSMutableArray arrayWithArray:values];
-                [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
-                patchValue = [array componentsJoinedByString:@":"];
-                [PHKeyChainUtil save:patchKey data:patchValue];
-                MFLog(@"Patch is activate successfully!");
-            }
-        }
+    
+    __block NSString *key = MFPatchKey(fileId);
+    __block NSString *value = [PHKeyChainUtil load:key];
+    
+    if (MFStringIsEmpty(value)) {
+        return;
+    }
+    
+    NSArray *values = [value componentsSeparatedByString:@":"];
+    NSString *isActivated = [values lastObject];
+    if (isActivated.boolValue) {
+        //已激活
+        return;
+    }
+    
+    //MFLog(@"Patch not activated!");
+    
+    [self requestPostWithUrl:PH_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(id responseObject) {
+        NSMutableArray *array = [NSMutableArray arrayWithArray:values];
+        [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
+        value = [array componentsJoinedByString:@":"];
+        [PHKeyChainUtil save:key data:value];
+        //MFLog(@"Patch is activate successfully!");
     } fail:nil];
-}
-
-- (NSString*)cachesDirectory {
-    return [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
-}
-
-- (NSString*)bundleShortVersion {
-    return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
 }
 
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
@@ -295,151 +301,105 @@ typedef void(^Fail)(NSString *msg);
     return dic;
 }
 
-#pragma mark - objc
+#pragma mark - MangoFix
 
 - (id)context {
-    id context = ((id (*) (id, SEL))objc_msgSend)(objc_getClass("MFContext"), sel_registerName("alloc"));
-    if (!context) {
-        return nil;
-    }
-    ((void (*) (id, SEL, id))objc_msgSend)(context, sel_registerName("initWithRSAPrivateKey:"), _privateKey);
-    return context;
+    
+#ifdef Has_Include_MangoFix
+    return [[MFContext alloc] initWithRSAPrivateKey:_privateKey];
+#endif
+    return nil;
 }
 
-- (void)evalMangoScriptWithRSAEncryptedBase64String:(NSString*)script context:(id)context {
-    if (!context) {
-        return;
-    }
-    ((void (*) (id, SEL, id))objc_msgSend)(context, sel_registerName("evalMangoScriptWithRSAEncryptedBase64String:"), script);
+- (void)evalMangoScriptWithRSAEncryptedBase64String:(NSString*)script {
+    
+#ifdef Has_Include_MangoFix
+    [[self context] evalMangoScriptWithRSAEncryptedBase64String:script];
+#endif
 }
 
 - (id)encryptString:(NSString*)string publicKey:(NSString*)publicKey {
-    return ((id (*)(id, SEL, id, id))objc_msgSend)(objc_getClass("MFRSA"), sel_registerName("encryptString:publicKey:"), string, publicKey);
+
+#ifdef Has_Include_MangoFix
+    return [MFRSA encryptString:string publicKey:publicKey];
+#else
+    return nil;
+#endif
 }
 
 - (void)requestCheckRemotePatch {
     
     __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:PH_Url_CheckMangoFile params:nil succ:^(NSDictionary *dict) {
+    [self requestPostWithUrl:PH_Url_CheckMangoFile params:nil succ:^(id responseObject) {
+        NSDictionary *dict = responseObject;
         NSDictionary *rows = dict[@"rows"];
         NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
-        if (MFStringIsEmpty(fileId)) {
-            MFLog(@"No new patch was detected!");
-            [weakSelf evalRemotePatchWithFileId:nil];
+        MFLog(@"A new patch was detected!");
+        NSString *key = MFPatchKey(fileId);
+        NSString *value = [PHKeyChainUtil load:key];
+        if (MFStringIsEmpty(value)) {
+            value = MFStringWithFormat(@"%@%@", MFPatchPrefix, fileId);
+            value = MFStringWithFormat(@"%@:%@", value, MFBundleShortVersion);
+            value = MFStringWithFormat(@"%@:%@", value, @"0");
+            [PHKeyChainUtil save:key data:value];
         }
-        else {
-            MFLog(@"A new patch was detected!");
-            NSString *patchKey = MFPatchKey(fileId);
-            NSString *patchValue = [PHKeyChainUtil load:patchKey];
-            if (MFStringIsEmpty(patchValue)) {
-                patchValue = MFStringWithFormat(@"%@%@", MFPatchPrefix, fileId);
-                patchValue = MFStringWithFormat(@"%@:%@", patchValue, [weakSelf bundleShortVersion]);
-                patchValue = MFStringWithFormat(@"%@:%@", patchValue, @"0");
-                [PHKeyChainUtil save:patchKey data:patchValue];
-            }
-            [weakSelf evalRemotePatchWithFileId:fileId];
-        }
+        [weakSelf evalRemotePatchWithFileId:fileId];
     } fail:^(NSString *msg) {
-        [weakSelf evalRemotePatchWithFileId:nil];
+        MFLog(@"%@", msg);
     }];
-}
-
-- (void)requestRemotePatch:(Succ)succ {
-    
-    __weak typeof(self) weakSelf = self;
-    NSURL *url = [NSURL URLWithString:_url];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *bodyString = @"";
-    for (NSString *key in self.baseParams.allKeys) {
-        NSString *value = [self.baseParams valueForKey:key];
-        bodyString = [NSString stringWithFormat:@"%@%@=%@&", bodyString, key, value];
-    }
-    if ([bodyString hasSuffix:@"&"]) {
-        bodyString = [bodyString substringWithRange:NSMakeRange(0, bodyString.length-1)];
-    }
-    request.HTTPBody = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-        if (data && httpResponse.statusCode == weakSelf.statusCode) {
-            NSString *cachesPath = [weakSelf cachesDirectory];
-            NSString *filePath = [cachesPath stringByAppendingPathComponent:@"demo.mg"];
-            if ([data writeToFile:filePath atomically:YES]) {
-                if (data.length == 0) {
-                    MFLog(@"The empty patch is saved successfully!");
-                }
-                else {
-                    MFLog(@"The latest patch is saved successfully!");
-                }
-                if (succ) {
-                    succ(nil);
-                }
-            }
-            else {
-                MFLog(@"Failed to save the latest patch!");
-            }
-        }
-        if (error) {
-            MFLog(@"Failed to download the latest patch, error:%@", error);
-        }
-    }];
-    [task resume];
 }
 
 - (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail {
     
     __weak typeof(self) weakSelf = self;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-    request.HTTPMethod = @"POST";
+    
     NSString *bodyString = @"";
-    for (NSString *key in self.baseParams.allKeys) {
-        NSString *value = [self.baseParams valueForKey:key];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict addEntriesFromDictionary:self.baseParams];
+    [dict addEntriesFromDictionary:params];
+    for (NSString *key in dict.allKeys) {
+        NSString *value = [dict valueForKey:key];
         bodyString = [NSString stringWithFormat:@"%@%@=%@&", bodyString, key, value];
     }
-    if (params.count > 0) {
-        for (NSString *key in params.allKeys) {
-            NSString *value = [params valueForKey:key];
-            bodyString = [NSString stringWithFormat:@"%@%@=%@&", bodyString, key, value];
-        }
-    }
-    if ([bodyString hasSuffix:@"&"]) {
-        bodyString = [bodyString substringWithRange:NSMakeRange(0, bodyString.length-1)];
-    }
+    bodyString = [bodyString substringWithRange:NSMakeRange(0, bodyString.length-1)];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    request.HTTPMethod = @"POST";
     request.HTTPBody = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-        if (httpResponse.statusCode == 200) {
-            NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-            NSDictionary *dict = [weakSelf dictionaryWithJsonString:resultStr];
-            NSInteger code = [dict[@"code"] intValue];
-            NSString *msg = dict[@"msg"];
-            if (code == 500) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+            if (data && httpResponse.statusCode == weakSelf.statusCode) {
+                if (succ) succ(data);
+            }
+            else if (httpResponse.statusCode == 200) {
+                NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [weakSelf dictionaryWithJsonString:resultStr];
+                NSString *msg = dict[@"msg"];
+                if ([dict[@"code"] intValue] == 500) {
                     if (fail) fail(msg);
-                });
-                MFLog(@"%@", msg);
+                    if (weakSelf.autoClearLastPath) {
+                        //检测不到补丁，则清理本地旧版本补丁
+                        [weakSelf deleteLocalMangoScript];
+                    }
+                }
+                else {
+                    if (succ) succ(dict);
+                }
             }
             else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (succ) succ(dict);
-                });
-            }
-        }
-        else {
-            dispatch_async(dispatch_get_main_queue(), ^{
                 if (fail) fail(error.localizedDescription);
-            });
-            MFLog(@"%@", error.localizedDescription);
-        }
+                MFLog(@"%@", error.localizedDescription);
+            }
+        });
     }];
     [task resume];
 }
 
 - (NSDictionary*)baseParams {
     if (!_baseParams) {
-        _baseParams = @{@"appid": _appId, @"version": [self bundleShortVersion], @"debug": @(_debug)};
+        _baseParams = @{@"appid": _appId, @"version": MFBundleShortVersion, @"debug": @(_debug)};
     }
     return _baseParams;
 }

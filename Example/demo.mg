@@ -1,18 +1,16 @@
-
 class BugFixController : UIViewController {
 
 - (void)testCrash {
-  
-    NSLog(@"本地未加密补丁-数组越界闪退已修复");
-          
-    NSArray *array = @[@"元素1", @"元素2", @"元素3", @"元素4"];
+
+    NSLog(@"测试数组越界闪退");
     
-    for (id string in array) {
+    NSArray *array = @[@"元素1", @"元素2", @"元素3"];
+    for (NSString *string in array) {
         NSLog(string);
     }
     
-    NSString *string = array.objectAtIndex:(3);
-    NSLog(string);
+    NSString *string = array[2];
+    NSLog(@"访问索引为2的元素：" + string);
 }
 
 }

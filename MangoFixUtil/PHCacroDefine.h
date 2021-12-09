@@ -8,6 +8,10 @@
 #ifndef PHCacroDefine_h
 #define PHCacroDefine_h
 
+#define MFCachesDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
+
+#define MFBundleShortVersion [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
+
 #define MFStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
 #define MFStringWithFormat(string, args...)  [NSString stringWithFormat:string, args]

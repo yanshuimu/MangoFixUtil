@@ -1,10 +1,10 @@
 # MangoFixUtil
 
-依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行、设备激活、补丁激活完整流程，另外提供本地加密或未加密补丁执行、生成加密补丁等方法。具体使用方法请下载MangoFixUtil项目参考里面的Example。
+依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行、设备激活、补丁激活完整流程，具体使用方法请下载Demo参考。
 
 欢迎使用作者维护的[补丁管理后台](http://patchhub.top/mangofix/login)。
 
-MangoFixUtil在公司项目中实战已经近1年多，基本很稳定，也会不断继续完善。第一个补丁诞生于2020-03-09，最初是用PostMan操作，后来有了界面，也是比较简陋，一直处于自用状态。最近才加上登录、注册功能，开放出来供有需要的小伙伴使用。
+MangoFixUtil在公司项目中实战已经近1年多，很稳定，也会不断继续完善。第一个补丁诞生于2020-03-09，最初是用PostMan操作，后来有了界面，也是比较简陋，一直处于自用状态。最近才加上登录、注册功能，开放出来供有需要的小伙伴使用。
 
 [公私钥在线生成](http://www.metools.info/code/c80.html)，密钥长度：1024 bit，密钥格式：PKCS#8
 
@@ -77,6 +77,9 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 
 #### V2.0.0
 1. 增加激活设备、激活补丁统计
+
+#### V2.0.1
+1. 优化
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
