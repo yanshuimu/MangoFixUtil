@@ -44,24 +44,19 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:NO];
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
     
     /*
      步骤：
-     建议将项目中的demo.mg、encrypted_demo文件拷贝至自己的项目中，方便调试
-     APP发布版本只需打开第④步注释
+     建议将项目中的demo.mg文件拷贝至自己的项目中，方便调试
+     APP发布版本只需打开第②步注释
      */
     
     //① 执行本地未加密补丁，直接在demo.mg中使用MangoFix语法编写代码，执行该方法调试
     //[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
     
-    //② 生成加密补丁，第①步调试完成后，执行改方法生成加密补丁，复制路径，在Finder中ctrl+shift+g进入目录中拿到加密补丁，替换项目中encrypted_demo.mg文件
-    //[mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
     
-    //③ 执行加密补丁，执行第②步生成的加密补丁，测试补丁是否正常，一般跑一遍即可
-    //[mangoFixUtil evalLocalMangoScript];
-    
-    //④ 执行远程补丁，第③步测试正常，即可通过补丁管理后台发布补丁
+    //② 执行远程补丁，第①步测试正常，即可通过补丁管理后台发布补丁
     //[mangoFixUtil evalRemoteMangoScript];
 }
 

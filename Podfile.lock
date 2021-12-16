@@ -7,7 +7,7 @@ DEPENDENCIES:
   - MangoFix (= 1.4.4)
 
 SPEC REPOS:
-  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+  trunk:
     - MangoFix
     - symdl
 
@@ -15,6 +15,6 @@ SPEC CHECKSUMS:
   MangoFix: 3331b01698e8cf0ef285cbd1e3136652218af20c
   symdl: 1906f396fff3f7530074ecfc226e17006b12d0a0
 
-PODFILE CHECKSUM: 4871097a72123733141b53f249ab07c3de7783bf
+PODFILE CHECKSUM: 611da4628e2a0bfe1fa6f4023800693ab17fd9d4
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.9.3

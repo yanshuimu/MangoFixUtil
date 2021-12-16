@@ -16,7 +16,6 @@
 		045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B425E8A27C00BBACF2 /* Main.storyboard */; };
 		045839BF25E8A68200BBACF2 /* MangoFixUtil.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */; };
 		045839C425E8A9A200BBACF2 /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 045839C225E8A9A200BBACF2 /* demo.mg */; };
-		045839C525E8A9A200BBACF2 /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 045839C325E8A9A200BBACF2 /* encrypted_demo.mg */; };
 		7B7432582715995200F10C5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7432572715995200F10C5C /* README.md */; };
 		7BA94D6F271173C200872060 /* PHKeyChainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA94D6C271173C200872060 /* PHKeyChainUtil.m */; };
 		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
@@ -38,7 +37,6 @@
 		045839B425E8A27C00BBACF2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MangoFixUtil.podspec; sourceTree = "<group>"; };
 		045839C225E8A9A200BBACF2 /* demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.mg; sourceTree = "<group>"; };
-		045839C325E8A9A200BBACF2 /* encrypted_demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = encrypted_demo.mg; sourceTree = "<group>"; };
 		298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.release.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
 		6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.debug.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
 		7B7432572715995200F10C5C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 			children = (
 				EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */,
 				045839C225E8A9A200BBACF2 /* demo.mg */,
-				045839C325E8A9A200BBACF2 /* encrypted_demo.mg */,
 				045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */,
 				045839B425E8A27C00BBACF2 /* Main.storyboard */,
 				0458399425E8A11D00BBACF2 /* AppDelegate.h */,
@@ -200,7 +197,6 @@
 				7B7432582715995200F10C5C /* README.md in Resources */,
 				045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */,
 				045839BF25E8A68200BBACF2 /* MangoFixUtil.podspec in Resources */,
-				045839C525E8A9A200BBACF2 /* encrypted_demo.mg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +391,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.2;
+				MARKETING_VERSION = 1.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
@@ -421,7 +417,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.8.2;
+				MARKETING_VERSION = 1.8.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
