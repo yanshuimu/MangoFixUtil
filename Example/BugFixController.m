@@ -51,7 +51,7 @@
     }
     
     NSString *string = array[3];
-    NSLog(@"访问索引为3的元素：%@", string);
+    NSLog(@"访问索引为3的元素：%@", [string substringWithRange:NSMakeRange(0, 1)]);
 }
 
 @end

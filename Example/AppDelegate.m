@@ -12,7 +12,7 @@
 /*
  补丁管理后台：http://patchhub.top/
  
- 公私钥在线生成：http://www.metools.info/code/c80.html/ 密钥长度：1024 bit，密钥格式：PKCS#8
+ 公私钥在线生成：http://www.metools.info/code/c80.html 密钥长度：1024 bit，密钥格式：PKCS#8
  
  如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
  */
@@ -44,7 +44,7 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:YES];
     
     /*
      步骤：
