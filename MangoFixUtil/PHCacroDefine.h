@@ -16,6 +16,8 @@
 
 #define MFStringWithFormat(string, args...)  [NSString stringWithFormat:string, args]
 
+#define MFUserDefaults [NSUserDefaults standardUserDefaults]
+
 #ifdef RELEASE
     #define MFLog(FORMAT, ...) nil
 #else
@@ -29,5 +31,7 @@
 #define MFDeviceKey(appId, version) MFStringWithFormat(@"MFDeviceKey:%@:%@", appId, version);
 
 #define MFPatchKey(fileId) MFStringWithFormat(@"MFPatchKey:%@", fileId);
+
+#define MFLocalPatchKey(appId) MFStringWithFormat(@"MFLocalPatchKey:%@", appId)
 
 #endif /* PHCacroDefine_h */

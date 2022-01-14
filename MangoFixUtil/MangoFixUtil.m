@@ -67,16 +67,16 @@ typedef void(^Fail)(NSString *msg);
 }
 
 - (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug {
+    
+    NSAssert(!MFStringIsEmpty(privateKey), @"The private key is nil or empty!");
     _appId = appId;
     _debug = debug;
     _privateKey = privateKey;
-    //激活设备
-    [self activateDevice];
 }
 
 - (void)evalRemoteMangoScript {
     
-    NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
+    
     @try {
         //先执行上一次补丁
         [self evalLastPatch];
@@ -85,6 +85,8 @@ typedef void(^Fail)(NSString *msg);
         MFLog(@"%@", exception);
     }
     @finally {
+        //激活设备
+        [self activateDevice];
         //检测是否有新的补丁
         [self requestCheckRemotePatch];
     }
@@ -92,7 +94,6 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)evalLocalMangoScript {
         
-    NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"encrypted_demo" ofType:@"mg"];
     NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     if (script && script.length > 0) {
@@ -106,7 +107,6 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)evalLocalUnEncryptedMangoScriptWithPublicKey:(NSString*)publicKey {
         
-    NSAssert(!MFStringIsEmpty(_privateKey), @"The private key is nil or empty!");
     NSString *script = [self encryptScirptWithPublicKey:publicKey];
     if (script && script.length > 0) {
         [self evalMangoScriptWithRSAEncryptedBase64String:script];
@@ -126,7 +126,7 @@ typedef void(^Fail)(NSString *msg);
         [fileManager removeItemAtPath:filePath error:&outErr];
         if (outErr) goto err;
         {
-            MFLog(@"The local patch was successfully deleted!");
+            MFLog(@"The local patch was successfully deleted! Please restart the device!");
         }
         err:
         if (outErr) MFLog(@"%@",outErr);
@@ -159,6 +159,9 @@ typedef void(^Fail)(NSString *msg);
         NSData *data = responseObject;
         NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
         if ([data writeToFile:filePath atomically:YES]) {
+            //存储最新补丁id
+            [MFUserDefaults setObject:fileId forKey:MFLocalPatchKey(weakSelf.appId)];
+            [MFUserDefaults synchronize];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
                 if (script && script.length > 0) {
@@ -172,6 +175,48 @@ typedef void(^Fail)(NSString *msg);
         else {
             MFLog(@"Failed to save the latest patch!");
         }
+    } fail:nil];
+}
+
+- (void)activateDevice {
+    
+    if (_debug) return;
+    
+    NSString *key = MFDeviceKey(_appId, MFBundleShortVersion);
+    NSString *value = [PHKeyChainUtil load:key];
+    
+    if (value.intValue == 1) {
+        //设备已激活
+        return;
+    }
+    
+    MFLog(@"Device not activated!");
+    
+    [self requestPostWithUrl:PH_Url_ActivateDevice params:nil succ:^(id responseObject) {
+        [PHKeyChainUtil save:key data:@"1"];
+        MFLog(@"Device is activate successfully!");
+    } fail:nil];
+}
+
+- (void)activatePatchWithFileId:(NSString*)fileId {
+        
+    if (_debug || MFStringIsEmpty(fileId)) {
+        return;
+    }
+    
+    NSString *key = MFPatchKey(fileId);
+    NSString *value = [PHKeyChainUtil load:key];
+    
+    if (value.intValue == 1) {
+        //已激活
+        return;
+    }
+    
+    MFLog(@"Patch not activated!");
+    
+    [self requestPostWithUrl:PH_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(id responseObject) {
+        [PHKeyChainUtil save:key data:@"1"];
+        MFLog(@"Patch is activate successfully!");
     } fail:nil];
 }
 
@@ -223,69 +268,6 @@ typedef void(^Fail)(NSString *msg);
     return encryptedPath;
 }
 
-- (void)activateDevice {
-    
-    if (_debug) return;
-    
-    __block NSString *key = MFDeviceKey(_appId, MFBundleShortVersion);
-    __block NSString *value = [PHKeyChainUtil load:key];
-    if (MFStringIsEmpty(value)) {
-        value = MFStringWithFormat(@"%@%@", MFDevicePrefix, _appId);
-        value = MFStringWithFormat(@"%@:%@", value, MFBundleShortVersion);
-        value = MFStringWithFormat(@"%@:%@", value, @"0");
-        [PHKeyChainUtil save:key data:value];
-    }
-    NSArray *values = [value componentsSeparatedByString:@":"];
-    NSString *isActivated = [values lastObject];
-    if (isActivated.boolValue) {
-        //设备已激活
-        return;
-    }
-    
-    //MFLog(@"Device not activated!");
-    
-    [self requestPostWithUrl:PH_Url_ActivateDevice params:nil succ:^(id responseObject) {
-        NSMutableArray *array = [NSMutableArray arrayWithArray:values];
-        [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
-        value = [array componentsJoinedByString:@":"];
-        [PHKeyChainUtil save:key data:value];
-        //MFLog(@"Device is activate successfully!");
-    } fail:nil];
-}
-
-- (void)activatePatchWithFileId:(NSString*)fileId {
-    
-    if (_debug) return;
-    
-    if (MFStringIsEmpty(fileId)) {
-        return;
-    }
-    
-    __block NSString *key = MFPatchKey(fileId);
-    __block NSString *value = [PHKeyChainUtil load:key];
-    
-    if (MFStringIsEmpty(value)) {
-        return;
-    }
-    
-    NSArray *values = [value componentsSeparatedByString:@":"];
-    NSString *isActivated = [values lastObject];
-    if (isActivated.boolValue) {
-        //已激活
-        return;
-    }
-    
-    //MFLog(@"Patch not activated!");
-    
-    [self requestPostWithUrl:PH_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(id responseObject) {
-        NSMutableArray *array = [NSMutableArray arrayWithArray:values];
-        [array replaceObjectAtIndex:array.count-1 withObject:@"1"];
-        value = [array componentsJoinedByString:@":"];
-        [PHKeyChainUtil save:key data:value];
-        //MFLog(@"Patch is activate successfully!");
-    } fail:nil];
-}
-
 - (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
     if (jsonString == nil) {
         return nil;
@@ -327,23 +309,38 @@ typedef void(^Fail)(NSString *msg);
 #endif
 }
 
+#pragma mark - Network
+
 - (void)requestCheckRemotePatch {
     
+    NSString *currentFileId = [MFUserDefaults valueForKey:MFLocalPatchKey(_appId)];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"fileid"] = currentFileId;
+    
     __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:PH_Url_CheckMangoFile params:nil succ:^(id responseObject) {
+    [self requestPostWithUrl:PH_Url_CheckMangoFile params:params succ:^(id responseObject) {
         NSDictionary *dict = responseObject;
         NSDictionary *rows = dict[@"rows"];
-        NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
-        MFLog(@"A new patch was detected!");
-        NSString *key = MFPatchKey(fileId);
-        NSString *value = [PHKeyChainUtil load:key];
-        if (MFStringIsEmpty(value)) {
-            value = MFStringWithFormat(@"%@%@", MFPatchPrefix, fileId);
-            value = MFStringWithFormat(@"%@:%@", value, MFBundleShortVersion);
-            value = MFStringWithFormat(@"%@:%@", value, @"0");
-            [PHKeyChainUtil save:key data:value];
+        NSString *msg = dict[@"msg"];
+        if ([dict[@"code"] intValue] == 202) {
+            //当前补丁已是最新
+            MFLog(@"%@", msg);
+            [weakSelf activatePatchWithFileId:currentFileId];
         }
-        [weakSelf evalRemotePatchWithFileId:fileId];
+        else if ([dict[@"code"] intValue] == 500) {
+            MFLog(@"%@", msg);
+            if (weakSelf.autoClearLastPath) {
+                //检测不到补丁，则清理本地旧版本补丁
+                [weakSelf deleteLocalMangoScript];
+            }
+            [MFUserDefaults removeObjectForKey:MFLocalPatchKey(weakSelf.appId)];
+        }
+        else {
+            NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
+            MFLog(@"A new patch was detected!");
+            [weakSelf evalRemotePatchWithFileId:fileId];
+        }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
     }];
@@ -376,17 +373,7 @@ typedef void(^Fail)(NSString *msg);
             else if (httpResponse.statusCode == 200) {
                 NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
                 NSDictionary *dict = [weakSelf dictionaryWithJsonString:resultStr];
-                NSString *msg = dict[@"msg"];
-                if ([dict[@"code"] intValue] == 500) {
-                    if (fail) fail(msg);
-                    if (weakSelf.autoClearLastPath) {
-                        //检测不到补丁，则清理本地旧版本补丁
-                        [weakSelf deleteLocalMangoScript];
-                    }
-                }
-                else {
-                    if (succ) succ(dict);
-                }
+                if (succ) succ(dict);
             }
             else {
                 if (fail) fail(error.localizedDescription);

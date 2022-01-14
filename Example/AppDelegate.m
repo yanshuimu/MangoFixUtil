@@ -17,9 +17,6 @@
  如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
  */
 
-//APPID，请登录后台新建应用后获取APPID
-#define APPID @"330eb766152b4c9a"
-
 @interface AppDelegate ()
 
 @end
@@ -44,7 +41,7 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:YES];
+    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:NO];
     
     /*
      步骤：
@@ -53,7 +50,7 @@
      */
     
     //① 执行本地未加密补丁，直接在demo.mg中使用MangoFix语法编写代码，执行该方法调试
-    //[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
+    [mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
     
     
     //② 执行远程补丁，第①步测试正常，即可通过补丁管理后台发布补丁

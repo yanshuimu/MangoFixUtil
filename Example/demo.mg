@@ -11,7 +11,7 @@ class BugFixController : UIViewController {
     }
     
     NSString *string = array[2];
-    NSLog(@"访问索引为2的元素：" + string.substringWithRange:(NSMakeRange(0, 1)));
+    NSLog(@"访问索引为2的元素：" + string);
     
 }
 
