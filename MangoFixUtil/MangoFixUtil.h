@@ -38,6 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL autoClearLastPath;
 
 /**
+ * 是否统计日活量，默认为 YES
+ */
+@property (nonatomic, assign) BOOL countDailyActiveUser;
+
+/**
+ * 扩展字段
+ */
+@property (nonatomic, strong) NSString *extendField;
+
+/**
  * 初始化
  * debug 默认为 NO 全量下发
  */

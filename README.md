@@ -84,5 +84,11 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 #### V2.0.2
 1. 支持线上加密补丁
 
+#### V2.0.3
+1. 优化流程
+
+#### V2.0.4
+1. 支持统计日活量
+
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)

@@ -41,6 +41,7 @@
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
+
     [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey debug:NO];
     
     /*
@@ -50,11 +51,11 @@
      */
     
     //① 执行本地未加密补丁，直接在demo.mg中使用MangoFix语法编写代码，执行该方法调试
-    [mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
+    //[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
     
     
     //② 执行远程补丁，第①步测试正常，即可通过补丁管理后台发布补丁
-    //[mangoFixUtil evalRemoteMangoScript];
+    [mangoFixUtil evalRemoteMangoScript];
 }
 
 @end

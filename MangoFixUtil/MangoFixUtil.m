@@ -36,9 +36,14 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *privateKey;
 
 /**
+ * uuid
+ */
+@property (nonatomic, copy) NSString *uuid;
+
+/**
  * 公共参数
  */
-@property (nonatomic, strong) NSDictionary *baseParams;
+@property (nonatomic, strong) NSMutableDictionary *baseParams;
 
 @end
 
@@ -57,6 +62,7 @@ typedef void(^Fail)(NSString *msg);
     if (self = [super init]) {
         _statusCode = 201;
         _autoClearLastPath = YES;
+        _countDailyActiveUser = YES;
         _url = PH_Url_GetMangoFile;
     }
     return self;
@@ -72,13 +78,17 @@ typedef void(^Fail)(NSString *msg);
     _appId = appId;
     _debug = debug;
     _privateKey = privateKey;
+    _uuid = [PHKeyChainUtil load:MFUUIDKey(_appId)];
+    if (MFStringIsEmpty(_uuid)) {
+        _uuid = [self createUUID];
+        [PHKeyChainUtil save:MFUUIDKey(_appId) data:_uuid];
+    }
 }
 
 - (void)evalRemoteMangoScript {
     
-    
     @try {
-        //先执行上一次补丁
+        //执行上一次补丁
         [self evalLastPatch];
     }
     @catch (NSException *exception) {
@@ -208,7 +218,7 @@ typedef void(^Fail)(NSString *msg);
     NSString *value = [PHKeyChainUtil load:key];
     
     if (value.intValue == 1) {
-        //已激活
+        //补丁已激活
         return;
     }
     
@@ -283,6 +293,18 @@ typedef void(^Fail)(NSString *msg);
     return dic;
 }
 
+- (NSString*)createUUID {
+    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
+    CFStringRef stringRef = CFUUIDCreateString(NULL, uuidRef);
+    NSString *uuid = [NSString stringWithString:(__bridge NSString*)stringRef];
+    CFRelease(uuidRef);
+    CFRelease(stringRef);
+    uuid = [uuid lowercaseString];
+    uuid = [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if(uuid.length > 16) uuid = [uuid substringToIndex:16];
+    return uuid;
+}
+
 #pragma mark - MangoFix
 
 - (id)context {
@@ -317,6 +339,10 @@ typedef void(^Fail)(NSString *msg);
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"fileid"] = currentFileId;
+    if (_countDailyActiveUser) {
+        params[@"uuid"] = _uuid;
+        params[@"extend"] = _extendField;
+    }
     
     __weak typeof(self) weakSelf = self;
     [self requestPostWithUrl:PH_Url_CheckMangoFile params:params succ:^(id responseObject) {
@@ -384,9 +410,12 @@ typedef void(^Fail)(NSString *msg);
     [task resume];
 }
 
-- (NSDictionary*)baseParams {
+- (NSMutableDictionary*)baseParams {
     if (!_baseParams) {
-        _baseParams = @{@"appid": _appId, @"version": MFBundleShortVersion, @"debug": @(_debug)};
+        _baseParams = [NSMutableDictionary dictionary];
+        _baseParams[@"appid"] = _appId;
+        _baseParams[@"version"] = MFBundleShortVersion;
+        _baseParams[@"debug"] = @(_debug);
     }
     return _baseParams;
 }

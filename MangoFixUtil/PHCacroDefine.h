@@ -34,4 +34,6 @@
 
 #define MFLocalPatchKey(appId) MFStringWithFormat(@"MFLocalPatchKey:%@", appId)
 
+#define MFUUIDKey(appId) MFStringWithFormat(@"MFUUIDKey:%@", appId)
+
 #endif /* PHCacroDefine_h */
