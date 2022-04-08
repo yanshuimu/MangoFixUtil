@@ -8,8 +8,8 @@
 #ifndef PHNetwork_Define_h
 #define PHNetwork_Define_h
 
-//#define PH_Url(url) MFStringWithFormat(@"%@%@", @"http://patchhub.top/mangofix", url)
-#define PH_Url(url) MFStringWithFormat(@"%@%@", @"http://localhost:8080/mangofix", url)
+#define PH_Url(url) MFStringWithFormat(@"%@%@", @"http://patchhub.top/mangofix", url)
+//#define PH_Url(url) MFStringWithFormat(@"%@%@", @"http://localhost:8080/mangofix", url)
 
 #define PH_Url_ActivateDevice PH_Url(@"/api/activatedevice")
 

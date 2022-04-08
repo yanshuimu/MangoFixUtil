@@ -69,13 +69,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 执行本地补丁（未加密），查找本地文件名为demo.mg的补丁并执行
- * @param key key
+ * @param aesKey key
  */
 - (void)evalLocalUnEncryptedMangoScriptWithKey:(NSString*)aesKey;
 
 /**
  * 加密补丁，查找本地文件名为demo.mg的补丁，并加密至Document中
- * @param key key
+ * @param aesKey key
  * @return 已加密补丁路径
  */
 - (NSString*)encryptPlainScirptToDocumentWithKey:(NSString*)aesKey;

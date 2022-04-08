@@ -15,6 +15,7 @@
 		045839B525E8A27C00BBACF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */; };
 		045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B425E8A27C00BBACF2 /* Main.storyboard */; };
 		045839BF25E8A68200BBACF2 /* MangoFixUtil.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */; };
+		7B1BBD5B28003560003299F9 /* PHEncryptionUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1BBD5A28003560003299F9 /* PHEncryptionUtil.m */; };
 		7B7432582715995200F10C5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7432572715995200F10C5C /* README.md */; };
 		7B9A2435278D1376007B419C /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A2434278D1376007B419C /* demo.mg */; };
 		7B9A24392791632D007B419C /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A24382791632D007B419C /* encrypted_demo.mg */; };
@@ -39,6 +40,8 @@
 		045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MangoFixUtil.podspec; sourceTree = "<group>"; };
 		298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.release.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
 		6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.debug.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
+		7B1BBD5928003560003299F9 /* PHEncryptionUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PHEncryptionUtil.h; sourceTree = "<group>"; };
+		7B1BBD5A28003560003299F9 /* PHEncryptionUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PHEncryptionUtil.m; sourceTree = "<group>"; };
 		7B7432572715995200F10C5C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7B9A2434278D1376007B419C /* demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.mg; sourceTree = "<group>"; };
 		7B9A24382791632D007B419C /* encrypted_demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = encrypted_demo.mg; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				7BA94D6B271173C100872060 /* PHKeyChainUtil.h */,
 				7BA94D6C271173C200872060 /* PHKeyChainUtil.m */,
 				7BA94D6D271173C200872060 /* PHNetworkDefine.h */,
+				7B1BBD5928003560003299F9 /* PHEncryptionUtil.h */,
+				7B1BBD5A28003560003299F9 /* PHEncryptionUtil.m */,
 			);
 			path = MangoFixUtil;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				045839A725E8A11D00BBACF2 /* AppDelegate.m in Sources */,
 				045839AC25E8A13400BBACF2 /* MangoFixUtil.m in Sources */,
 				7BA94D6F271173C200872060 /* PHKeyChainUtil.m in Sources */,
+				7B1BBD5B28003560003299F9 /* PHEncryptionUtil.m in Sources */,
 				045839A625E8A11D00BBACF2 /* main.m in Sources */,
 				045839A225E8A11D00BBACF2 /* ViewController.m in Sources */,
 				EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */,

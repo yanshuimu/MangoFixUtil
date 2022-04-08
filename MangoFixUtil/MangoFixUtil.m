@@ -9,6 +9,7 @@
 #import "PHKeyChainUtil.h"
 #import "PHNetworkDefine.h"
 #import "PHCacroDefine.h"
+#import "PHEncryptionUtil.h"
 #if __has_include(<MangoFix/MangoFix.h>)
 #import <MangoFix/MangoFix.h>
 #define Has_Include_MangoFix
@@ -329,7 +330,7 @@ typedef void(^Fail)(NSString *msg);
 
 #ifdef Has_Include_MangoFix
     NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    return [scriptData AES128ParmEncryptWithKey:aesKey iv:aesIv];
+    return [PHEncryptionUtil AES128ParmEncryptWithData:scriptData key:aesKey iv:aesIv];
 #else
     return nil;
 #endif
