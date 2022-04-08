@@ -11,7 +11,7 @@ class BugFixController : UIViewController {
     }
     
     NSString *string = array[2];
-    NSLog(@"访问索引为2的元素：" + string);
+    NSLog(@"访问索引为666666888888999999的元素：" + string);
     
 }
 

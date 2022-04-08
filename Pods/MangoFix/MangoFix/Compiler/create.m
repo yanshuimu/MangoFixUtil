@@ -325,8 +325,15 @@ MFBlockBody *mf_close_block_statement(MFBlockBody *block, NSArray<MFStatement *>
 	return block;
 }
 
+MFAnnotation *mf_create_annotation(NSString *name, MFExpression *expr) {
+    MFAnnotation *annotation = [[MFAnnotation alloc] init];
+    annotation.name = name;
+    annotation.expr = expr;
+    return annotation;
+}
 
-MFStructDeclare *mf_create_struct_declare(MFExpression *annotaionIfConditionExpr, NSString *structName, NSString *typeEncodingKey, MFExpression *typeEncodingValueExpr, NSString *keysKey, NSArray<NSString *> *keysValue){
+
+MFStructDeclare *mf_create_struct_declare(NSArray<MFAnnotation *> *annotationList, NSString *structName, NSString *typeEncodingKey, MFExpression *typeEncodingValueExpr, NSString *keysKey, NSArray<NSString *> *keysValue){
 	if (![typeEncodingKey isEqualToString:@"typeEncoding"]) {
         mf_throw_error(mf_get_current_compile_util().currentLineNumber, MFSemanticErrorStructDeclareLackFieldEncoding, @"struct: %@ declare lack field typeEncoding",structName);
         return nil;
@@ -337,7 +344,7 @@ MFStructDeclare *mf_create_struct_declare(MFExpression *annotaionIfConditionExpr
 	}
     const char *typeEncodingValue = typeEncodingValueExpr.cstringValue;
 	MFStructDeclare *structDeclare = [[MFStructDeclare alloc] init];
-	structDeclare.annotationIfConditionExpr = annotaionIfConditionExpr;
+	structDeclare.annotationList = annotationList;
 	structDeclare.name = structName;
 	structDeclare.typeEncoding = typeEncodingValue;
 	structDeclare.keys = keysValue;
@@ -465,9 +472,9 @@ MFMethodNameItem *mf_create_method_name_item(NSString *name, MFTypeSpecifier *ty
 }
 
 
-MFMethodDefinition *mf_create_method_definition(MFExpression *annotaionIfConditionExpr, BOOL classMethod, MFTypeSpecifier *returnTypeSpecifier, NSArray<MFMethodNameItem *> *items, MFBlockBody *block){
+MFMethodDefinition *mf_create_method_definition(NSArray<MFAnnotation *> *annotationList, BOOL classMethod, MFTypeSpecifier *returnTypeSpecifier, NSArray<MFMethodNameItem *> *items, MFBlockBody *block){
 	MFMethodDefinition *methodDefinition = [[MFMethodDefinition alloc] init];
-	methodDefinition.annotationIfConditionExpr = annotaionIfConditionExpr;
+	methodDefinition.annotationList = annotationList;
 	methodDefinition.classMethod = classMethod;
 	MFFunctionDefinition *funcDefinition = [[MFFunctionDefinition alloc] init];
 	funcDefinition.kind = MFFunctionDefinitionKindMethod;
@@ -500,9 +507,9 @@ MFMethodDefinition *mf_create_method_definition(MFExpression *annotaionIfConditi
 }
 
 
-MFPropertyDefinition *mf_create_property_definition(MFExpression *annotaionIfConditionExpr, MFPropertyModifier modifier, MFTypeSpecifier *typeSpecifier, NSString *name){
+MFPropertyDefinition *mf_create_property_definition(NSArray<MFAnnotation *> *annotationList, MFPropertyModifier modifier, MFTypeSpecifier *typeSpecifier, NSString *name){
 	MFPropertyDefinition *propertyDefinition = [[MFPropertyDefinition alloc] init];
-	propertyDefinition.annotationIfConditionExpr = annotaionIfConditionExpr;
+	propertyDefinition.annotationList = annotationList;
 	propertyDefinition.lineNumber = mf_get_current_compile_util().currentLineNumber;
 	propertyDefinition.modifier = modifier;
 	propertyDefinition.typeSpecifier = typeSpecifier;
@@ -511,13 +518,35 @@ MFPropertyDefinition *mf_create_property_definition(MFExpression *annotaionIfCon
 }
 
 
-void mf_start_class_definition(MFExpression *annotaionIfConditionExpr, NSString *name, NSString *superNmae, NSArray<NSString *> *protocolNames){
+void mf_start_class_definition(NSArray<MFAnnotation *> *annotationList, NSString *name, NSArray<MFAnnotation *> *superAnnotationList, NSString *superName, NSArray<NSString *> *protocolNames){
 	MFInterpreter *interpreter = mf_get_current_compile_util();
 	MFClassDefinition *classDefinition = [[MFClassDefinition alloc] init];
 	classDefinition.lineNumber = interpreter.currentLineNumber;
-	classDefinition.annotationIfConditionExpr = annotaionIfConditionExpr;
-	classDefinition.name = name;
-	classDefinition.superNmae = superNmae;
+	classDefinition.annotationList = annotationList;
+    classDefinition.superAnnotationList = superAnnotationList;
+    if (classDefinition.swiftModuleAnnotation) {
+        classDefinition.name = [NSString stringWithFormat:@"%s.%@", classDefinition.swiftModuleAnnotation.expr.cstringValue, name];
+        [[MFSwfitClassNameAlisTable shareInstance] addSwiftClassNmae:classDefinition.name alias:name];
+    } else {
+        NSString *swiftClassName = [[MFSwfitClassNameAlisTable shareInstance] swiftClassNameByAlias:name];
+        if (swiftClassName) {
+            classDefinition.name = swiftClassName;
+        } else {
+            classDefinition.name = name;
+        }
+    }
+    
+    if (classDefinition.superSwiftModuleAnnotation) {
+        classDefinition.superName = [NSString stringWithFormat:@"%s.%@", classDefinition.superSwiftModuleAnnotation.expr.cstringValue, superName];
+        [[MFSwfitClassNameAlisTable shareInstance] addSwiftClassNmae:classDefinition.superName alias:superName];
+    } else {
+        NSString *swiftSuperClassName = [[MFSwfitClassNameAlisTable shareInstance] swiftClassNameByAlias:superName];
+        if (swiftSuperClassName) {
+            classDefinition.superName = swiftSuperClassName;
+        } else {
+            classDefinition.superName = superName;
+        }
+    }
 	classDefinition.protocolNames = protocolNames;
 	interpreter.currentClassDefinition = classDefinition;
 }
@@ -583,6 +612,24 @@ void mf_add_typedef_from_alias(NSString *alias_existing, NSString *alias_new){
     mf_add_typedef(type, alias_new);
 }
 
+
+
+void mf_add_swift_class_alias(NSString *n1, NSString *n2, NSString *n3, NSString *n4, NSString *n5, NSString *aliasName) {
+    NSMutableString *swiftClassName = [NSMutableString stringWithString:n1];
+    if (n2) {
+        [swiftClassName appendFormat:@".%@", n2];
+    }
+    if (n3) {
+        [swiftClassName appendFormat:@".%@", n3];
+    }
+    if (n4) {
+        [swiftClassName appendFormat:@".%@", n4];
+    }
+    if (n5) {
+        [swiftClassName appendFormat:@".%@", n5];
+    }
+    [[MFSwfitClassNameAlisTable shareInstance] addSwiftClassNmae:swiftClassName.copy alias:aliasName];
+}
 
 
 

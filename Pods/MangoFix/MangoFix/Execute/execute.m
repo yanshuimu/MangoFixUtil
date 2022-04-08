@@ -389,9 +389,9 @@ MFValue * mf_call_mf_function(MFInterpreter *inter, MFScopeChain *scope, MFFunct
 }
 
 
-static void define_class(MFInterpreter *interpreter,MFClassDefinition *classDefinition){
+static void define_class(MFInterpreter *interpreter, MFClassDefinition *classDefinition){
 	if (classDefinition.annotationIfExprResult == AnnotationIfExprResultNoComputed) {
-		MFExpression *annotationIfConditionExpr = classDefinition.annotationIfConditionExpr;
+		MFExpression *annotationIfConditionExpr = classDefinition.ifAnnotation.expr;
 		if (annotationIfConditionExpr) {
 			MFValue *value = mf_eval_expression(interpreter, interpreter.topScope, annotationIfConditionExpr);
 			classDefinition.annotationIfExprResult = value.isSubtantial ? AnnotationIfExprResultTrue : AnnotationIfExprResultFalse;
@@ -407,29 +407,47 @@ static void define_class(MFInterpreter *interpreter,MFClassDefinition *classDefi
 	if (classDefinition.annotationIfExprResult != AnnotationIfExprResultTrue) {
 		return;
 	}
-	
-	Class clazz = NSClassFromString(classDefinition.name);
+    Class clazz = NSClassFromString(classDefinition.name);
 	if (!clazz) {
-		NSString *superClassName = classDefinition.superNmae;
+		NSString *superClassName = classDefinition.superName;
 		Class superClass = NSClassFromString(superClassName);
+        
+        if (!superClass) {
+            if (classDefinition.swiftModuleAnnotation && !classDefinition.superSwiftModuleAnnotation) {
+                NSString *sueprClassFullName = [NSString stringWithFormat:@"%s.%@", classDefinition.swiftModuleAnnotation.expr.cstringValue, superClassName];
+                superClass = NSClassFromString(sueprClassFullName);
+                if (superClass) {
+                    [[MFSwfitClassNameAlisTable shareInstance] addSwiftClassNmae:sueprClassFullName alias:superClassName];
+                    classDefinition.superName = sueprClassFullName;
+                }
+            }
+        }
+        
 		if (!superClass) {
 			define_class(interpreter, interpreter.classDefinitionDic[superClassName]);
+            superClass = NSClassFromString(superClassName);
 		}
+        
+        if (!superClass && classDefinition.swiftModuleAnnotation && !classDefinition.superSwiftModuleAnnotation) {
+            NSString *sueprClassFullName = [NSString stringWithFormat:@"%s.%@", classDefinition.swiftModuleAnnotation.expr.cstringValue, superClassName];
+            define_class(interpreter, interpreter.classDefinitionDic[sueprClassFullName]);
+            superClass = NSClassFromString(sueprClassFullName);
+            if (superClass) {
+                [[MFSwfitClassNameAlisTable shareInstance] addSwiftClassNmae:sueprClassFullName alias:superClassName];
+                classDefinition.superName = sueprClassFullName;
+            }
+        }
 		
 		if (!superClass) {
             mf_throw_error(classDefinition.lineNumber, MFRuntimeErrorNotFoundSuperClass, @"not found super class: %@",superClassName);
 			return;
 		}
-		Class clazz = objc_allocateClassPair(superClass, classDefinition.name.UTF8String, 0);
+        clazz = objc_allocateClassPair(superClass, classDefinition.name.UTF8String, 0);
 		objc_registerClassPair(clazz);
-	}else{
-		Class superClass = class_getSuperclass(clazz);
-		char const *superClassName = class_getName(superClass);
-		if (strcmp(classDefinition.superNmae.UTF8String, superClassName)) {
-            mf_throw_error(classDefinition.lineNumber, @"MFRuntimeErrorSuperClassNoMatch", @"MangoFix class: %@:%@, but Objective-C class: %@:%s",classDefinition.name,classDefinition.superNmae, classDefinition.name, superClassName);
-			return;
-		}
+        
 	}
+    classDefinition.clazz = clazz;
+    
 }
 
 
@@ -532,8 +550,8 @@ static void replace_setter_method(NSUInteger lineNumber ,MFInterpreter *inter ,C
 
 
 static void replace_prop(MFInterpreter *inter ,Class clazz, MFPropertyDefinition *prop){
-	if (prop.annotationIfConditionExpr) {
-		MFValue *conValue = mf_eval_expression(inter, inter.topScope, prop.annotationIfConditionExpr);
+	if (prop.ifAnnotation.expr) {
+		MFValue *conValue = mf_eval_expression(inter, inter.topScope, prop.ifAnnotation.expr);
 		if (![conValue isSubtantial]) {
 			return;
 		}
@@ -580,6 +598,7 @@ static void replaceIMP(ffi_cif *cif, void *ret, void **args, void *userdata){
     NSDictionary * userInfo = (__bridge id)userdata;// 不可以进行释放
     Class class  = userInfo[@"class"];
     NSString *typeEncoding = userInfo[@"typeEncoding"];
+    MFClassDefinition *classDefinition =userInfo[@"classDefinition"];
     id assignSlf = (__bridge  id)(*(void **)args[0]);
     SEL sel = *(void **)args[1];
 
@@ -590,6 +609,7 @@ static void replaceIMP(ffi_cif *cif, void *ret, void **args, void *userdata){
 
     MFScopeChain *classScope = [MFScopeChain scopeChainWithNext:inter.topScope];
     classScope.instance = assignSlf;
+    classScope.classDefinition = classDefinition;
 
     NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:typeEncoding.UTF8String];
 
@@ -615,13 +635,24 @@ static void replaceIMP(ffi_cif *cif, void *ret, void **args, void *userdata){
 }
 
 
-static void replace_method(MFInterpreter *interpreter,Class clazz, MFMethodDefinition *method){
-	if (method.annotationIfConditionExpr) {
-		MFValue *conValue = mf_eval_expression(interpreter, interpreter.topScope, method.annotationIfConditionExpr);
+static void replace_method(MFInterpreter *interpreter, Class clazz, MFMethodDefinition *method){
+	if (method.ifAnnotation.expr) {
+		MFValue *conValue = mf_eval_expression(interpreter, interpreter.topScope, method.ifAnnotation.expr);
 		if (![conValue isSubtantial]) {
 			return;
 		}
 	}
+    if (method.selectorNameAnnotation) {
+        MFValue *v = mf_eval_expression(interpreter, interpreter.topScope, method.selectorNameAnnotation.expr);
+        NSString * selName = v.objectValue;
+        if (!selName && v.cstringValue) {
+            selName = [NSString stringWithUTF8String:v.cstringValue];
+        }
+        if (selName) {
+            method.functionDefinition.name = selName;
+        }
+    }
+    
 	MFFunctionDefinition *func = method.functionDefinition;
 	SEL sel = NSSelectorFromString(func.name);
 	
@@ -667,7 +698,12 @@ static void replace_method(MFInterpreter *interpreter,Class clazz, MFMethodDefin
 
     if(ffi_prep_cif(cif, FFI_DEFAULT_ABI, argCount, returnType, args) == FFI_OK)
     {
-        NSDictionary *userInfo = @{@"class":c2,@"typeEncoding":[typeEncoding copy]};
+        NSDictionary *userInfo = nil;
+        if (method.classDefinition) {
+            userInfo = @{@"class":c2, @"typeEncoding":[typeEncoding copy], @"classDefinition" : method.classDefinition};
+        } else {
+            userInfo = @{@"class":c2, @"typeEncoding":[typeEncoding copy]};
+        }
         CFTypeRef cfuserInfo = (__bridge_retained CFTypeRef)userInfo;
         ffi_prep_closure_loc(closure, cif, replaceIMP, (void *)cfuserInfo, imp);
     }
@@ -675,8 +711,8 @@ static void replace_method(MFInterpreter *interpreter,Class clazz, MFMethodDefin
 }
 
 
-static void fix_class(MFInterpreter *interpreter,MFClassDefinition *classDefinition){
-	Class clazz = NSClassFromString(classDefinition.name);
+static void fix_class(MFInterpreter *interpreter, MFClassDefinition *classDefinition){
+	Class clazz = classDefinition.clazz;
 	for (MFPropertyDefinition *prop in classDefinition.properties) {
 		replace_prop(interpreter,clazz, prop);
 	}
@@ -692,8 +728,8 @@ static void fix_class(MFInterpreter *interpreter,MFClassDefinition *classDefinit
 
 
 void add_struct_declare(MFInterpreter *interpreter, MFStructDeclare *structDeclaer){
-	if (structDeclaer.annotationIfConditionExpr) {
-		MFValue *conValue = mf_eval_expression(interpreter, interpreter.topScope, structDeclaer.annotationIfConditionExpr);
+	if (structDeclaer.ifAnnotation.expr) {
+		MFValue *conValue = mf_eval_expression(interpreter, interpreter.topScope, structDeclaer.ifAnnotation.expr);
 		if (![conValue isSubtantial]) {
 			return;
 		}

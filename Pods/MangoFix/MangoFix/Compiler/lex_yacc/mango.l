@@ -107,10 +107,11 @@ static void increment_line_number(){
 <INITIAL>"continue"  {return CONTINUE; }
 <INITIAL>"return" {return RETURN; }
 
-<INITIAL>"#If" {return ANNOTATION_IF; }
 
 <INITIAL>"@property" {return PROPERTY; }
 <INITIAL>"@selector" {return SELECTOR; }
+
+
 <INITIAL>"weak" {return WEAK; }
 <INITIAL>"strong" {return STRONG; }
 <INITIAL>"copy" {return COPY; }
@@ -135,6 +136,9 @@ static void increment_line_number(){
 <INITIAL>"__strong" {return __STRONG; }
 <INITIAL>"static" {return STATIC; }
 <INITIAL>"typedef" {return TYPEDEF; }
+
+<INITIAL>"@SwiftClassAlias" {return SWIFT_CLASS_ALIAS; }
+
 
 <INITIAL>"self" {
 	MFExpression *expression = mf_create_expression(MF_SELF_EXPRESSION);
@@ -174,6 +178,18 @@ static void increment_line_number(){
 	yylval.expression = (__bridge_retained void *)expression;
 	return NO_;
 	
+}
+
+<INITIAL>@[A-Za-z_$][A-Za-z_$0-9]* {
+    NSString *identifier = mf_create_identifier(yytext);
+    yylval.identifier = (__bridge_retained void *)identifier;
+    return ANNOTATION;
+}
+
+<INITIAL>"#If" {
+    NSString *identifier = mf_create_identifier(yytext);
+    yylval.identifier = (__bridge_retained void *)identifier;
+    return ANNOTATION;
 }
 
 <INITIAL>[A-Za-z_$][A-Za-z_$0-9]* {

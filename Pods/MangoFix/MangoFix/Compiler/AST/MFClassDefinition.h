@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MFFunctionDefinition.h"
+#import "MFAnnotationableDefinition.h"
 
 @class MFClassDefinition;
 
@@ -32,9 +33,8 @@ typedef NS_ENUM(NSUInteger, MFPropertyModifier) {
 };
 
 
-@interface MFMemberDefinition: NSObject
+@interface MFMemberDefinition: MFAnnotationableDefinition
 
-@property (strong, nonatomic) MFExpression *annotationIfConditionExpr;
 @property (weak, nonatomic) MFClassDefinition *classDefinition;
 
 @end
@@ -66,17 +66,21 @@ typedef NS_ENUM(NSUInteger, MFPropertyModifier) {
 @end
 
 
-@interface MFClassDefinition : NSObject
+@interface MFClassDefinition : MFAnnotationableDefinition
 
 @property (assign, nonatomic) NSUInteger lineNumber;
 @property (copy, nonatomic) NSString *name;
-@property (copy, nonatomic) NSString *superNmae;
+@property (strong, nonatomic) NSArray<MFAnnotation *> *superAnnotationList;
+@property (copy, nonatomic) NSString *superName;
 @property (strong, nonatomic) NSArray<NSString *> *protocolNames;
 @property (strong, nonatomic) NSArray<MFPropertyDefinition *> *properties;
 @property (strong, nonatomic) NSArray<MFMethodDefinition *> *classMethods;
 @property (strong, nonatomic) NSArray<MFMethodDefinition *> *instanceMethods;
-@property (strong, nonatomic) MFExpression *annotationIfConditionExpr;
 @property (assign, nonatomic) AnnotationIfExprResult annotationIfExprResult;
+@property (strong, nonatomic) Class clazz;
+
+
+- (nullable MFAnnotation *)superSwiftModuleAnnotation;
 
 @end
 

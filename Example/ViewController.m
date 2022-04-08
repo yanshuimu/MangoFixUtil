@@ -103,11 +103,10 @@
     
     switch (indexPath.row) {
         case 0:
-            [mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
+            [mangoFixUtil evalLocalUnEncryptedMangoScriptWithKey:aes128Key];
             break;
         case 1:
-            [mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
-            
+            [mangoFixUtil encryptPlainScirptToDocumentWithKey:aes128Key];
             break;
         case 2:
             [mangoFixUtil evalLocalMangoScript];

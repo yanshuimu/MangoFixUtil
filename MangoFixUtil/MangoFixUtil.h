@@ -7,9 +7,7 @@
 
 /*
  补丁管理后台：http://patchhub.top/
- 
- 公私钥在线生成：http://www.metools.info/code/c80.html/ 密钥长度：1024 bit，密钥格式：PKCS#8
- 
+  
  如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
  */
 
@@ -40,24 +38,24 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 是否统计日活量，默认为 YES
  */
-@property (nonatomic, assign) BOOL countDailyActiveUser;
+@property (nonatomic, assign) BOOL dailyActiveUserEnabled;
 
 /**
  * 扩展字段
  */
-@property (nonatomic, strong) NSString *extendField;
+@property (nonatomic, strong) NSString *extend;
 
 /**
  * 初始化
  * debug 默认为 NO 全量下发
  */
-- (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey;
+- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
 /**
  * 初始化
  * @param debug YES 开发预览 NO 全量下发
  */
-- (void)startWithAppId:(NSString*)appId privateKey:(NSString*)privateKey debug:(BOOL)debug;
+- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 执行远程补丁
@@ -71,16 +69,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 执行本地补丁（未加密），查找本地文件名为demo.mg的补丁并执行
- * @param publicKey 公钥
+ * @param key key
  */
-- (void)evalLocalUnEncryptedMangoScriptWithPublicKey:(NSString*)publicKey;
+- (void)evalLocalUnEncryptedMangoScriptWithKey:(NSString*)aesKey;
 
 /**
  * 加密补丁，查找本地文件名为demo.mg的补丁，并加密至Document中
- * @param publicKey 公钥
+ * @param key key
  * @return 已加密补丁路径
  */
-- (NSString*)encryptPlainScirptToDocumentWithPublicKey:(NSString*)publicKey;
+- (NSString*)encryptPlainScirptToDocumentWithKey:(NSString*)aesKey;
 
 /**
  * 删除Document中已拉取的远程补丁或本地生成的加密补丁
