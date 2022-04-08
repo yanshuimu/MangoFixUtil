@@ -9,7 +9,6 @@
 #import "PHKeyChainUtil.h"
 #import "PHNetworkDefine.h"
 #import "PHCacroDefine.h"
-#import "PHEncryptionUtil.h"
 #if __has_include(<MangoFix/MangoFix.h>)
 #import <MangoFix/MangoFix.h>
 #define Has_Include_MangoFix
@@ -246,8 +245,10 @@ typedef void(^Fail)(NSString *msg);
     NSString *plainScriptString = [NSString stringWithContentsOfURL:scriptUrl encoding:NSUTF8StringEncoding error:&outErr];
     if (outErr) goto err;
     {
+#ifdef Has_Include_MangoFix
         NSData *scriptData = [plainScriptString dataUsingEncoding:NSUTF8StringEncoding];
         result = [scriptData AES128ParmEncryptWithKey:key iv:iv];
+#endif
     }
     err:
     if (outErr) MFLog(@"%@",outErr);
@@ -266,8 +267,10 @@ typedef void(^Fail)(NSString *msg);
     
     {
         NSData *scriptData = [plainScriptString dataUsingEncoding:NSUTF8StringEncoding];
-        NSData *encryptedScriptData = [scriptData AES128ParmEncryptWithKey:aesKey iv:@""];
-        
+        NSData *encryptedScriptData = nil;
+#ifdef Has_Include_MangoFix
+        encryptedScriptData = [scriptData AES128ParmEncryptWithKey:aesKey iv:@""];
+#endif
         encryptedPath= [(NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"encrypted_demo.mg"];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if (![fileManager fileExistsAtPath:encryptedPath]) {
@@ -330,7 +333,7 @@ typedef void(^Fail)(NSString *msg);
 
 #ifdef Has_Include_MangoFix
     NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    return [PHEncryptionUtil AES128ParmEncryptWithData:scriptData key:aesKey iv:aesIv];
+    return [scriptData AES128ParmEncryptWithKey:aesKey iv:aesIv];
 #else
     return nil;
 #endif
