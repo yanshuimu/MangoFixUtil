@@ -246,8 +246,8 @@ typedef void(^Fail)(NSString *msg);
     if (outErr) goto err;
     {
 #ifdef Has_Include_MangoFix
-        //NSData *scriptData = [plainScriptString dataUsingEncoding:NSUTF8StringEncoding];
-        //result = [scriptData AES128ParmEncryptWithKey:key iv:iv];
+        NSData *scriptData = [plainScriptString dataUsingEncoding:NSUTF8StringEncoding];
+        result = [scriptData AES128ParmEncryptWithKey:key iv:iv];
 #endif
     }
     err:
