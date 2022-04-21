@@ -90,5 +90,8 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 #### V2.0.4
 1. 支持统计日活量
 
+#### V2.1.0
+1. 增加AES加密方式，支持MangoFix 1.5.0版本
+
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
