@@ -20,20 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedUtil;
 
 /**
- * 补丁地址
- */
-@property (nonatomic, copy) NSString *url;
-
-/**
- * 成功状态码，默认201
- */
-@property (nonatomic, assign) NSInteger statusCode;
-
-/**
- * 当检测不到补丁时（如：APP升级新版本），是否自动清除本地旧版本补丁，默认为 YES 自动清理
+ * APP更新版本后是否清除本地旧版本补丁
  * 需重启APP生效
+ * 默认为 YES
  */
-@property (nonatomic, assign) BOOL autoClearLastPath;
+@property (nonatomic, assign) BOOL clearLastPathAfterVersionUpdateEnabled;
 
 /**
  * 是否统计日活量，默认为 YES
@@ -47,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 初始化
- * debug 默认为 NO 全量下发
  */
 - (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
@@ -69,16 +59,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 执行本地补丁（未加密），查找本地文件名为demo.mg的补丁并执行
- * @param aesKey key
  */
-- (void)evalLocalUnEncryptedMangoScriptWithKey:(NSString*)aesKey;
+- (void)evalLocalUnEncryptedMangoScript;
 
 /**
  * 加密补丁，查找本地文件名为demo.mg的补丁，并加密至Document中
- * @param aesKey key
  * @return 已加密补丁路径
  */
-- (NSString*)encryptPlainScirptToDocumentWithKey:(NSString*)aesKey;
+- (NSString*)encryptPlainScriptToDocument;
 
 /**
  * 删除Document中已拉取的远程补丁或本地生成的加密补丁

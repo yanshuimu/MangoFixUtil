@@ -1,14 +1,14 @@
 //
-//  PHKeyChainUtil.m
+//  MFKeyChainUtil.m
 //  MangoFixUtil
 //
 //  Created by 许鸿桂 on 2021/9/18.
 //
 
-#import "PHKeyChainUtil.h"
+#import "MFKeyChainUtil.h"
 #import <Security/Security.h>
 
-@implementation PHKeyChainUtil
+@implementation MFKeyChainUtil
 
 + (NSMutableDictionary *)keychainQuery:(NSString *)key
 {

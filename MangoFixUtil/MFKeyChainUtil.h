@@ -1,5 +1,5 @@
 //
-//  PHKeyChainUtil.h
+//  MFKeyChainUtil.h
 //  MangoFixUtil
 //
 //  Created by 许鸿桂 on 2021/9/18.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PHKeyChainUtil : NSObject
+@interface MFKeyChainUtil : NSObject
 
 /**
  * 保存数据

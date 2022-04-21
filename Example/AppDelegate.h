@@ -10,8 +10,8 @@
 //APPID，请登录后台新建应用后获取APPID
 #define APPID @"def068fe489546ae"
 
-//AES128Key
-#define aes128Key @"1234567812345678"
+//AES128秘钥，长度需为16个字节的倍数
+#define AES128KEY @"1234123412341234"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

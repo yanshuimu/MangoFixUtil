@@ -5,8 +5,8 @@
 //  Created by 许鸿桂 on 2021/10/9.
 //
 
-#ifndef PHCacroDefine_h
-#define PHCacroDefine_h
+#ifndef MFMacroDefine_h
+#define MFMacroDefine_h
 
 #define MFCachesDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -36,4 +36,4 @@
 
 #define MFUUIDKey(appId) MFStringWithFormat(@"MFUUIDKey:%@", appId)
 
-#endif /* PHCacroDefine_h */
+#endif /* MFMacroDefine_h */
