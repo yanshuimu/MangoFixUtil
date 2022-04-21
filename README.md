@@ -28,7 +28,7 @@ MangoFixUtil在公司项目中实战已经近1年多，很稳定，也会不断�
 - (void)setupMangoFixUtil {
     
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    [mangoFixUtil startWithAppId:APPID privateKey:RSAPrivateKey];
+    [mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
     [mangoFixUtil evalRemoteMangoScript];
 }
 
@@ -55,7 +55,7 @@ Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFixUtil/` to your project.
 
 ```objc
 MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-[mangoFixUtil startWithAppId:MANGOFIXUTIL_APPID privateKey:RSAPrivateKey];
+[mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
 
 // exec mangofix file from network
 [mangoFixUtil evalRemoteMangoScript];
@@ -64,34 +64,34 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 [mangoFixUtil evalLocalMangoScript];
 
 // exec local unEncrypted mangofix file
-[mangoFixUtil evalLocalUnEncryptedMangoScriptWithPublicKey:RSAPublicKey];
+[mangoFixUtil evalLocalUnEncryptedMangoScript];
 
 // encrypt plain mangofix file to documentDirectory
-[mangoFixUtil encryptPlainScirptToDocumentWithPublicKey:RSAPublicKey];
+[mangoFixUtil encryptPlainScriptToDocument];
 
 ```
 ## Update
 
-#### V1.0.6
-1. 增加开发预览、全量下发模式
-
-#### V2.0.0
-1. 增加激活设备、激活补丁统计
-
-#### V2.0.1
-1. 优化
-
-#### V2.0.2
-1. 支持线上加密补丁
-
-#### V2.0.3
-1. 优化流程
+#### V2.1.0
+####1. 增加AES加密方式，支持MangoFix 1.5.0版本
 
 #### V2.0.4
-1. 支持统计日活量
+####1. 支持统计日活量
 
-#### V2.1.0
-1. 增加AES加密方式，支持MangoFix 1.5.0版本
+#### V2.0.3
+####1. 优化流程
+
+#### V2.0.2
+####1. 支持线上加密补丁
+
+#### V2.0.1
+####1. 优化
+
+#### V2.0.0
+####1. 增加激活设备、激活补丁统计
+
+#### V1.0.6
+####1. 增加开发预览、全量下发模式
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
