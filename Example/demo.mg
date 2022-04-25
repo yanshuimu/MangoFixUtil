@@ -11,7 +11,7 @@ class BugFixController : UIViewController {
     }
     
     NSString *string = array[2];
-    NSLog(@"【16:54】访问索引为的元素：" + string);
+    NSLog(@"【14:44】访问索引为的元素：" + string);
     
 }
 

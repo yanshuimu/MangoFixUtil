@@ -43,9 +43,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 初始化
+ * 通过UserId、BundleId识别唯一应用
+ */
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
+
+/**
+ * 初始化
  * @param debug YES 开发预览 NO 全量下发
  */
 - (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
+
+/**
+ * 初始化
+ * @param debug YES 开发预览 NO 全量下发
+ * 通过UserId、BundleId识别唯一应用
+ */
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 执行远程补丁

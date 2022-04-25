@@ -1,5 +1,5 @@
 //
-//  PHCacroDefine.h
+//  MFCacroDefine.h
 //  MangoFixUtil
 //
 //  Created by 许鸿桂 on 2021/10/9.
@@ -12,28 +12,28 @@
 
 #define MFBundleShortVersion [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
 
+#define MFBundleIdentifier [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleIdentifier"]
+
+#define MFBundleDisplayName [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"]
+
 #define MFStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
 #define MFStringWithFormat(string, args...)  [NSString stringWithFormat:string, args]
 
 #define MFUserDefaults [NSUserDefaults standardUserDefaults]
 
+#define MFDeviceKey(bundleId, version) MFStringWithFormat(@"MFDeviceKey:%@:%@", bundleId, version);
+
+#define MFPatchKey(fileId) MFStringWithFormat(@"MFPatchKey:%@", fileId);
+
+#define MFLocalPatchKey(bundleId) MFStringWithFormat(@"MFLocalPatchKey:%@", bundleId)
+
+#define MFUUIDKey(bundleId) MFStringWithFormat(@"MFUUIDKey:%@", bundleId)
+
 #ifdef RELEASE
     #define MFLog(FORMAT, ...) nil
 #else
     #define MFLog(FORMAT, ...) NSLog((@"MangoFixUtil：" FORMAT), ##__VA_ARGS__)
 #endif
-
-#define MFDevicePrefix @"MangoFixUtil:Device:"
-
-#define MFPatchPrefix @"MangoFixUtil:Patch:"
-
-#define MFDeviceKey(appId, version) MFStringWithFormat(@"MFDeviceKey:%@:%@", appId, version);
-
-#define MFPatchKey(fileId) MFStringWithFormat(@"MFPatchKey:%@", fileId);
-
-#define MFLocalPatchKey(appId) MFStringWithFormat(@"MFLocalPatchKey:%@", appId)
-
-#define MFUUIDKey(appId) MFStringWithFormat(@"MFUUIDKey:%@", appId)
 
 #endif /* MFMacroDefine_h */

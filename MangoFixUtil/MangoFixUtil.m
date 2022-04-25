@@ -28,6 +28,11 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *appId;
 
 /**
+ * 用户id
+ */
+@property (nonatomic, copy) NSString *userId;
+
+/**
  * 规则 YES 开发设备 NO 全量设备
  */
 @property (nonatomic, assign) BOOL debug;
@@ -71,6 +76,11 @@ typedef void(^Fail)(NSString *msg);
 #ifdef HAS_INCLUDE_MANGOFIX
         _interpreter = [[MFInterpreter alloc] init];
 #endif
+        _uuid = [MFKeyChainUtil load:MFUUIDKey(MFBundleIdentifier)];
+        if (MFStringIsEmpty(_uuid)) {
+            _uuid = [self createUUID];
+            [MFKeyChainUtil save:MFUUIDKey(MFBundleIdentifier) data:_uuid];
+        }
     }
     return self;
 }
@@ -80,18 +90,29 @@ typedef void(^Fail)(NSString *msg);
     [self startWithAppId:appId aesKey:aesKey debug:NO];
 }
 
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey {
+    
+    [self startWithUserId:userId aesKey:aesKey debug:NO];
+}
+
 - (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug {
     
     NSAssert(!MFStringIsEmpty(aesKey), @"The aesKey is nil or empty!");
     NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
     _appId = appId;
+    _userId = @"";
     _debug = debug;
     _aesKey = aesKey;
-    _uuid = [MFKeyChainUtil load:MFUUIDKey(_appId)];
-    if (MFStringIsEmpty(_uuid)) {
-        _uuid = [self createUUID];
-        [MFKeyChainUtil save:MFUUIDKey(_appId) data:_uuid];
-    }
+}
+
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug {
+    
+    NSAssert(!MFStringIsEmpty(userId), @"The userId is nil or empty!");
+    NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
+    _appId = @"";
+    _userId = userId;
+    _debug = debug;
+    _aesKey = aesKey;
 }
 
 - (void)evalRemoteMangoScript {
@@ -200,7 +221,7 @@ typedef void(^Fail)(NSString *msg);
         NSData *data = resp;
         NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
         if ([data writeToFile:filePath atomically:YES]) {
-            [MFUserDefaults setObject:fileId forKey:MFLocalPatchKey(weakSelf.appId)];
+            [MFUserDefaults setObject:fileId forKey:MFLocalPatchKey(MFBundleIdentifier)];
             [MFUserDefaults synchronize];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
@@ -226,7 +247,7 @@ typedef void(^Fail)(NSString *msg);
     
     if (_debug) return;
     
-    NSString *key = MFDeviceKey(_appId, MFBundleShortVersion);
+    NSString *key = MFDeviceKey(MFBundleIdentifier, MFBundleShortVersion);
     NSString *value = [MFKeyChainUtil load:key];
     
     if (value.intValue == 1) {
@@ -236,8 +257,16 @@ typedef void(^Fail)(NSString *msg);
     MFLog(@"Device not activated!");
     
     [self requestPostWithUrl:MF_Url_ActivateDevice params:nil succ:^(id resp) {
-        [MFKeyChainUtil save:key data:@"1"];
-        MFLog(@"Device is activate successfully!");
+        NSDictionary *dict = resp;
+        NSString *msg = dict[@"msg"];
+        NSInteger code = [dict[@"code"] intValue];
+        if (code == 500) {
+            MFLog(@"%@", msg);
+        }
+        else {
+            [MFKeyChainUtil save:key data:@"1"];
+            MFLog(@"Device is activate successfully!");
+        }
     } fail:nil];
 }
 
@@ -257,8 +286,16 @@ typedef void(^Fail)(NSString *msg);
     MFLog(@"Patch not activated!");
     
     [self requestPostWithUrl:MF_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(id resp) {
-        [MFKeyChainUtil save:key data:@"1"];
-        MFLog(@"Patch is activate successfully!");
+        NSDictionary *dict = resp;
+        NSString *msg = dict[@"msg"];
+        NSInteger code = [dict[@"code"] intValue];
+        if (code == 500) {
+            MFLog(@"%@", msg);
+        }
+        else {
+            [MFKeyChainUtil save:key data:@"1"];
+            MFLog(@"Patch is activate successfully!");
+        }
     } fail:nil];
 }
 
@@ -362,7 +399,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)requestCheckRemotePatch {
     
-    NSString *currentFileId = [MFUserDefaults valueForKey:MFLocalPatchKey(_appId)];
+    NSString *currentFileId = [MFUserDefaults valueForKey:MFLocalPatchKey(MFBundleIdentifier)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"fileid"] = currentFileId;
@@ -376,16 +413,17 @@ typedef void(^Fail)(NSString *msg);
         NSDictionary *dict = resp;
         NSDictionary *rows = dict[@"rows"];
         NSString *msg = dict[@"msg"];
-        if ([dict[@"code"] intValue] == 202) {
+        NSInteger code = [dict[@"code"] intValue];
+        if (code == 202) {
             MFLog(@"%@", msg);
             [weakSelf activatePatchWithFileId:currentFileId];
         }
-        else if ([dict[@"code"] intValue] == 500) {
+        else if (code == 500) {
             MFLog(@"%@", msg);
             if (weakSelf.clearLastPathAfterVersionUpdateEnabled) {
                 [weakSelf deleteLocalMangoScript];
             }
-            [MFUserDefaults removeObjectForKey:MFLocalPatchKey(weakSelf.appId)];
+            [MFUserDefaults removeObjectForKey:MFLocalPatchKey(MFBundleIdentifier)];
         }
         else {
             NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
@@ -439,8 +477,11 @@ typedef void(^Fail)(NSString *msg);
     if (!_baseParams) {
         _baseParams = [NSMutableDictionary dictionary];
         _baseParams[@"appid"] = _appId;
+        _baseParams[@"userid"] = _userId;
         _baseParams[@"version"] = MFBundleShortVersion;
         _baseParams[@"debug"] = @(_debug);
+        _baseParams[@"encrypt"] = @"1";
+        _baseParams[@"bundleid"] = MFBundleIdentifier;
     }
     return _baseParams;
 }

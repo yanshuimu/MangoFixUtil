@@ -41,7 +41,6 @@
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 
     [mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
-    
     /*
      步骤：
      建议将项目中的demo.mg文件拷贝至自己的项目中，方便调试
