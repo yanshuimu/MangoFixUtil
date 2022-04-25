@@ -72,6 +72,9 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 ```
 ## Update
 
+#### V2.1.1
+1. 支持通过UserId、BundleId识别唯一应用
+
 #### V2.1.0
 1. 增加AES加密方式，支持MangoFix 1.5.0版本
 
