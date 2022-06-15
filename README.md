@@ -2,11 +2,9 @@
 
 依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行、设备激活、补丁激活完整流程，具体使用方法请下载Demo参考。
 
-MangoFixUtil在公司项目中实战已经近1年多，很稳定，也会不断继续完善。
+该库在项目中实战已经近2年多，经过多次迭代，比较成熟。
 
-欢迎使用作者维护的[补丁管理后台](http://patchhub.top/mangofix/login)，第一个补丁诞生于2020-03-09，最初是用PostMan操作，后来有了界面，也是比较简陋，一直都是自己和朋友在使用，目前已经有30+个已上架AppStore的应用在使用，现开放出来给有需要的小伙伴使用。
-
-[公私钥在线生成](http://www.metools.info/code/c80.html)，密钥长度：1024 bit，密钥格式：PKCS#8
+另有自己维护的[补丁管理后台](http://patchhub.top/mangofix/login)，目前已经有40+个已上架AppStore的应用在使用，且有日活1w的应用，欢迎小伙伴们使用。
 
 ## Example
 
