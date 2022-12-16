@@ -32,9 +32,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL dailyActiveUserEnabled;
 
 /**
- * 扩展字段
+ * 扩展字段，暂未使用
  */
 @property (nonatomic, strong) NSString *extend;
+
+/**
+ * true 简易模式：不统计日活量、补丁激活数、设备数量等
+ * false 完整模式
+ */
+@property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
  * 初始化
@@ -61,28 +67,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
- * 执行远程补丁
- */
-- (void)evalRemoteMangoScript;
-
-/**
- * 执行本地补丁（已加密），查找本地文件名为encrypted_demo.mg的补丁并执行
- */
-- (void)evalLocalMangoScript;
-
-/**
- * 执行本地补丁（未加密），查找本地文件名为demo.mg的补丁并执行
+ * 执行未加密补丁，查找并执行项目中文件名为<demo.mg>的补丁
  */
 - (void)evalLocalUnEncryptedMangoScript;
 
 /**
- * 加密补丁，查找本地文件名为demo.mg的补丁，并加密至Document中
+ * 执行已加密补丁，查找并执行项目中文件名为<encrypted_demo.mg>的补丁
+ */
+- (void)evalLocalEncryptedMangoScript;
+
+/**
+ * 加密补丁，查找项目中文件名为<demo.mg>的补丁，加密后保存至沙盒Documents目录中
  * @return 已加密补丁路径
  */
 - (NSString*)encryptPlainScriptToDocument;
 
 /**
- * 删除Document中已拉取的远程补丁或本地生成的加密补丁
+ * 执行远程补丁
+ */
+- (void)evalRemoteMangoScript;
+
+/**
+ * 删除沙盒Caches目录中文件名为<demo.mg>的补丁，重启App后生效
  */
 - (void)deleteLocalMangoScript;
 

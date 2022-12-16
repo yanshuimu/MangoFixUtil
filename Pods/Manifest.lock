@@ -1,20 +1,16 @@
 PODS:
-  - MangoFix (1.5.0):
-    - symdl
-  - symdl (0.6.0)
+  - symdl (0.9.0)
 
 DEPENDENCIES:
-  - MangoFix (= 1.5.0)
+  - symdl
 
 SPEC REPOS:
   trunk:
-    - MangoFix
     - symdl
 
 SPEC CHECKSUMS:
-  MangoFix: 83f741a7da249a0653fd7993cca8a438f3b034f1
-  symdl: 1906f396fff3f7530074ecfc226e17006b12d0a0
+  symdl: b199c582777d9abb0dc324c308f358502ca2c190
 
-PODFILE CHECKSUM: 59f7dd5d0371558b92afbb27552e75c148826145
+PODFILE CHECKSUM: 932d342d5ec7db2781f34b646abf2efb573bbf5a
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.3

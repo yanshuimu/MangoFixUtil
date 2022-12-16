@@ -8,8 +8,6 @@
 #ifndef MFMacroDefine_h
 #define MFMacroDefine_h
 
-#define MFCachesDirectory [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
-
 #define MFBundleShortVersion [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
 
 #define MFBundleIdentifier [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleIdentifier"]
@@ -19,8 +17,6 @@
 #define MFStringIsEmpty(str) (str && [[NSString stringWithFormat:@"%@", str] length] > 0 ? NO : YES)
 
 #define MFStringWithFormat(string, args...)  [NSString stringWithFormat:string, args]
-
-#define MFUserDefaults [NSUserDefaults standardUserDefaults]
 
 #define MFDeviceKey(bundleId, version) MFStringWithFormat(@"MFDeviceKey:%@:%@", bundleId, version);
 
@@ -33,7 +29,7 @@
 #ifdef RELEASE
     #define MFLog(FORMAT, ...) nil
 #else
-    #define MFLog(FORMAT, ...) NSLog((@"MangoFixUtil：" FORMAT), ##__VA_ARGS__)
+    #define MFLog(FORMAT, ...) NSLog(FORMAT, ##__VA_ARGS__)
 #endif
 
 #endif /* MFMacroDefine_h */

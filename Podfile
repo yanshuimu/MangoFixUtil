@@ -3,6 +3,6 @@ inhibit_all_warnings!
 
 target 'MangoFixUtil' do
   
-pod 'MangoFix', '= 1.5.0'
-  
+pod 'symdl'
+
 end

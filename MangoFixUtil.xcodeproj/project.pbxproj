@@ -19,6 +19,7 @@
 		7B9A2435278D1376007B419C /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A2434278D1376007B419C /* demo.mg */; };
 		7B9A24392791632D007B419C /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A24382791632D007B419C /* encrypted_demo.mg */; };
 		7BA94D6F271173C200872060 /* MFKeyChainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA94D6C271173C200872060 /* MFKeyChainUtil.m */; };
+		7BDA8869294C07EE001BA155 /* MangoFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA8868294C07EE001BA155 /* MangoFix.framework */; };
 		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
 		EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E12AD264FE8D6008E7F4D /* BugFixController.m */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		7BA94D6C271173C200872060 /* MFKeyChainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyChainUtil.m; sourceTree = "<group>"; };
 		7BA94D6D271173C200872060 /* MFNetworkDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFNetwork\U0010Define.h"; sourceTree = "<group>"; };
 		7BA94D6E271173C200872060 /* MFMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMacroDefine.h; sourceTree = "<group>"; };
+		7BDA8868294C07EE001BA155 /* MangoFix.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MangoFix.framework; sourceTree = "<group>"; };
 		D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EF2E12AC264FE8D5008E7F4D /* BugFixController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BugFixController.h; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */,
+				7BDA8869294C07EE001BA155 /* MangoFix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +91,7 @@
 		0458397525E89B8000BBACF2 /* MangoFixUtil */ = {
 			isa = PBXGroup;
 			children = (
+				7BDA8868294C07EE001BA155 /* MangoFix.framework */,
 				045839AB25E8A13300BBACF2 /* MangoFixUtil.h */,
 				045839AA25E8A13300BBACF2 /* MangoFixUtil.m */,
 				7BA94D6E271173C200872060 /* MFMacroDefine.h */,
@@ -387,6 +391,10 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G2Y832M5KJ;
 				EXCLUDED_ARCHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MangoFixUtil",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
@@ -396,7 +404,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.patchhub.test30;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -413,6 +421,11 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G2Y832M5KJ;
 				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MangoFixUtil",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
@@ -422,7 +435,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.patchhub.test30;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
 				TARGETED_DEVICE_FAMILY = 1;

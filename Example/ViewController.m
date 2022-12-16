@@ -109,7 +109,7 @@
             [mangoFixUtil encryptPlainScriptToDocument];
             break;
         case 2:
-            [mangoFixUtil evalLocalMangoScript];
+            [mangoFixUtil evalLocalEncryptedMangoScript];
             break;
         case 3:
             [mangoFixUtil evalRemoteMangoScript];

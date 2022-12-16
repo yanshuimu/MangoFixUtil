@@ -7,108 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E32D65D9559B8A3D8BD18B02652221 /* MangoFix-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37650721C79030B94543A11FD6CF819B /* MangoFix-dummy.m */; };
-		03E218C6A76D124ECEBCDC00F8447C76 /* MFDeclarationModifier.h in Headers */ = {isa = PBXBuildFile; fileRef = F0AA4068F24357A508CF94D83A442BE6 /* MFDeclarationModifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		05429F254BD627767C79C0D1CD9CCB74 /* MFMethodMapTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 501ECFD9FAC4FA23BB8891486F481C22 /* MFMethodMapTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0A248AF8E9396111A2A920B170397906 /* MFStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 918C30A5268CCA51624B159E4C5B39A9 /* MFStatement.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		100AA535662696221E4E9274F052BD61 /* MFStaticVarTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C479CA2FC14CBD33E4544224A4367FE7 /* MFStaticVarTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		10D938BA388104ACA0B4E1BB4B1A4D42 /* util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8988DD793C8908B4398E54A542A4467C /* util.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		12CB0A3866E6EF8F9B1B5D1650EFFFEF /* ffi.h in Headers */ = {isa = PBXBuildFile; fileRef = F5933C15E2D114C6D08F0CF1E348F6CD /* ffi.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		16997F21B3283B777057CA70B3201281 /* MFBlockBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 2974EC4EF2BC26DB7E0238B0E531997C /* MFBlockBody.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1BF22FDE27BA4254AB9B5AFC51F21BAD /* MFAnnotationableDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 962D7B10137248A97C7C879DE1C2C502 /* MFAnnotationableDefinition.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1E102FF5118D7C8BE9B0D1888EE3BCA3 /* MFStructDeclare.h in Headers */ = {isa = PBXBuildFile; fileRef = 19891A43FFA3374324C57177CC67FF4B /* MFStructDeclare.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		21F776F940E64D51C7048F62F4CE4832 /* MFScopeChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 33C5E934A36A4E5EBF354BB0B60D2BDA /* MFScopeChain.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		29BF814AAF8E30BF3F57ED7A7AD8E7D8 /* MFAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C9EB17F515106B2B98637FB1583FF360 /* MFAnnotation.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2A95AE3C64986C13946ADA82C91F7D73 /* NSData+AESEncryption.h in Headers */ = {isa = PBXBuildFile; fileRef = 1176C95E73AB7B981EDED5F8EEC5F41A /* NSData+AESEncryption.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3166C3DC3A65FAD2E477AD1D80EE8124 /* MFContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2F7B93B9BCABE1DF157ED38695D5 /* MFContext.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		33D52066F4CC5C1ECF26CFE5DE9330B1 /* MFDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5232042DC21CE01B93DE878AE0A68338 /* MFDeclaration.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		367C5EA2E871C782DB25FECE7509D666 /* MFExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C237CC61C3FA9FA7AC566221A81175B /* MFExpression.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		379606AE09752273B48AF59961EBB427 /* ffitarget_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = A1CD60EE841C3F4477B057D3772D38C2 /* ffitarget_arm.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		394056351ED3FF8C361C9AE6DF0890C3 /* ffi_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = 6595169B5F3DC2ACB6BA890A2D8C9AA2 /* ffi_arm.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		398190D8634A984B7BAB2C2A0D6A1E59 /* runenv.h in Headers */ = {isa = PBXBuildFile; fileRef = EBB2606D687E8CD2156A62583E64EB5C /* runenv.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3D3E59DF82C26E80BB3CF074FE0EFA84 /* MFVarDeclareChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 9464EA6F0CB9A40930AD03F9D698DC79 /* MFVarDeclareChain.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		3FC3D2F82656DB21AE319A9B34430228 /* ffitarget_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 09CF5CB8D16D49BC3D4882A5F062C6E7 /* ffitarget_x86_64.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		41280D09DDC799795EB08E610BFD31B1 /* MFWeakPropertyBox.h in Headers */ = {isa = PBXBuildFile; fileRef = AE9AB91DEF303C70A3B7E7C695EED2E2 /* MFWeakPropertyBox.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		41D434D82F58D78503F29AE7F08029E3 /* errror.m in Sources */ = {isa = PBXBuildFile; fileRef = 241D902BA9833A2E7850B0CAFFBB92D1 /* errror.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		49E95309D1E37756F57EA7DFB3568CA3 /* NSData+AESEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 910900422DCA0654CBA810ADDBB75D0E /* NSData+AESEncryption.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		4A193FF48E24E89B71F03D8709DAE181 /* MFWeakPropertyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D88B244A1E5846A5DADD4B7CB18B03 /* MFWeakPropertyBox.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		549B7F4FC42A92A315E005BF5B1C9455 /* MFBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = DAF8F98E2B67554FB06E8DE10910CE85 /* MFBlock.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5B891F9220EFDFCC0DEC13DD7DC30F8B /* MFStructDeclareTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721FE80905D46B6A0DBC366120D8837 /* MFStructDeclareTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		5F943CC2CDB6933D1D77140403D83520 /* MFInterpreter.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2AD7F9D89BAD8AB5CF7B7F264689A /* MFInterpreter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		604D94390C07EA6013878D77F0B947A4 /* MFStatementResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E708D92EACD605747CCA57E28ED42CB /* MFStatementResult.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		610814596DEB91D2849CC69093DC4F23 /* MFSwfitClassNameAlisTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DD4F818FD581745C4C244F51F200919 /* MFSwfitClassNameAlisTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		619FEBC7C012B8CEF2DE2705F1D86A80 /* MFAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = C9A49E2ADCFE3530F0AD6F0F5E78883F /* MFAnnotation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		62BE0F248EB6E6042BEB030C668974D4 /* mango.l in Sources */ = {isa = PBXBuildFile; fileRef = 1296031E9257F2376D2FB3574DF78C78 /* mango.l */; };
-		6478FBD8E178DF5D6193EA4FC81BB8AC /* MFVarDeclareChain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A97626B9FDE87059552C060996F94A8 /* MFVarDeclareChain.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		65274C51B9656C7624FDD083913D7FB1 /* MFBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = A064DF9DA0FC10CD78ABBC1FDA202796 /* MFBlock.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		6572CC72E9F8151CF72B696EE67F98FE /* MangoFix.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CF21C39CDBE4005DB85DAAAC83AC5C6 /* MangoFix.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		67E3AE2980F732AA5189202662953186 /* MFValue.m in Sources */ = {isa = PBXBuildFile; fileRef = A01765CFBE314DA9184AADABCDB81396 /* MFValue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		6931F552C0CC8ED2FBE4FE0BE48A10D0 /* ffitarget.h in Headers */ = {isa = PBXBuildFile; fileRef = A7CD2939AA550172FDE654B20C31CCC1 /* ffitarget.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		71A20E7DAC053D9E558C696E0BB2CCEF /* ffitarget_i386.h in Headers */ = {isa = PBXBuildFile; fileRef = CF060AF55B1B53B1A177304D68E0BC70 /* ffitarget_i386.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		75956A4F37B4C0C6CFF8D376BE416C87 /* built-in.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F985C306FA02C7CF196AE309273276 /* built-in.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		7C0388C0579CD6F1ADB0FCED6CBCC0DD /* create.m in Sources */ = {isa = PBXBuildFile; fileRef = 19871CC1C94801CBDCFB081F38F9ED92 /* create.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		7C839404D2128AB1C71E67B03BEF2502 /* MFContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C002B1E92D796EFA08FDBDEE13FA57E /* MFContext.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7D4DF2C9A735C0E4CEFE963170C92978 /* MFStructDeclareTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 6639051C8470952D6AE2EE538A6E7F88 /* MFStructDeclareTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7DE222C402CBC8369703F9651A4189D4 /* MFTypeSpecifier.h in Headers */ = {isa = PBXBuildFile; fileRef = EA188C706E6EDF17E4442CE696AF40D9 /* MFTypeSpecifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		87436B3D50F0E639F87E87C5455733BB /* MFBlockBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C498EAAE1008FF9E47E68E1AB3F08AB /* MFBlockBody.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		875AE3F15A67094C07217FCADEDD1F3E /* MFTypeSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 662F0F09D4257FFC7BD027398D6199B7 /* MFTypeSpecifier.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		88051F9B37E1615F65DAEC0C46604F9E /* symdl.h in Headers */ = {isa = PBXBuildFile; fileRef = AFBB50230601B460A1CED6789E58CDE3 /* symdl.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		892485DEB53667A3105D41AF70354854 /* symdl-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B39E71ACC609DC2BEB286C0188DEA918 /* symdl-dummy.m */; };
-		89A9F479B7848CB376C42756D31F0E0C /* MFPropertyMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CCB378C912ACCB716F5C557003DA089B /* MFPropertyMapTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B241C2E276A316818CD5B78123CC6B4 /* MFMethodMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E796599178272AC1E6C8837B2DBFA243 /* MFMethodMapTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8B9C691B3565280118AE58F8E5A316F1 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = E209011A32A04E8EFB1870C075CC2126 /* util.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8CABDF573D34FCE733E5051107577509 /* MFClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = FFF7B55DE8B3E47F9A9FEA4BBA723E52 /* MFClassDefinition.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		9152AB483180A18E072014D32DB85161 /* Pods-MangoFixUtil-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2812FD65F862E405A0E78BFF9EFDC579 /* Pods-MangoFixUtil-dummy.m */; };
-		93258FCB946134F9E0BB4BBF4BBD0379 /* MFExpression.h in Headers */ = {isa = PBXBuildFile; fileRef = D986B8693841E24AE39990479ED15224 /* MFExpression.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		95A975ED38B799E2CCAAD70A97951169 /* symdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 712450F2A1EB7CBFD9748115A5C53137 /* symdl.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		962F99EB929558877C10EA66C4B9224E /* mango.y in Sources */ = {isa = PBXBuildFile; fileRef = 3ED3A25E34A9AAD85DC12A9C795C44F6 /* mango.y */; };
-		97F6FA2631FEE1172175C1DE375960E2 /* create.h in Headers */ = {isa = PBXBuildFile; fileRef = CAB51A84F8DDBAE7CFF1D14E851643AB /* create.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9D1F61DF30BDEE5274E95FE1B915F198 /* MFStack.h in Headers */ = {isa = PBXBuildFile; fileRef = F0BD378465A1DB1FCBAE5897FE9C1FA1 /* MFStack.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9D216A17A9EEBBE5C3D980DBAD5CD601 /* MFStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 02EB20CC123F298ECF1A35D997E8EAAF /* MFStack.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		A387674B11B920E5368AB93DB70F5A1C /* eval.m in Sources */ = {isa = PBXBuildFile; fileRef = 440F0A2EC017EAE19207342C948D407A /* eval.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		A900FA0FA76C4954534BA9EDBCF0D13F /* ffi_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1A938922A1FF71A1C9CE2EF3ABD371 /* ffi_arm64.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A9190FE4F56A1A850AB6D44CFF531A3C /* MFStaticVarTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 8351AB9523CB279C1871BAA410BF96DC /* MFStaticVarTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		ABAC8F21DB2281EE7821B3D0CA35D5E1 /* MFValue+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7268A9ACCEFA5A2948F3E39C2A4794C2 /* MFValue+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		AC90C7218EF4F22FA342A6DF70762AA2 /* MFClassDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 271E59E7978030797C736871D8DA4C24 /* MFClassDefinition.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B0584A4138A6239C9232BC1079257B93 /* MFStructDeclare.m in Sources */ = {isa = PBXBuildFile; fileRef = CB55E1659938D285F1C81F4236CE5B13 /* MFStructDeclare.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B1DB2824D75EAEB2009F9EA371E1CC13 /* MFTypedefTable.h in Headers */ = {isa = PBXBuildFile; fileRef = C5B4B8B143983A5D3C8441FDAED04B69 /* MFTypedefTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B1FD6C49348E4141C8E70BF2BB9752A5 /* execute.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AC9D0EFC42AF4211AF4C25982FD81D /* execute.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B7E9108D4AA414962FBD9934E5E4DA24 /* ffitarget_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B5156A269CFCEE6DEDA402A590B0300 /* ffitarget_arm64.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BADC872D861B3FF1CEDAB5E1BA6783FD /* mf_ast.h in Headers */ = {isa = PBXBuildFile; fileRef = 32B39E0D47E7163516D18DA28CF00520 /* mf_ast.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C8A3271195751ED53FEE1D734CE22771 /* MFAnnotationableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B1468FDED6A2B8C376036DD9F13B479 /* MFAnnotationableDefinition.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		CF28246344DD33A003E845ABFC9C53F4 /* MFDeclaration.h in Headers */ = {isa = PBXBuildFile; fileRef = 42B3C37250F0EE16FC167635781CB212 /* MFDeclaration.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CF3CE0A255BF1B95CFF71C33FEC662D0 /* MFScopeChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C61D495E9E081C24CC20A2A6393BE /* MFScopeChain.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D464AD49D9D9426706AE6234716AF35C /* MFFunctionDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = E0F9FBE5834007484208B104490A3E67 /* MFFunctionDefinition.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D57032A8E84DBCA2CFDFA21AF5580C05 /* MFTypedefTable.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCB1FA98C308464EEFBC8C1D60BE723 /* MFTypedefTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D6704A7EE94CE31EEE7CB8E55F6BF515 /* MFFunctionDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = E38F578C882E81EDF38DA732E0E8A725 /* MFFunctionDefinition.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D710FA23BB578D4502988F44F1A6FDF7 /* MFPropertyMapTable.h in Headers */ = {isa = PBXBuildFile; fileRef = D04F0BEECC0B769E38F92DB065D5B5FF /* MFPropertyMapTable.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D8DAA3DBF440C2C5C38BD160695CEB34 /* ffi_i386.h in Headers */ = {isa = PBXBuildFile; fileRef = DB0BA7934AD9216916663F1F99DA67FF /* ffi_i386.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DBA877B7E79E595011048974117E2A33 /* MFSwfitClassNameAlisTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B99AE5E75CB25FFD92789CDD7F34CA /* MFSwfitClassNameAlisTable.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		ECFC70594C91EF40EEE8D0062FADFB19 /* MFStatementResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 262FC10755FDC6B63511C6B4F4BF1C87 /* MFStatementResult.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		EE64DF5ABF4145A13158BE371D5E88FA /* MFInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D293A9982F2548E7300E85B4E62EC3 /* MFInterpreter.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		EE837D4585DA57EB78DFE18DA6E5F122 /* ffi_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 727BC42AE51F341BBB0A298FDC2D0C97 /* ffi_x86_64.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EFA9A49CCAAF88E9EAD1E6879E8A3431 /* MFValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 518E14089752F2A671499508FD837D0C /* MFValue.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EFCC195DE01C83F0E19C7E8FD8BC0B30 /* errror.h in Headers */ = {isa = PBXBuildFile; fileRef = 026D1FBBDCFCBE965A6AB36AD35AB572 /* errror.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F0FD892E37AD355D26C892EB96F48100 /* MFStatement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3470D1F223454B5EE59DBE334A1F33DF /* MFStatement.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FA4D27391631CC919B1219CA0E289352 /* execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABB3062689045DE37CC07BA0BD7A5A /* execute.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		6ACD12C31924F1DC6EF1FD0A7141AE81 /* symdl.c in Sources */ = {isa = PBXBuildFile; fileRef = DB111B50503CEC6E4BEE0CC2E88645AF /* symdl.c */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		A6435AC83D0947DE66B218BECE25A790 /* Pods-MangoFixUtil-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2812FD65F862E405A0E78BFF9EFDC579 /* Pods-MangoFixUtil-dummy.m */; };
+		C0C83B4FE2D92465662C41F2FE3DD193 /* symdl-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3D77B757E38A4122A97FD4827DC79E /* symdl-dummy.m */; };
+		E5B89AB59AA0E85F0E150111D155B72E /* symdl.h in Headers */ = {isa = PBXBuildFile; fileRef = E2948980088BB7CE175F07E9E5BB4901 /* symdl.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AD45CAD83619E2C6DB4CD01A3E246CEA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A9EBF2FAB4D5066D95CC1C7830A7E314;
-			remoteInfo = symdl;
-		};
-		B418B60B213F98022ABABC0A504F43DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 57EE331E4E7782F76F697D52ADB516F4;
-			remoteInfo = MangoFix;
-		};
-		FEDC34B15B0B1B43A2A5E644976DA390 /* PBXContainerItemProxy */ = {
+		A1342A111383C3B11A76DA4EB63E42C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -118,123 +24,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		026D1FBBDCFCBE965A6AB36AD35AB572 /* errror.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = errror.h; path = MangoFix/Error/errror.h; sourceTree = "<group>"; };
-		02EB20CC123F298ECF1A35D997E8EAAF /* MFStack.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStack.m; path = MangoFix/Execute/RunEnv/MFStack.m; sourceTree = "<group>"; };
-		09CF5CB8D16D49BC3D4882A5F062C6E7 /* ffitarget_x86_64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffitarget_x86_64.h; path = MangoFix/libffi/ffitarget_x86_64.h; sourceTree = "<group>"; };
-		0A97626B9FDE87059552C060996F94A8 /* MFVarDeclareChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFVarDeclareChain.h; path = MangoFix/Execute/RunEnv/MFVarDeclareChain.h; sourceTree = "<group>"; };
-		0E1E94AC5FC7169F2083B2F1DAFCD6FA /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-MangoFixUtil.a"; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1176C95E73AB7B981EDED5F8EEC5F41A /* NSData+AESEncryption.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+AESEncryption.h"; path = "MangoFix/Util/NSData+AESEncryption.h"; sourceTree = "<group>"; };
-		1296031E9257F2376D2FB3574DF78C78 /* mango.l */ = {isa = PBXFileReference; includeInIndex = 1; name = mango.l; path = MangoFix/Compiler/lex_yacc/mango.l; sourceTree = "<group>"; };
-		13F985C306FA02C7CF196AE309273276 /* built-in.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "built-in.m"; path = "MangoFix/Execute/built-in.m"; sourceTree = "<group>"; };
-		14ABB3062689045DE37CC07BA0BD7A5A /* execute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = execute.m; path = MangoFix/Execute/execute.m; sourceTree = "<group>"; };
-		14B4ACAE4B76E1A39A4C84DAB251049B /* MangoFix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MangoFix.debug.xcconfig; sourceTree = "<group>"; };
-		19871CC1C94801CBDCFB081F38F9ED92 /* create.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = create.m; path = MangoFix/Compiler/create.m; sourceTree = "<group>"; };
-		19891A43FFA3374324C57177CC67FF4B /* MFStructDeclare.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStructDeclare.h; path = MangoFix/Compiler/AST/MFStructDeclare.h; sourceTree = "<group>"; };
-		19B99AE5E75CB25FFD92789CDD7F34CA /* MFSwfitClassNameAlisTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFSwfitClassNameAlisTable.m; path = MangoFix/Execute/RunEnv/MFSwfitClassNameAlisTable.m; sourceTree = "<group>"; };
-		1AEA8FF5E7A79FEF192F21EDAF71E40F /* symdl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = symdl.release.xcconfig; sourceTree = "<group>"; };
-		1F1A938922A1FF71A1C9CE2EF3ABD371 /* ffi_arm64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffi_arm64.h; path = MangoFix/libffi/ffi_arm64.h; sourceTree = "<group>"; };
-		241D902BA9833A2E7850B0CAFFBB92D1 /* errror.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = errror.m; path = MangoFix/Error/errror.m; sourceTree = "<group>"; };
-		262FC10755FDC6B63511C6B4F4BF1C87 /* MFStatementResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStatementResult.m; path = MangoFix/Execute/RunEnv/MFStatementResult.m; sourceTree = "<group>"; };
-		271E59E7978030797C736871D8DA4C24 /* MFClassDefinition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFClassDefinition.h; path = MangoFix/Compiler/AST/MFClassDefinition.h; sourceTree = "<group>"; };
+		0E1E94AC5FC7169F2083B2F1DAFCD6FA /* Pods-MangoFixUtil */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-MangoFixUtil"; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2812FD65F862E405A0E78BFF9EFDC579 /* Pods-MangoFixUtil-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MangoFixUtil-dummy.m"; sourceTree = "<group>"; };
-		2974EC4EF2BC26DB7E0238B0E531997C /* MFBlockBody.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFBlockBody.h; path = MangoFix/Compiler/AST/MFBlockBody.h; sourceTree = "<group>"; };
-		32B39E0D47E7163516D18DA28CF00520 /* mf_ast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mf_ast.h; path = MangoFix/Compiler/AST/mf_ast.h; sourceTree = "<group>"; };
-		33C5E934A36A4E5EBF354BB0B60D2BDA /* MFScopeChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFScopeChain.h; path = MangoFix/Execute/RunEnv/MFScopeChain.h; sourceTree = "<group>"; };
-		3470D1F223454B5EE59DBE334A1F33DF /* MFStatement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStatement.h; path = MangoFix/Compiler/AST/MFStatement.h; sourceTree = "<group>"; };
-		3470EAF8E6189605E69D372B436C9D97 /* symdl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = symdl.debug.xcconfig; sourceTree = "<group>"; };
-		3721FE80905D46B6A0DBC366120D8837 /* MFStructDeclareTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStructDeclareTable.m; path = MangoFix/Execute/RunEnv/MFStructDeclareTable.m; sourceTree = "<group>"; };
-		37650721C79030B94543A11FD6CF819B /* MangoFix-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MangoFix-dummy.m"; sourceTree = "<group>"; };
-		38AC9D0EFC42AF4211AF4C25982FD81D /* execute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = execute.h; path = MangoFix/Execute/execute.h; sourceTree = "<group>"; };
-		3ED3A25E34A9AAD85DC12A9C795C44F6 /* mango.y */ = {isa = PBXFileReference; includeInIndex = 1; name = mango.y; path = MangoFix/Compiler/lex_yacc/mango.y; sourceTree = "<group>"; };
-		42B0B83B9E0FBE5FCB5D34877FC3E8D8 /* MangoFix-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MangoFix-prefix.pch"; sourceTree = "<group>"; };
-		42B3C37250F0EE16FC167635781CB212 /* MFDeclaration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFDeclaration.h; path = MangoFix/Compiler/AST/MFDeclaration.h; sourceTree = "<group>"; };
-		440F0A2EC017EAE19207342C948D407A /* eval.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = eval.m; path = MangoFix/Execute/eval.m; sourceTree = "<group>"; };
-		48DEEB7376C9EAA637A4B041DCBAD7EA /* libffi.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libffi.a; path = MangoFix/libffi/libffi.a; sourceTree = "<group>"; };
-		4C237CC61C3FA9FA7AC566221A81175B /* MFExpression.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFExpression.m; path = MangoFix/Compiler/AST/MFExpression.m; sourceTree = "<group>"; };
-		501ECFD9FAC4FA23BB8891486F481C22 /* MFMethodMapTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFMethodMapTable.h; path = MangoFix/Execute/RunEnv/MFMethodMapTable.h; sourceTree = "<group>"; };
-		518E14089752F2A671499508FD837D0C /* MFValue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFValue.h; path = MangoFix/Execute/RunEnv/MFValue.h; sourceTree = "<group>"; };
-		5232042DC21CE01B93DE878AE0A68338 /* MFDeclaration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFDeclaration.m; path = MangoFix/Compiler/AST/MFDeclaration.m; sourceTree = "<group>"; };
-		55A2AD7F9D89BAD8AB5CF7B7F264689A /* MFInterpreter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFInterpreter.h; path = MangoFix/Compiler/AST/MFInterpreter.h; sourceTree = "<group>"; };
-		5C498EAAE1008FF9E47E68E1AB3F08AB /* MFBlockBody.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFBlockBody.m; path = MangoFix/Compiler/AST/MFBlockBody.m; sourceTree = "<group>"; };
-		5DD4F818FD581745C4C244F51F200919 /* MFSwfitClassNameAlisTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFSwfitClassNameAlisTable.h; path = MangoFix/Execute/RunEnv/MFSwfitClassNameAlisTable.h; sourceTree = "<group>"; };
-		5E708D92EACD605747CCA57E28ED42CB /* MFStatementResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStatementResult.h; path = MangoFix/Execute/RunEnv/MFStatementResult.h; sourceTree = "<group>"; };
-		6595169B5F3DC2ACB6BA890A2D8C9AA2 /* ffi_arm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffi_arm.h; path = MangoFix/libffi/ffi_arm.h; sourceTree = "<group>"; };
-		662F0F09D4257FFC7BD027398D6199B7 /* MFTypeSpecifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFTypeSpecifier.m; path = MangoFix/Compiler/AST/MFTypeSpecifier.m; sourceTree = "<group>"; };
-		6639051C8470952D6AE2EE538A6E7F88 /* MFStructDeclareTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStructDeclareTable.h; path = MangoFix/Execute/RunEnv/MFStructDeclareTable.h; sourceTree = "<group>"; };
-		66D293A9982F2548E7300E85B4E62EC3 /* MFInterpreter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFInterpreter.m; path = MangoFix/Compiler/AST/MFInterpreter.m; sourceTree = "<group>"; };
-		6C002B1E92D796EFA08FDBDEE13FA57E /* MFContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFContext.h; path = MangoFix/Execute/MFContext.h; sourceTree = "<group>"; };
-		712450F2A1EB7CBFD9748115A5C53137 /* symdl.c */ = {isa = PBXFileReference; includeInIndex = 1; name = symdl.c; path = symdl/symdl/symdl.c; sourceTree = "<group>"; };
-		7268A9ACCEFA5A2948F3E39C2A4794C2 /* MFValue+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MFValue+Private.h"; path = "MangoFix/Execute/RunEnv/MFValue+Private.h"; sourceTree = "<group>"; };
-		727BC42AE51F341BBB0A298FDC2D0C97 /* ffi_x86_64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffi_x86_64.h; path = MangoFix/libffi/ffi_x86_64.h; sourceTree = "<group>"; };
-		7442AF8A68335FE31A72723B8339E4D9 /* symdl-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "symdl-prefix.pch"; sourceTree = "<group>"; };
-		7B5156A269CFCEE6DEDA402A590B0300 /* ffitarget_arm64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffitarget_arm64.h; path = MangoFix/libffi/ffitarget_arm64.h; sourceTree = "<group>"; };
-		7BBD2F7B93B9BCABE1DF157ED38695D5 /* MFContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFContext.m; path = MangoFix/Execute/MFContext.m; sourceTree = "<group>"; };
-		7CF21C39CDBE4005DB85DAAAC83AC5C6 /* MangoFix.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MangoFix.h; path = MangoFix/MangoFix.h; sourceTree = "<group>"; };
+		405CD164D3F3665669798B0CB3DB5130 /* symdl-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "symdl-prefix.pch"; sourceTree = "<group>"; };
+		423C4350E8BC0602CC58E05315E69F2A /* symdl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = symdl.release.xcconfig; sourceTree = "<group>"; };
 		82E5EB5812729BF3ABF77C3AD2AC5BCE /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
-		8351AB9523CB279C1871BAA410BF96DC /* MFStaticVarTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStaticVarTable.h; path = MangoFix/Execute/RunEnv/MFStaticVarTable.h; sourceTree = "<group>"; };
-		8988DD793C8908B4398E54A542A4467C /* util.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = util.m; path = MangoFix/Util/util.m; sourceTree = "<group>"; };
-		910900422DCA0654CBA810ADDBB75D0E /* NSData+AESEncryption.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSData+AESEncryption.m"; path = "MangoFix/Util/NSData+AESEncryption.m"; sourceTree = "<group>"; };
-		918C30A5268CCA51624B159E4C5B39A9 /* MFStatement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStatement.m; path = MangoFix/Compiler/AST/MFStatement.m; sourceTree = "<group>"; };
-		9464EA6F0CB9A40930AD03F9D698DC79 /* MFVarDeclareChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFVarDeclareChain.m; path = MangoFix/Execute/RunEnv/MFVarDeclareChain.m; sourceTree = "<group>"; };
-		962D7B10137248A97C7C879DE1C2C502 /* MFAnnotationableDefinition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFAnnotationableDefinition.h; path = MangoFix/Compiler/AST/MFAnnotationableDefinition.h; sourceTree = "<group>"; };
-		969C61D495E9E081C24CC20A2A6393BE /* MFScopeChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFScopeChain.m; path = MangoFix/Execute/RunEnv/MFScopeChain.m; sourceTree = "<group>"; };
-		9B1468FDED6A2B8C376036DD9F13B479 /* MFAnnotationableDefinition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFAnnotationableDefinition.m; path = MangoFix/Compiler/AST/MFAnnotationableDefinition.m; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A01765CFBE314DA9184AADABCDB81396 /* MFValue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFValue.m; path = MangoFix/Execute/RunEnv/MFValue.m; sourceTree = "<group>"; };
-		A064DF9DA0FC10CD78ABBC1FDA202796 /* MFBlock.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFBlock.m; path = MangoFix/Execute/RunEnv/MFBlock.m; sourceTree = "<group>"; };
-		A1CD60EE841C3F4477B057D3772D38C2 /* ffitarget_arm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffitarget_arm.h; path = MangoFix/libffi/ffitarget_arm.h; sourceTree = "<group>"; };
-		A7CD2939AA550172FDE654B20C31CCC1 /* ffitarget.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffitarget.h; path = MangoFix/libffi/ffitarget.h; sourceTree = "<group>"; };
-		ADCB1FA98C308464EEFBC8C1D60BE723 /* MFTypedefTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFTypedefTable.m; path = MangoFix/Compiler/Table/MFTypedefTable.m; sourceTree = "<group>"; };
-		AE9AB91DEF303C70A3B7E7C695EED2E2 /* MFWeakPropertyBox.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFWeakPropertyBox.h; path = MangoFix/Execute/RunEnv/MFWeakPropertyBox.h; sourceTree = "<group>"; };
-		AFBB50230601B460A1CED6789E58CDE3 /* symdl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = symdl.h; path = symdl/symdl/symdl.h; sourceTree = "<group>"; };
-		B39E71ACC609DC2BEB286C0188DEA918 /* symdl-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "symdl-dummy.m"; sourceTree = "<group>"; };
-		B5D88B244A1E5846A5DADD4B7CB18B03 /* MFWeakPropertyBox.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFWeakPropertyBox.m; path = MangoFix/Execute/RunEnv/MFWeakPropertyBox.m; sourceTree = "<group>"; };
-		BD35D5D632198C2E2DB12241D46E5E84 /* MangoFix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MangoFix.release.xcconfig; sourceTree = "<group>"; };
-		C479CA2FC14CBD33E4544224A4367FE7 /* MFStaticVarTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStaticVarTable.m; path = MangoFix/Execute/RunEnv/MFStaticVarTable.m; sourceTree = "<group>"; };
-		C5B4B8B143983A5D3C8441FDAED04B69 /* MFTypedefTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFTypedefTable.h; path = MangoFix/Compiler/Table/MFTypedefTable.h; sourceTree = "<group>"; };
-		C9A49E2ADCFE3530F0AD6F0F5E78883F /* MFAnnotation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFAnnotation.h; path = MangoFix/Compiler/AST/MFAnnotation.h; sourceTree = "<group>"; };
-		C9EB17F515106B2B98637FB1583FF360 /* MFAnnotation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFAnnotation.m; path = MangoFix/Compiler/AST/MFAnnotation.m; sourceTree = "<group>"; };
-		CAB51A84F8DDBAE7CFF1D14E851643AB /* create.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = create.h; path = MangoFix/Compiler/create.h; sourceTree = "<group>"; };
-		CB55E1659938D285F1C81F4236CE5B13 /* MFStructDeclare.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFStructDeclare.m; path = MangoFix/Compiler/AST/MFStructDeclare.m; sourceTree = "<group>"; };
-		CCB378C912ACCB716F5C557003DA089B /* MFPropertyMapTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFPropertyMapTable.m; path = MangoFix/Execute/RunEnv/MFPropertyMapTable.m; sourceTree = "<group>"; };
-		CF060AF55B1B53B1A177304D68E0BC70 /* ffitarget_i386.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffitarget_i386.h; path = MangoFix/libffi/ffitarget_i386.h; sourceTree = "<group>"; };
-		D04F0BEECC0B769E38F92DB065D5B5FF /* MFPropertyMapTable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFPropertyMapTable.h; path = MangoFix/Execute/RunEnv/MFPropertyMapTable.h; sourceTree = "<group>"; };
+		AE936AEAE3601FD25E5CF898E003363A /* symdl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = symdl.debug.xcconfig; sourceTree = "<group>"; };
+		BE3D77B757E38A4122A97FD4827DC79E /* symdl-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "symdl-dummy.m"; sourceTree = "<group>"; };
 		D83959E1695DE2040BDA8F0B1B6FC90E /* Pods-MangoFixUtil-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MangoFixUtil-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D986B8693841E24AE39990479ED15224 /* MFExpression.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFExpression.h; path = MangoFix/Compiler/AST/MFExpression.h; sourceTree = "<group>"; };
-		DAF8F98E2B67554FB06E8DE10910CE85 /* MFBlock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFBlock.h; path = MangoFix/Execute/RunEnv/MFBlock.h; sourceTree = "<group>"; };
-		DB0BA7934AD9216916663F1F99DA67FF /* ffi_i386.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffi_i386.h; path = MangoFix/libffi/ffi_i386.h; sourceTree = "<group>"; };
-		E0F9FBE5834007484208B104490A3E67 /* MFFunctionDefinition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFFunctionDefinition.m; path = MangoFix/Compiler/AST/MFFunctionDefinition.m; sourceTree = "<group>"; };
-		E1AF4952F05FC7C7E419E5371CB77F2A /* libsymdl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libsymdl.a; path = libsymdl.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E209011A32A04E8EFB1870C075CC2126 /* util.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = util.h; path = MangoFix/Util/util.h; sourceTree = "<group>"; };
-		E38F578C882E81EDF38DA732E0E8A725 /* MFFunctionDefinition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFFunctionDefinition.h; path = MangoFix/Compiler/AST/MFFunctionDefinition.h; sourceTree = "<group>"; };
-		E796599178272AC1E6C8837B2DBFA243 /* MFMethodMapTable.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFMethodMapTable.m; path = MangoFix/Execute/RunEnv/MFMethodMapTable.m; sourceTree = "<group>"; };
+		DB111B50503CEC6E4BEE0CC2E88645AF /* symdl.c */ = {isa = PBXFileReference; includeInIndex = 1; name = symdl.c; path = symdl/symdl/symdl.c; sourceTree = "<group>"; };
+		E1AF4952F05FC7C7E419E5371CB77F2A /* symdl */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = symdl; path = libsymdl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2948980088BB7CE175F07E9E5BB4901 /* symdl.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = symdl.h; path = symdl/symdl/symdl.h; sourceTree = "<group>"; };
 		E8A7C4A6E97CFA45FA65BA4428F59429 /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
-		EA188C706E6EDF17E4442CE696AF40D9 /* MFTypeSpecifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFTypeSpecifier.h; path = MangoFix/Compiler/AST/MFTypeSpecifier.h; sourceTree = "<group>"; };
-		EBB2606D687E8CD2156A62583E64EB5C /* runenv.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = runenv.h; path = MangoFix/Execute/RunEnv/runenv.h; sourceTree = "<group>"; };
-		F0AA4068F24357A508CF94D83A442BE6 /* MFDeclarationModifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFDeclarationModifier.h; path = MangoFix/Compiler/AST/MFDeclarationModifier.h; sourceTree = "<group>"; };
-		F0BD378465A1DB1FCBAE5897FE9C1FA1 /* MFStack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MFStack.h; path = MangoFix/Execute/RunEnv/MFStack.h; sourceTree = "<group>"; };
-		F5933C15E2D114C6D08F0CF1E348F6CD /* ffi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ffi.h; path = MangoFix/libffi/ffi.h; sourceTree = "<group>"; };
-		FC958FE6D52AF4FDB03B8FB1F541DAA0 /* libMangoFix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libMangoFix.a; path = libMangoFix.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9DA20DD8735B6BA7854B0EB4193329 /* Pods-MangoFixUtil-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MangoFixUtil-acknowledgements.plist"; sourceTree = "<group>"; };
-		FFF7B55DE8B3E47F9A9FEA4BBA723E52 /* MFClassDefinition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MFClassDefinition.m; path = MangoFix/Compiler/AST/MFClassDefinition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		25EE9781475F82B79F012D3E1E96BE3C /* Frameworks */ = {
+		2C50A527FDFCE0216D59D9CB753814D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D865EF195439A32BC55EC216AC694FA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		704B3051F58161D6218253E88F66700B /* Frameworks */ = {
+		EEEB28D0CD06CD47FF067FFD835A97B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -244,45 +58,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0FFE10C838F1DC3448BE33F9E3A06AD0 /* Pods */ = {
+		799CC8E158074D36B6402846BD483471 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8F9F424B7D82E7421DE2BEA610593F7 /* MangoFix */,
-				3795DABD83B0F0F6FF6479BA74FC535B /* symdl */,
+				0E1E94AC5FC7169F2083B2F1DAFCD6FA /* Pods-MangoFixUtil */,
+				E1AF4952F05FC7C7E419E5371CB77F2A /* symdl */,
 			);
-			name = Pods;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		3795DABD83B0F0F6FF6479BA74FC535B /* symdl */ = {
+		A40CD92DD7C0D6D7AEC5A7EB71592B34 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				712450F2A1EB7CBFD9748115A5C53137 /* symdl.c */,
-				AFBB50230601B460A1CED6789E58CDE3 /* symdl.h */,
-				876454F55FCF85E58270FA5024FBC05F /* Support Files */,
-			);
-			name = symdl;
-			path = symdl;
-			sourceTree = "<group>";
-		};
-		5C3FC873FB05CE6070405FDAD7FC1E5F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				37650721C79030B94543A11FD6CF819B /* MangoFix-dummy.m */,
-				42B0B83B9E0FBE5FCB5D34877FC3E8D8 /* MangoFix-prefix.pch */,
-				14B4ACAE4B76E1A39A4C84DAB251049B /* MangoFix.debug.xcconfig */,
-				BD35D5D632198C2E2DB12241D46E5E84 /* MangoFix.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/MangoFix";
-			sourceTree = "<group>";
-		};
-		876454F55FCF85E58270FA5024FBC05F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B39E71ACC609DC2BEB286C0188DEA918 /* symdl-dummy.m */,
-				7442AF8A68335FE31A72723B8339E4D9 /* symdl-prefix.pch */,
-				3470EAF8E6189605E69D372B436C9D97 /* symdl.debug.xcconfig */,
-				1AEA8FF5E7A79FEF192F21EDAF71E40F /* symdl.release.xcconfig */,
+				BE3D77B757E38A4122A97FD4827DC79E /* symdl-dummy.m */,
+				405CD164D3F3665669798B0CB3DB5130 /* symdl-prefix.pch */,
+				AE936AEAE3601FD25E5CF898E003363A /* symdl.debug.xcconfig */,
+				423C4350E8BC0602CC58E05315E69F2A /* symdl.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/symdl";
@@ -296,15 +87,34 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		C28B5CD83D70F7DCA94CEE10C622DEBE /* symdl */ = {
+			isa = PBXGroup;
+			children = (
+				DB111B50503CEC6E4BEE0CC2E88645AF /* symdl.c */,
+				E2948980088BB7CE175F07E9E5BB4901 /* symdl.h */,
+				A40CD92DD7C0D6D7AEC5A7EB71592B34 /* Support Files */,
+			);
+			name = symdl;
+			path = symdl;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				0FFE10C838F1DC3448BE33F9E3A06AD0 /* Pods */,
-				FA2F965C427AAB195A14C8ABB8183BAE /* Products */,
+				D85AD822BDB5646D7B87883CF5BD4081 /* Pods */,
+				799CC8E158074D36B6402846BD483471 /* Products */,
 				A5605DD8730C8FE3A3ADB20318EFDFBC /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D85AD822BDB5646D7B87883CF5BD4081 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C28B5CD83D70F7DCA94CEE10C622DEBE /* symdl */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
@@ -312,95 +122,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D8F9F424B7D82E7421DE2BEA610593F7 /* MangoFix */ = {
-			isa = PBXGroup;
-			children = (
-				13F985C306FA02C7CF196AE309273276 /* built-in.m */,
-				CAB51A84F8DDBAE7CFF1D14E851643AB /* create.h */,
-				19871CC1C94801CBDCFB081F38F9ED92 /* create.m */,
-				026D1FBBDCFCBE965A6AB36AD35AB572 /* errror.h */,
-				241D902BA9833A2E7850B0CAFFBB92D1 /* errror.m */,
-				440F0A2EC017EAE19207342C948D407A /* eval.m */,
-				38AC9D0EFC42AF4211AF4C25982FD81D /* execute.h */,
-				14ABB3062689045DE37CC07BA0BD7A5A /* execute.m */,
-				F5933C15E2D114C6D08F0CF1E348F6CD /* ffi.h */,
-				6595169B5F3DC2ACB6BA890A2D8C9AA2 /* ffi_arm.h */,
-				1F1A938922A1FF71A1C9CE2EF3ABD371 /* ffi_arm64.h */,
-				DB0BA7934AD9216916663F1F99DA67FF /* ffi_i386.h */,
-				727BC42AE51F341BBB0A298FDC2D0C97 /* ffi_x86_64.h */,
-				A7CD2939AA550172FDE654B20C31CCC1 /* ffitarget.h */,
-				A1CD60EE841C3F4477B057D3772D38C2 /* ffitarget_arm.h */,
-				7B5156A269CFCEE6DEDA402A590B0300 /* ffitarget_arm64.h */,
-				CF060AF55B1B53B1A177304D68E0BC70 /* ffitarget_i386.h */,
-				09CF5CB8D16D49BC3D4882A5F062C6E7 /* ffitarget_x86_64.h */,
-				1296031E9257F2376D2FB3574DF78C78 /* mango.l */,
-				3ED3A25E34A9AAD85DC12A9C795C44F6 /* mango.y */,
-				7CF21C39CDBE4005DB85DAAAC83AC5C6 /* MangoFix.h */,
-				32B39E0D47E7163516D18DA28CF00520 /* mf_ast.h */,
-				C9A49E2ADCFE3530F0AD6F0F5E78883F /* MFAnnotation.h */,
-				C9EB17F515106B2B98637FB1583FF360 /* MFAnnotation.m */,
-				962D7B10137248A97C7C879DE1C2C502 /* MFAnnotationableDefinition.h */,
-				9B1468FDED6A2B8C376036DD9F13B479 /* MFAnnotationableDefinition.m */,
-				DAF8F98E2B67554FB06E8DE10910CE85 /* MFBlock.h */,
-				A064DF9DA0FC10CD78ABBC1FDA202796 /* MFBlock.m */,
-				2974EC4EF2BC26DB7E0238B0E531997C /* MFBlockBody.h */,
-				5C498EAAE1008FF9E47E68E1AB3F08AB /* MFBlockBody.m */,
-				271E59E7978030797C736871D8DA4C24 /* MFClassDefinition.h */,
-				FFF7B55DE8B3E47F9A9FEA4BBA723E52 /* MFClassDefinition.m */,
-				6C002B1E92D796EFA08FDBDEE13FA57E /* MFContext.h */,
-				7BBD2F7B93B9BCABE1DF157ED38695D5 /* MFContext.m */,
-				42B3C37250F0EE16FC167635781CB212 /* MFDeclaration.h */,
-				5232042DC21CE01B93DE878AE0A68338 /* MFDeclaration.m */,
-				F0AA4068F24357A508CF94D83A442BE6 /* MFDeclarationModifier.h */,
-				D986B8693841E24AE39990479ED15224 /* MFExpression.h */,
-				4C237CC61C3FA9FA7AC566221A81175B /* MFExpression.m */,
-				E38F578C882E81EDF38DA732E0E8A725 /* MFFunctionDefinition.h */,
-				E0F9FBE5834007484208B104490A3E67 /* MFFunctionDefinition.m */,
-				55A2AD7F9D89BAD8AB5CF7B7F264689A /* MFInterpreter.h */,
-				66D293A9982F2548E7300E85B4E62EC3 /* MFInterpreter.m */,
-				501ECFD9FAC4FA23BB8891486F481C22 /* MFMethodMapTable.h */,
-				E796599178272AC1E6C8837B2DBFA243 /* MFMethodMapTable.m */,
-				D04F0BEECC0B769E38F92DB065D5B5FF /* MFPropertyMapTable.h */,
-				CCB378C912ACCB716F5C557003DA089B /* MFPropertyMapTable.m */,
-				33C5E934A36A4E5EBF354BB0B60D2BDA /* MFScopeChain.h */,
-				969C61D495E9E081C24CC20A2A6393BE /* MFScopeChain.m */,
-				F0BD378465A1DB1FCBAE5897FE9C1FA1 /* MFStack.h */,
-				02EB20CC123F298ECF1A35D997E8EAAF /* MFStack.m */,
-				3470D1F223454B5EE59DBE334A1F33DF /* MFStatement.h */,
-				918C30A5268CCA51624B159E4C5B39A9 /* MFStatement.m */,
-				5E708D92EACD605747CCA57E28ED42CB /* MFStatementResult.h */,
-				262FC10755FDC6B63511C6B4F4BF1C87 /* MFStatementResult.m */,
-				8351AB9523CB279C1871BAA410BF96DC /* MFStaticVarTable.h */,
-				C479CA2FC14CBD33E4544224A4367FE7 /* MFStaticVarTable.m */,
-				19891A43FFA3374324C57177CC67FF4B /* MFStructDeclare.h */,
-				CB55E1659938D285F1C81F4236CE5B13 /* MFStructDeclare.m */,
-				6639051C8470952D6AE2EE538A6E7F88 /* MFStructDeclareTable.h */,
-				3721FE80905D46B6A0DBC366120D8837 /* MFStructDeclareTable.m */,
-				5DD4F818FD581745C4C244F51F200919 /* MFSwfitClassNameAlisTable.h */,
-				19B99AE5E75CB25FFD92789CDD7F34CA /* MFSwfitClassNameAlisTable.m */,
-				C5B4B8B143983A5D3C8441FDAED04B69 /* MFTypedefTable.h */,
-				ADCB1FA98C308464EEFBC8C1D60BE723 /* MFTypedefTable.m */,
-				EA188C706E6EDF17E4442CE696AF40D9 /* MFTypeSpecifier.h */,
-				662F0F09D4257FFC7BD027398D6199B7 /* MFTypeSpecifier.m */,
-				518E14089752F2A671499508FD837D0C /* MFValue.h */,
-				A01765CFBE314DA9184AADABCDB81396 /* MFValue.m */,
-				7268A9ACCEFA5A2948F3E39C2A4794C2 /* MFValue+Private.h */,
-				0A97626B9FDE87059552C060996F94A8 /* MFVarDeclareChain.h */,
-				9464EA6F0CB9A40930AD03F9D698DC79 /* MFVarDeclareChain.m */,
-				AE9AB91DEF303C70A3B7E7C695EED2E2 /* MFWeakPropertyBox.h */,
-				B5D88B244A1E5846A5DADD4B7CB18B03 /* MFWeakPropertyBox.m */,
-				1176C95E73AB7B981EDED5F8EEC5F41A /* NSData+AESEncryption.h */,
-				910900422DCA0654CBA810ADDBB75D0E /* NSData+AESEncryption.m */,
-				EBB2606D687E8CD2156A62583E64EB5C /* runenv.h */,
-				E209011A32A04E8EFB1870C075CC2126 /* util.h */,
-				8988DD793C8908B4398E54A542A4467C /* util.m */,
-				EBFD063E2165DA7DCC4B314385FCC7D2 /* Frameworks */,
-				5C3FC873FB05CE6070405FDAD7FC1E5F /* Support Files */,
-			);
-			name = MangoFix;
-			path = MangoFix;
 			sourceTree = "<group>";
 		};
 		DB41C1D8DB68CC08DEBA7CB219A66F4D /* Pods-MangoFixUtil */ = {
@@ -416,141 +137,52 @@
 			path = "Target Support Files/Pods-MangoFixUtil";
 			sourceTree = "<group>";
 		};
-		EBFD063E2165DA7DCC4B314385FCC7D2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				48DEEB7376C9EAA637A4B041DCBAD7EA /* libffi.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FA2F965C427AAB195A14C8ABB8183BAE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FC958FE6D52AF4FDB03B8FB1F541DAA0 /* libMangoFix.a */,
-				0E1E94AC5FC7169F2083B2F1DAFCD6FA /* libPods-MangoFixUtil.a */,
-				E1AF4952F05FC7C7E419E5371CB77F2A /* libsymdl.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		CBBC5158EF40FE34D5751342A87D4BF8 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				88051F9B37E1615F65DAEC0C46604F9E /* symdl.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CC43DB3E3FABC248B8C30609C42CED8B /* Headers */ = {
+		5A485464DE267778B71CDC4C51F21380 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E863B88C6D9DE0E9B7EA0DB1CE0C474F /* Headers */ = {
+		FBBFD7910AB41FEE4F3771207A1DCD34 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97F6FA2631FEE1172175C1DE375960E2 /* create.h in Headers */,
-				EFCC195DE01C83F0E19C7E8FD8BC0B30 /* errror.h in Headers */,
-				B1FD6C49348E4141C8E70BF2BB9752A5 /* execute.h in Headers */,
-				12CB0A3866E6EF8F9B1B5D1650EFFFEF /* ffi.h in Headers */,
-				394056351ED3FF8C361C9AE6DF0890C3 /* ffi_arm.h in Headers */,
-				A900FA0FA76C4954534BA9EDBCF0D13F /* ffi_arm64.h in Headers */,
-				D8DAA3DBF440C2C5C38BD160695CEB34 /* ffi_i386.h in Headers */,
-				EE837D4585DA57EB78DFE18DA6E5F122 /* ffi_x86_64.h in Headers */,
-				6931F552C0CC8ED2FBE4FE0BE48A10D0 /* ffitarget.h in Headers */,
-				379606AE09752273B48AF59961EBB427 /* ffitarget_arm.h in Headers */,
-				B7E9108D4AA414962FBD9934E5E4DA24 /* ffitarget_arm64.h in Headers */,
-				71A20E7DAC053D9E558C696E0BB2CCEF /* ffitarget_i386.h in Headers */,
-				3FC3D2F82656DB21AE319A9B34430228 /* ffitarget_x86_64.h in Headers */,
-				6572CC72E9F8151CF72B696EE67F98FE /* MangoFix.h in Headers */,
-				BADC872D861B3FF1CEDAB5E1BA6783FD /* mf_ast.h in Headers */,
-				619FEBC7C012B8CEF2DE2705F1D86A80 /* MFAnnotation.h in Headers */,
-				1BF22FDE27BA4254AB9B5AFC51F21BAD /* MFAnnotationableDefinition.h in Headers */,
-				549B7F4FC42A92A315E005BF5B1C9455 /* MFBlock.h in Headers */,
-				16997F21B3283B777057CA70B3201281 /* MFBlockBody.h in Headers */,
-				AC90C7218EF4F22FA342A6DF70762AA2 /* MFClassDefinition.h in Headers */,
-				7C839404D2128AB1C71E67B03BEF2502 /* MFContext.h in Headers */,
-				CF28246344DD33A003E845ABFC9C53F4 /* MFDeclaration.h in Headers */,
-				03E218C6A76D124ECEBCDC00F8447C76 /* MFDeclarationModifier.h in Headers */,
-				93258FCB946134F9E0BB4BBF4BBD0379 /* MFExpression.h in Headers */,
-				D6704A7EE94CE31EEE7CB8E55F6BF515 /* MFFunctionDefinition.h in Headers */,
-				5F943CC2CDB6933D1D77140403D83520 /* MFInterpreter.h in Headers */,
-				05429F254BD627767C79C0D1CD9CCB74 /* MFMethodMapTable.h in Headers */,
-				D710FA23BB578D4502988F44F1A6FDF7 /* MFPropertyMapTable.h in Headers */,
-				21F776F940E64D51C7048F62F4CE4832 /* MFScopeChain.h in Headers */,
-				9D1F61DF30BDEE5274E95FE1B915F198 /* MFStack.h in Headers */,
-				F0FD892E37AD355D26C892EB96F48100 /* MFStatement.h in Headers */,
-				604D94390C07EA6013878D77F0B947A4 /* MFStatementResult.h in Headers */,
-				A9190FE4F56A1A850AB6D44CFF531A3C /* MFStaticVarTable.h in Headers */,
-				1E102FF5118D7C8BE9B0D1888EE3BCA3 /* MFStructDeclare.h in Headers */,
-				7D4DF2C9A735C0E4CEFE963170C92978 /* MFStructDeclareTable.h in Headers */,
-				610814596DEB91D2849CC69093DC4F23 /* MFSwfitClassNameAlisTable.h in Headers */,
-				B1DB2824D75EAEB2009F9EA371E1CC13 /* MFTypedefTable.h in Headers */,
-				7DE222C402CBC8369703F9651A4189D4 /* MFTypeSpecifier.h in Headers */,
-				ABAC8F21DB2281EE7821B3D0CA35D5E1 /* MFValue+Private.h in Headers */,
-				EFA9A49CCAAF88E9EAD1E6879E8A3431 /* MFValue.h in Headers */,
-				6478FBD8E178DF5D6193EA4FC81BB8AC /* MFVarDeclareChain.h in Headers */,
-				41280D09DDC799795EB08E610BFD31B1 /* MFWeakPropertyBox.h in Headers */,
-				2A95AE3C64986C13946ADA82C91F7D73 /* NSData+AESEncryption.h in Headers */,
-				398190D8634A984B7BAB2C2A0D6A1E59 /* runenv.h in Headers */,
-				8B9C691B3565280118AE58F8E5A316F1 /* util.h in Headers */,
+				E5B89AB59AA0E85F0E150111D155B72E /* symdl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		57EE331E4E7782F76F697D52ADB516F4 /* MangoFix */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FFE698E6C0C5B91D61130188FBAB977B /* Build configuration list for PBXNativeTarget "MangoFix" */;
-			buildPhases = (
-				E863B88C6D9DE0E9B7EA0DB1CE0C474F /* Headers */,
-				C34DCFBCF169C15EED6C89149CCD80B2 /* Sources */,
-				25EE9781475F82B79F012D3E1E96BE3C /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				65BD8BD87B24B90FC0BF4D29D97E0156 /* PBXTargetDependency */,
-			);
-			name = MangoFix;
-			productName = MangoFix;
-			productReference = FC958FE6D52AF4FDB03B8FB1F541DAA0 /* libMangoFix.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		A533124A449D7436716BECAF0CC7B104 /* Pods-MangoFixUtil */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2E7AAB3587C4A49F9E1357224EDF59E1 /* Build configuration list for PBXNativeTarget "Pods-MangoFixUtil" */;
+			buildConfigurationList = B53502B47C6B2BDBAF9CFF52115F2B1B /* Build configuration list for PBXNativeTarget "Pods-MangoFixUtil" */;
 			buildPhases = (
-				CC43DB3E3FABC248B8C30609C42CED8B /* Headers */,
-				85BD76E425EFE9CADCC143566CF9688C /* Sources */,
-				4D865EF195439A32BC55EC216AC694FA /* Frameworks */,
+				5A485464DE267778B71CDC4C51F21380 /* Headers */,
+				BD64B6D80E38E37F8818E7669B7FE64E /* Sources */,
+				EEEB28D0CD06CD47FF067FFD835A97B6 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9A3E0188D44BA312970120106B933AFC /* PBXTargetDependency */,
-				79457AFFB9A6C34CFF108EA971A55823 /* PBXTargetDependency */,
+				046A25E7CDC8F3D672738C6AC2EF78B5 /* PBXTargetDependency */,
 			);
 			name = "Pods-MangoFixUtil";
 			productName = "Pods-MangoFixUtil";
-			productReference = 0E1E94AC5FC7169F2083B2F1DAFCD6FA /* libPods-MangoFixUtil.a */;
+			productReference = 0E1E94AC5FC7169F2083B2F1DAFCD6FA /* Pods-MangoFixUtil */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A9EBF2FAB4D5066D95CC1C7830A7E314 /* symdl */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A7DFD0D5CEA64B1C64EDC7CF22A6DC28 /* Build configuration list for PBXNativeTarget "symdl" */;
+			buildConfigurationList = 1918E0414DF72F65B5E656292BF9E77D /* Build configuration list for PBXNativeTarget "symdl" */;
 			buildPhases = (
-				CBBC5158EF40FE34D5751342A87D4BF8 /* Headers */,
-				2542C1DAE80F55AEC5FD9758C3111C21 /* Sources */,
-				704B3051F58161D6218253E88F66700B /* Frameworks */,
+				FBBFD7910AB41FEE4F3771207A1DCD34 /* Headers */,
+				0578B843DBAB7605D1FAF45152F9AAB0 /* Sources */,
+				2C50A527FDFCE0216D59D9CB753814D5 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -558,7 +190,7 @@
 			);
 			name = symdl;
 			productName = symdl;
-			productReference = E1AF4952F05FC7C7E419E5371CB77F2A /* libsymdl.a */;
+			productReference = E1AF4952F05FC7C7E419E5371CB77F2A /* symdl */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -567,23 +199,22 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = FA2F965C427AAB195A14C8ABB8183BAE /* Products */;
+			productRefGroup = 799CC8E158074D36B6402846BD483471 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				57EE331E4E7782F76F697D52ADB516F4 /* MangoFix */,
 				A533124A449D7436716BECAF0CC7B104 /* Pods-MangoFixUtil */,
 				A9EBF2FAB4D5066D95CC1C7830A7E314 /* symdl */,
 			);
@@ -591,285 +222,40 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2542C1DAE80F55AEC5FD9758C3111C21 /* Sources */ = {
+		0578B843DBAB7605D1FAF45152F9AAB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				892485DEB53667A3105D41AF70354854 /* symdl-dummy.m in Sources */,
-				95A975ED38B799E2CCAAD70A97951169 /* symdl.c in Sources */,
+				6ACD12C31924F1DC6EF1FD0A7141AE81 /* symdl.c in Sources */,
+				C0C83B4FE2D92465662C41F2FE3DD193 /* symdl-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		85BD76E425EFE9CADCC143566CF9688C /* Sources */ = {
+		BD64B6D80E38E37F8818E7669B7FE64E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9152AB483180A18E072014D32DB85161 /* Pods-MangoFixUtil-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C34DCFBCF169C15EED6C89149CCD80B2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75956A4F37B4C0C6CFF8D376BE416C87 /* built-in.m in Sources */,
-				7C0388C0579CD6F1ADB0FCED6CBCC0DD /* create.m in Sources */,
-				41D434D82F58D78503F29AE7F08029E3 /* errror.m in Sources */,
-				A387674B11B920E5368AB93DB70F5A1C /* eval.m in Sources */,
-				FA4D27391631CC919B1219CA0E289352 /* execute.m in Sources */,
-				62BE0F248EB6E6042BEB030C668974D4 /* mango.l in Sources */,
-				962F99EB929558877C10EA66C4B9224E /* mango.y in Sources */,
-				00E32D65D9559B8A3D8BD18B02652221 /* MangoFix-dummy.m in Sources */,
-				29BF814AAF8E30BF3F57ED7A7AD8E7D8 /* MFAnnotation.m in Sources */,
-				C8A3271195751ED53FEE1D734CE22771 /* MFAnnotationableDefinition.m in Sources */,
-				65274C51B9656C7624FDD083913D7FB1 /* MFBlock.m in Sources */,
-				87436B3D50F0E639F87E87C5455733BB /* MFBlockBody.m in Sources */,
-				8CABDF573D34FCE733E5051107577509 /* MFClassDefinition.m in Sources */,
-				3166C3DC3A65FAD2E477AD1D80EE8124 /* MFContext.m in Sources */,
-				33D52066F4CC5C1ECF26CFE5DE9330B1 /* MFDeclaration.m in Sources */,
-				367C5EA2E871C782DB25FECE7509D666 /* MFExpression.m in Sources */,
-				D464AD49D9D9426706AE6234716AF35C /* MFFunctionDefinition.m in Sources */,
-				EE64DF5ABF4145A13158BE371D5E88FA /* MFInterpreter.m in Sources */,
-				8B241C2E276A316818CD5B78123CC6B4 /* MFMethodMapTable.m in Sources */,
-				89A9F479B7848CB376C42756D31F0E0C /* MFPropertyMapTable.m in Sources */,
-				CF3CE0A255BF1B95CFF71C33FEC662D0 /* MFScopeChain.m in Sources */,
-				9D216A17A9EEBBE5C3D980DBAD5CD601 /* MFStack.m in Sources */,
-				0A248AF8E9396111A2A920B170397906 /* MFStatement.m in Sources */,
-				ECFC70594C91EF40EEE8D0062FADFB19 /* MFStatementResult.m in Sources */,
-				100AA535662696221E4E9274F052BD61 /* MFStaticVarTable.m in Sources */,
-				B0584A4138A6239C9232BC1079257B93 /* MFStructDeclare.m in Sources */,
-				5B891F9220EFDFCC0DEC13DD7DC30F8B /* MFStructDeclareTable.m in Sources */,
-				DBA877B7E79E595011048974117E2A33 /* MFSwfitClassNameAlisTable.m in Sources */,
-				D57032A8E84DBCA2CFDFA21AF5580C05 /* MFTypedefTable.m in Sources */,
-				875AE3F15A67094C07217FCADEDD1F3E /* MFTypeSpecifier.m in Sources */,
-				67E3AE2980F732AA5189202662953186 /* MFValue.m in Sources */,
-				3D3E59DF82C26E80BB3CF074FE0EFA84 /* MFVarDeclareChain.m in Sources */,
-				4A193FF48E24E89B71F03D8709DAE181 /* MFWeakPropertyBox.m in Sources */,
-				49E95309D1E37756F57EA7DFB3568CA3 /* NSData+AESEncryption.m in Sources */,
-				10D938BA388104ACA0B4E1BB4B1A4D42 /* util.m in Sources */,
+				A6435AC83D0947DE66B218BECE25A790 /* Pods-MangoFixUtil-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		65BD8BD87B24B90FC0BF4D29D97E0156 /* PBXTargetDependency */ = {
+		046A25E7CDC8F3D672738C6AC2EF78B5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = symdl;
 			target = A9EBF2FAB4D5066D95CC1C7830A7E314 /* symdl */;
-			targetProxy = AD45CAD83619E2C6DB4CD01A3E246CEA /* PBXContainerItemProxy */;
-		};
-		79457AFFB9A6C34CFF108EA971A55823 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = symdl;
-			target = A9EBF2FAB4D5066D95CC1C7830A7E314 /* symdl */;
-			targetProxy = FEDC34B15B0B1B43A2A5E644976DA390 /* PBXContainerItemProxy */;
-		};
-		9A3E0188D44BA312970120106B933AFC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MangoFix;
-			target = 57EE331E4E7782F76F697D52ADB516F4 /* MangoFix */;
-			targetProxy = B418B60B213F98022ABABC0A504F43DA /* PBXContainerItemProxy */;
+			targetProxy = A1342A111383C3B11A76DA4EB63E42C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		674B9BDE8229D19187ED43D0A73D17E3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 14B4ACAE4B76E1A39A4C84DAB251049B /* MangoFix.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/MangoFix/MangoFix-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = MangoFix;
-				PRODUCT_NAME = MangoFix;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		6C2119F10BF6C903933CBE41D8E3E2DC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AEA8FF5E7A79FEF192F21EDAF71E40F /* symdl.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/symdl/symdl-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = symdl;
-				PRODUCT_NAME = symdl;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		6DE03DA38F1596FA8123A2CE9F323F0F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3470EAF8E6189605E69D372B436C9D97 /* symdl.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/symdl/symdl-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = symdl;
-				PRODUCT_NAME = symdl;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		7C098CF6BE1F2E4DEFA1D0AA5138D6D0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8A7C4A6E97CFA45FA65BA4428F59429 /* Pods-MangoFixUtil.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		844D6EE6D5212DCDDC8F79CFD014B25A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD35D5D632198C2E2DB12241D46E5E84 /* MangoFix.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/MangoFix/MangoFix-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = MangoFix;
-				PRODUCT_NAME = MangoFix;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		B65509170794F11EEACF4074B958BA5F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 82E5EB5812729BF3ABF77C3AD2AC5BCE /* Pods-MangoFixUtil.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		C14E932D4C3EFCC589F7DEABCEC18F22 /* Release */ = {
+		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
-		};
-		EF3BAAA889B17377BE8F3254633FA0A7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -931,14 +317,162 @@
 			};
 			name = Debug;
 		};
+		4E9642EC68F8E499775AF8A3E7B51FA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 423C4350E8BC0602CC58E05315E69F2A /* symdl.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/symdl/symdl-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = symdl;
+				PRODUCT_NAME = symdl;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		513633DD0A2DAA30218A86502162662E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82E5EB5812729BF3ABF77C3AD2AC5BCE /* Pods-MangoFixUtil.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5990520E087C80D5D25B68CCAF977790 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8A7C4A6E97CFA45FA65BA4428F59429 /* Pods-MangoFixUtil.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		E8B9E56AE4330E9D64737E0D1FEA6AA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE936AEAE3601FD25E5CF898E003363A /* symdl.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/symdl/symdl-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = symdl;
+				PRODUCT_NAME = symdl;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2E7AAB3587C4A49F9E1357224EDF59E1 /* Build configuration list for PBXNativeTarget "Pods-MangoFixUtil" */ = {
+		1918E0414DF72F65B5E656292BF9E77D /* Build configuration list for PBXNativeTarget "symdl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7C098CF6BE1F2E4DEFA1D0AA5138D6D0 /* Debug */,
-				B65509170794F11EEACF4074B958BA5F /* Release */,
+				E8B9E56AE4330E9D64737E0D1FEA6AA4 /* Debug */,
+				4E9642EC68F8E499775AF8A3E7B51FA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -946,26 +480,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EF3BAAA889B17377BE8F3254633FA0A7 /* Debug */,
-				C14E932D4C3EFCC589F7DEABCEC18F22 /* Release */,
+				25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */,
+				CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A7DFD0D5CEA64B1C64EDC7CF22A6DC28 /* Build configuration list for PBXNativeTarget "symdl" */ = {
+		B53502B47C6B2BDBAF9CFF52115F2B1B /* Build configuration list for PBXNativeTarget "Pods-MangoFixUtil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6DE03DA38F1596FA8123A2CE9F323F0F /* Debug */,
-				6C2119F10BF6C903933CBE41D8E3E2DC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FFE698E6C0C5B91D61130188FBAB977B /* Build configuration list for PBXNativeTarget "MangoFix" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				674B9BDE8229D19187ED43D0A73D17E3 /* Debug */,
-				844D6EE6D5212DCDDC8F79CFD014B25A /* Release */,
+				5990520E087C80D5D25B68CCAF977790 /* Debug */,
+				513633DD0A2DAA30218A86502162662E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

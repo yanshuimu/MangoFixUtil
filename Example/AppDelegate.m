@@ -9,11 +9,13 @@
 #import "ViewController.h"
 #import "MangoFixUtil.h"
 
-/*
- 补丁管理后台：http://patchhub.top/
-  
- 如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
- */
+// 注意：本库需搭配补丁管理后台一起使用
+// http://patchhub.top
+// Github地址：
+// https://github.com/yanshuimu/MangoFixUtil
+// 脚本语法参考：
+// https://github.com/YPLiang19/Mango
+
 
 @interface AppDelegate ()
 
@@ -24,7 +26,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //初始化建议放在最前面
     [self setupMangoFixUtil];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -41,6 +42,7 @@
     MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 
     [mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
+//    [mangoFixUtil startWithUserId:@"" aesKey:AES128KEY];
     /*
      步骤：
      建议将项目中的demo.mg文件拷贝至自己的项目中，方便调试
@@ -48,10 +50,12 @@
      */
     
     //① 执行本地未加密补丁，直接在demo.mg中使用MangoFix语法编写代码，执行该方法调试
-    //[mangoFixUtil evalLocalUnEncryptedMangoScript];
+//    [mangoFixUtil evalLocalUnEncryptedMangoScript];
         
     //② 执行远程补丁，第①步测试正常，即可通过补丁管理后台发布补丁
-    [mangoFixUtil evalRemoteMangoScript];
+//    [mangoFixUtil evalLocalMangoScript];
+    
+    [mangoFixUtil encryptPlainScriptToDocument];
 }
 
 @end

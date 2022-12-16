@@ -9,18 +9,15 @@
 #import "MFKeyChainUtil.h"
 #import "MFNetworkDefine.h"
 #import "MFMacroDefine.h"
-#if __has_include(<MangoFix/MangoFix.h>)
 #import <MangoFix/MangoFix.h>
-#import "create.h"
-#import "execute.h"
-#define HAS_INCLUDE_MANGOFIX
-#endif
 
 typedef void(^Succ)(id resp);
 
 typedef void(^Fail)(NSString *msg);
 
 @interface MangoFixUtil ()
+
+@property(nonatomic, strong) MFInterpreter *interpreter;
 
 /**
  * 应用id
@@ -38,7 +35,7 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, assign) BOOL debug;
 
 /**
- * AES秘钥
+ * AES128密钥，长度需为16的倍数，举个栗子：xWx2TilxtpHlvQrT
  */
 @property (nonatomic, copy) NSString *aesKey;
 
@@ -52,15 +49,12 @@ typedef void(^Fail)(NSString *msg);
  */
 @property (nonatomic, strong) NSMutableDictionary *baseParams;
 
-#ifdef HAS_INCLUDE_MANGOFIX
-@property(nonatomic, strong) MFInterpreter *interpreter;
-#endif
-
 @end
 
 @implementation MangoFixUtil
 
-+ (instancetype)sharedUtil {
++ (instancetype)sharedUtil
+{
     static MangoFixUtil *util = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
@@ -69,15 +63,14 @@ typedef void(^Fail)(NSString *msg);
     return util;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     if (self = [super init]) {
+        _interpreter = [[MFInterpreter alloc] init];
         _clearLastPathAfterVersionUpdateEnabled = YES;
         _dailyActiveUserEnabled = YES;
-#ifdef HAS_INCLUDE_MANGOFIX
-        _interpreter = [[MFInterpreter alloc] init];
-#endif
         _uuid = [MFKeyChainUtil load:MFUUIDKey(MFBundleIdentifier)];
-        if (MFStringIsEmpty(_uuid)) {
+        if (_uuid.length == 0) {
             _uuid = [self createUUID];
             [MFKeyChainUtil save:MFUUIDKey(MFBundleIdentifier) data:_uuid];
         }
@@ -85,19 +78,19 @@ typedef void(^Fail)(NSString *msg);
     return self;
 }
 
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey {
-    
+- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
+{
     [self startWithAppId:appId aesKey:aesKey debug:NO];
 }
 
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey {
-    
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
+{
     [self startWithUserId:userId aesKey:aesKey debug:NO];
 }
 
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug {
-    
-    NSAssert(!MFStringIsEmpty(aesKey), @"The aesKey is nil or empty!");
+- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
+{
+    NSAssert(appId.length != 0, @"The appId is nil or empty!");
     NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
     _appId = appId;
     _userId = @"";
@@ -105,9 +98,9 @@ typedef void(^Fail)(NSString *msg);
     _aesKey = aesKey;
 }
 
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug {
-    
-    NSAssert(!MFStringIsEmpty(userId), @"The userId is nil or empty!");
+- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
+{
+    NSAssert(userId.length != 0, @"The userId is nil or empty!");
     NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
     _appId = @"";
     _userId = userId;
@@ -115,8 +108,8 @@ typedef void(^Fail)(NSString *msg);
     _aesKey = aesKey;
 }
 
-- (void)evalRemoteMangoScript {
-    
+- (void)evalRemoteMangoScript
+{
     @try {
         [self evalLastPatch];
     }
@@ -124,49 +117,21 @@ typedef void(^Fail)(NSString *msg);
         MFLog(@"%@", exception);
     }
     @finally {
-        [self activateDevice];
         [self requestCheckRemotePatch];
     }
 }
 
-- (void)evalLocalMangoScript {
-        
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"encrypted_demo" ofType:@"mg"];
-    NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
-    if (scriptData && scriptData.length > 0) {
-        NSString *scriptString = [self decryptAES128Data:scriptData];
-        if (!scriptString.length) {
-            MFLog(@"AES128 decrypt error!");
-            return;
-        }
-        [self evalMangoScriptString:scriptString];
-        MFLog(@"The local patch is successfully executed!");
-    }
-    else {
-        MFLog(@"The local patch content is empty!");
-    }
-}
-
-- (void)evalLocalUnEncryptedMangoScript {
-        
-    NSData *scriptData = nil;
-    NSError *outErr = nil;
-    
+- (void)evalLocalUnEncryptedMangoScript
+{
+    NSError *error = nil;
     NSURL *scriptUrl = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"mg"];
-    NSString *plainScriptString = [NSString stringWithContentsOfURL:scriptUrl encoding:NSUTF8StringEncoding error:&outErr];
-    if (outErr) goto err;
-    {
-        scriptData = [self encryptString:plainScriptString];
+    NSString *scriptString = [NSString stringWithContentsOfURL:scriptUrl encoding:NSUTF8StringEncoding error:&error];
+    if (error) {
+        MFLog(@"%@", error.localizedDescription);
+        return;
     }
-    err:
-    if (outErr) MFLog(@"%@",outErr);
-    if (scriptData && scriptData.length > 0) {
-        NSString *scriptString = [self decryptAES128Data:scriptData];
-        if (!scriptString.length) {
-            MFLog(@"AES128 decrypt error!");
-            return;
-        }
-        [self evalMangoScriptString:scriptString];
+    if (scriptString.length > 0) {
+        [self startInterpret:scriptString];
         MFLog(@"The local unencrypted patch is successfully executed!");
     }
     else {
@@ -174,34 +139,71 @@ typedef void(^Fail)(NSString *msg);
     }
 }
 
-- (void)deleteLocalMangoScript {
-    
-    NSError *outErr = nil;
-    NSString *filePath= (NSString *)[MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if ([fileManager fileExistsAtPath:filePath]) {
-        [fileManager removeItemAtPath:filePath error:&outErr];
-        if (outErr) goto err;
-        {
-            MFLog(@"The local patch was successfully deleted! Please restart the device!");
+- (void)evalLocalEncryptedMangoScript
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"encrypted_demo" ofType:@"mg"];
+    NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
+    if (scriptData && scriptData.length > 0) {
+        NSString *scriptString = [self decryptData:scriptData];
+        if (scriptString.length == 0) {
+            MFLog(@"Decrypt error!");
+            return;
         }
-        err:
-        if (outErr) MFLog(@"%@",outErr);
+        [self startInterpret:scriptString];
+        MFLog(@"The local encrypted patch is successfully executed!");
+    }
+    else {
+        MFLog(@"The local encrypted patch content is empty!");
     }
 }
 
-- (void)evalLastPatch {
-    
-    NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
+- (NSString*)encryptPlainScriptToDocument
+{
+    NSError *error = nil;
+    NSString * scriptPath = nil;
+    NSURL *scriptUrl = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"mg"];
+    NSString *scriptString = [NSString stringWithContentsOfURL:scriptUrl encoding:NSUTF8StringEncoding error:&error];
+    if (error) {
+        MFLog(@"%@", error.localizedDescription);
+        return scriptPath;
+    }
+    NSData *scriptData = [self encryptString:scriptString];
+    scriptPath = [[self documentsPath] stringByAppendingPathComponent:@"encrypted_demo.mg"];
+    [scriptData writeToFile:scriptPath options:NSDataWritingAtomic error:&error];
+    if (error) {
+        MFLog(@"%@", error.localizedDescription);
+        return scriptPath;
+    }
+    MFLog(@"The encrypted patch path: %@", scriptPath);
+    return scriptPath;
+}
+
+- (void)deleteLocalMangoScript
+{
+    NSError *error = nil;
+    NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+        if (error) {
+            MFLog(@"%@", error.localizedDescription);
+            return;
+        }
+        MFLog(@"The local patch was successfully deleted! Please restart the app!");
+    }
+}
+
+- (void)evalLastPatch
+{
+    NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
         if (scriptData && scriptData.length > 0) {
-            NSString *scriptString = [self decryptAES128Data:scriptData];
+            NSString *scriptString = [self decryptData:scriptData];
             if (!scriptString.length) {
-                MFLog(@"AES128 decrypt error!");
+                MFLog(@"Decrypt error!");
                 return;
             }
-            [self evalMangoScriptString:scriptString];
+            [self startInterpret:scriptString];
             MFLog(@"The last patch is successfully executed!");
         }
         else {
@@ -213,25 +215,140 @@ typedef void(^Fail)(NSString *msg);
     }
 }
 
+#pragma mark - MangoFix
+
+- (void)startInterpret:(NSString*)scriptString
+{
+    @autoreleasepool {
+        mf_set_current_compile_util(self.interpreter);
+        mf_add_built_in(self.interpreter);
+        [self.interpreter compileSourceWithString:scriptString];
+        mf_set_current_compile_util(nil);
+        mf_interpret(self.interpreter);
+    }
+}
+
+- (NSString*)decryptData:(NSData*)data
+{
+    NSData *scriptData = [data AES128ParmDecryptWithKey:_aesKey iv:@""];
+    NSString *scriptString = [[NSString alloc] initWithData:scriptData encoding:NSUTF8StringEncoding];
+    return scriptString;
+}
+
+- (id)encryptString:(NSString*)string
+{
+    NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
+    return [scriptData AES128ParmEncryptWithKey:_aesKey iv:@""];
+}
+
+#pragma mark - Other
+
+- (NSString*)documentsPath
+{
+    return (NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+}
+
+- (NSString*)cachesPath
+{
+    return (NSString *)[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+}
+
+- (NSDictionary *)jsonString2Dictionary:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    if(error) {
+        return nil;
+    }
+    return dict;
+}
+
+- (NSString*)createUUID
+{
+    NSString *string = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if(string.length > 16) string = [string substringToIndex:16];
+    return string;
+}
+
+- (NSString*)userDefaultsGet:(NSString*)key
+{
+    return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+}
+
+- (void)userDefaultsSave:(NSString*)key value:(id)value
+{
+    [[NSUserDefaults standardUserDefaults] setValue:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)userDefaultsRemove:(NSString*)key
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - Network
+
+- (void)requestCheckRemotePatch
+{
+    NSString *currentFileId = [self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"fileid"] = currentFileId;
+    if (_isSimpleMode == NO) {
+        params[@"uuid"] = _uuid;
+        params[@"extend"] = _extend;
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    [self requestPostWithUrl:MF_Url_CheckMangoFile params:params succ:^(id resp) {
+        NSDictionary *dict = resp;
+        NSDictionary *rows = dict[@"rows"];
+        NSString *msg = dict[@"msg"];
+        NSInteger code = [dict[@"code"] intValue];
+        if (code == 202) {
+            MFLog(@"%@", msg);
+            [weakSelf activatePatchWithFileId:currentFileId];
+        }
+        else if (code == 500) {
+            MFLog(@"%@", msg);
+            if (weakSelf.clearLastPathAfterVersionUpdateEnabled) {
+                [weakSelf deleteLocalMangoScript];
+            }
+            [weakSelf userDefaultsRemove:MFLocalPatchKey(MFBundleIdentifier)];
+        }
+        else {
+            NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
+            MFLog(@"A new patch was detected!");
+            [weakSelf evalRemotePatchWithFileId:fileId];
+        }
+    } fail:^(NSString *msg) {
+        MFLog(@"%@", msg);
+    }];
+}
+
 - (void)evalRemotePatchWithFileId:(NSString*)fileId {
     
     __weak typeof(self) weakSelf = self;
     
     [self requestPostWithUrl:MF_Url_GetMangoFile params:nil succ:^(id resp) {
         NSData *data = resp;
-        NSString *filePath = [MFCachesDirectory stringByAppendingPathComponent:@"demo.mg"];
+        NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
         if ([data writeToFile:filePath atomically:YES]) {
-            [MFUserDefaults setObject:fileId forKey:MFLocalPatchKey(MFBundleIdentifier)];
-            [MFUserDefaults synchronize];
+            [weakSelf userDefaultsSave:fileId value:MFLocalPatchKey(MFBundleIdentifier)];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
                 if (scriptData && scriptData.length > 0) {
-                    NSString *scriptString = [weakSelf decryptAES128Data:scriptData];
+                    NSString *scriptString = [weakSelf decryptData:scriptData];
                     if (!scriptString.length) {
                         MFLog(@"AES128 decrypt error!");
                         return;
                     }
-                    [weakSelf evalMangoScriptString:scriptString];
+                    [weakSelf startInterpret:scriptString];
                     MFLog(@"The latest patch is successfully executed!");
                     [weakSelf activatePatchWithFileId:fileId];
                 }
@@ -299,142 +416,6 @@ typedef void(^Fail)(NSString *msg);
     } fail:nil];
 }
 
-- (NSString*)encryptPlainScriptToDocument {
-    
-    NSError *outErr = nil;
-    BOOL writeResult = NO;
-    NSString * encryptedPath = nil;
-    
-    NSURL *scriptUrl = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"mg"];
-    NSString *plainScriptString = [NSString stringWithContentsOfURL:scriptUrl encoding:NSUTF8StringEncoding error:&outErr];
-    if (outErr) goto err;
-    
-    {
-        NSData *encryptedScriptData = [self encryptString:plainScriptString];
-        encryptedPath= [(NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"encrypted_demo.mg"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:encryptedPath]) {
-            [fileManager createFileAtPath:encryptedPath contents:nil attributes:nil];
-        }
-        MFLog(@"The encrypted patch path: %@", encryptedPath);
-        writeResult = [encryptedScriptData writeToFile:encryptedPath options:NSDataWritingAtomic error:&outErr];
-    }
-    
-    err:
-    if (outErr) MFLog(@"%@",outErr);
-    return encryptedPath;
-}
-
-- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
-    
-    if (jsonString == nil) {
-        return nil;
-    }
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    if(err) {
-        return nil;
-    }
-    return dic;
-}
-
-- (NSString*)createUUID {
-    
-    CFUUIDRef uuidRef = CFUUIDCreate(NULL);
-    CFStringRef stringRef = CFUUIDCreateString(NULL, uuidRef);
-    NSString *uuid = [NSString stringWithString:(__bridge NSString*)stringRef];
-    CFRelease(uuidRef);
-    CFRelease(stringRef);
-    uuid = [uuid lowercaseString];
-    uuid = [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    if(uuid.length > 16) uuid = [uuid substringToIndex:16];
-    return uuid;
-}
-
-#pragma mark - MangoFix
-
-- (void)evalMangoScriptString:(NSString*)scriptString {
-
-#ifdef HAS_INCLUDE_MANGOFIX
-    @autoreleasepool {
-        mf_set_current_compile_util(self.interpreter);
-        mf_add_built_in(self.interpreter);
-        [self.interpreter compileSourceWithString:scriptString];
-        mf_set_current_compile_util(nil);
-        mf_interpret(self.interpreter);
-    }
-#else
-#endif
-    
-}
-
-- (NSString*)decryptAES128Data:(NSData*)data {
-
-#ifdef HAS_INCLUDE_MANGOFIX
-    NSData *scriptData = [data AES128ParmDecryptWithKey:_aesKey iv:@""];
-    NSString *scriptString = [[NSString alloc] initWithData:scriptData encoding:NSUTF8StringEncoding];
-    return scriptString;
-#else
-    return @"";
-#endif
-    
-}
-
-- (id)encryptString:(NSString*)string {
-
-#ifdef HAS_INCLUDE_MANGOFIX
-    NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    return [scriptData AES128ParmEncryptWithKey:_aesKey iv:@""];
-#else
-    return nil;
-#endif
-    
-}
-
-
-#pragma mark - Network
-
-- (void)requestCheckRemotePatch {
-    
-    NSString *currentFileId = [MFUserDefaults valueForKey:MFLocalPatchKey(MFBundleIdentifier)];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"fileid"] = currentFileId;
-    if (_dailyActiveUserEnabled) {
-        params[@"uuid"] = _uuid;
-        params[@"extend"] = _extend;
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:MF_Url_CheckMangoFile params:params succ:^(id resp) {
-        NSDictionary *dict = resp;
-        NSDictionary *rows = dict[@"rows"];
-        NSString *msg = dict[@"msg"];
-        NSInteger code = [dict[@"code"] intValue];
-        if (code == 202) {
-            MFLog(@"%@", msg);
-            [weakSelf activatePatchWithFileId:currentFileId];
-        }
-        else if (code == 500) {
-            MFLog(@"%@", msg);
-            if (weakSelf.clearLastPathAfterVersionUpdateEnabled) {
-                [weakSelf deleteLocalMangoScript];
-            }
-            [MFUserDefaults removeObjectForKey:MFLocalPatchKey(MFBundleIdentifier)];
-        }
-        else {
-            NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
-            MFLog(@"A new patch was detected!");
-            [weakSelf evalRemotePatchWithFileId:fileId];
-        }
-    } fail:^(NSString *msg) {
-        MFLog(@"%@", msg);
-    }];
-}
-
 - (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail {
     
     __weak typeof(self) weakSelf = self;
@@ -461,7 +442,7 @@ typedef void(^Fail)(NSString *msg);
             }
             else if (httpResponse.statusCode == 200) {
                 NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                NSDictionary *dict = [weakSelf dictionaryWithJsonString:resultStr];
+                NSDictionary *dict = [weakSelf jsonString2Dictionary:resultStr];
                 if (succ) succ(dict);
             }
             else {

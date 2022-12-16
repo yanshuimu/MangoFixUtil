@@ -1,1 +1,0 @@
-../../../MangoFix/MangoFix/Compiler/AST/MFStructDeclare.h
