@@ -39,23 +39,7 @@
 
 - (void)setupMangoFixUtil {
     
-    MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-
-    [mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
-//    [mangoFixUtil startWithUserId:@"" aesKey:AES128KEY];
-    /*
-     步骤：
-     建议将项目中的demo.mg文件拷贝至自己的项目中，方便调试
-     APP发布版本只需打开第②步注释
-     */
-    
-    //① 执行本地未加密补丁，直接在demo.mg中使用MangoFix语法编写代码，执行该方法调试
-//    [mangoFixUtil evalLocalUnEncryptedMangoScript];
-        
-    //② 执行远程补丁，第①步测试正常，即可通过补丁管理后台发布补丁
-//    [mangoFixUtil evalLocalMangoScript];
-    
-    [mangoFixUtil encryptPlainScriptToDocument];
+    [[MangoFixUtil startWithAppId:APPID aesKey:AES128KEY] encryptPlainScriptToDocument];
 }
 
 @end

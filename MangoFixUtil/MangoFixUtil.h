@@ -5,11 +5,13 @@
 //  Copyright © 2020 许鸿桂. All rights reserved.
 //
 
-/*
- 补丁管理后台：http://patchhub.top/
-  
- 如需帮助，请联系QQ：593692553、微信：hongguixu8131支持
- */
+// 注意：本库需搭配补丁管理后台一起使用
+// http://patchhub.top
+// Github地址：
+// https://github.com/yanshuimu/MangoFixUtil
+// 脚本语法参考：
+// https://github.com/YPLiang19/Mango
+// 如需帮助，请联系QQ：593692553
 
 #import <Foundation/Foundation.h>
 
@@ -45,26 +47,37 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 初始化
  */
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
++ (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
 /**
  * 初始化
  * 通过UserId、BundleId识别唯一应用
  */
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
+
+/**
+ * 初始化
+ */
+- (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
+
+/**
+ * 初始化
+ * 通过UserId、BundleId识别唯一应用
+ */
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
 
 /**
  * 初始化
  * @param debug YES 开发预览 NO 全量下发
  */
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
+- (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 初始化
  * @param debug YES 开发预览 NO 全量下发
  * 通过UserId、BundleId识别唯一应用
  */
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 执行未加密补丁，查找并执行项目中文件名为<demo.mg>的补丁

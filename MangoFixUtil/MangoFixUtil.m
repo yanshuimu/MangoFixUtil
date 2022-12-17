@@ -78,17 +78,31 @@ typedef void(^Fail)(NSString *msg);
     return self;
 }
 
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
++ (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
 {
-    [self startWithAppId:appId aesKey:aesKey debug:NO];
+    MangoFixUtil *util = [self sharedUtil];
+    [util startWithAppId:appId aesKey:aesKey debug:NO];
+    return util;
 }
 
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
 {
-    [self startWithUserId:userId aesKey:aesKey debug:NO];
+    MangoFixUtil *util = [self sharedUtil];
+    [util startWithUserId:userId aesKey:aesKey debug:NO];
+    return util;
 }
 
-- (void)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
+- (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
+{
+    return [self startWithAppId:appId aesKey:aesKey debug:NO];
+}
+
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
+{
+    return [self startWithUserId:userId aesKey:aesKey debug:NO];
+}
+
+- (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
 {
     NSAssert(appId.length != 0, @"The appId is nil or empty!");
     NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
@@ -96,9 +110,10 @@ typedef void(^Fail)(NSString *msg);
     _userId = @"";
     _debug = debug;
     _aesKey = aesKey;
+    return self;
 }
 
-- (void)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
 {
     NSAssert(userId.length != 0, @"The userId is nil or empty!");
     NSAssert(aesKey.length % 16 == 0, @"The aesKey is not a multiple of 16 bytes!");
@@ -106,6 +121,7 @@ typedef void(^Fail)(NSString *msg);
     _userId = userId;
     _debug = debug;
     _aesKey = aesKey;
+    return self;
 }
 
 - (void)evalRemoteMangoScript
@@ -295,163 +311,145 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)requestCheckRemotePatch
 {
-    NSString *currentFileId = [self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)];
+    NSString *fileId = [self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"fileid"] = currentFileId;
+    params[@"fileid"] = fileId;
     if (_isSimpleMode == NO) {
         params[@"uuid"] = _uuid;
         params[@"extend"] = _extend;
     }
     
     __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:MF_Url_CheckMangoFile params:params succ:^(id resp) {
-        NSDictionary *dict = resp;
+    [self requestPostWithUrl:MF_Url_CheckMangoFile params:params succ:^(NSDictionary *dict) {
         NSDictionary *rows = dict[@"rows"];
-        NSString *msg = dict[@"msg"];
         NSInteger code = [dict[@"code"] intValue];
+        MFLog(@"%@", dict[@"msg"]);
         if (code == 202) {
-            MFLog(@"%@", msg);
-            [weakSelf activatePatchWithFileId:currentFileId];
+            //The current patch is up to date...
+            [weakSelf requestActivateDevice:fileId];
         }
         else if (code == 500) {
-            MFLog(@"%@", msg);
-            if (weakSelf.clearLastPathAfterVersionUpdateEnabled) {
-                [weakSelf deleteLocalMangoScript];
-            }
+            //No new patch was detected...
+            [weakSelf deleteLocalMangoScript];
             [weakSelf userDefaultsRemove:MFLocalPatchKey(MFBundleIdentifier)];
         }
-        else {
-            NSString *fileId = MFStringWithFormat(@"%@", rows[@"fileid"]);
-            MFLog(@"A new patch was detected!");
-            [weakSelf evalRemotePatchWithFileId:fileId];
+        else if (code == 200){
+            //A new patch was detected...
+            [weakSelf requestActivateDevice:fileId];
+            [weakSelf requestGetRemotePatch:MFStringWithFormat(@"%@", rows[@"fileid"])];
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
     }];
 }
 
-- (void)evalRemotePatchWithFileId:(NSString*)fileId {
-    
+- (void)requestGetRemotePatch:(NSString*)fileId
+{
     __weak typeof(self) weakSelf = self;
-    
-    [self requestPostWithUrl:MF_Url_GetMangoFile params:nil succ:^(id resp) {
-        NSData *data = resp;
+    [self requestPostWithUrl:MF_Url_GetMangoFile params:nil succ:^(NSData *scriptData) {
         NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
-        if ([data writeToFile:filePath atomically:YES]) {
+        if ([scriptData writeToFile:filePath atomically:YES]) {
             [weakSelf userDefaultsSave:fileId value:MFLocalPatchKey(MFBundleIdentifier)];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
                 if (scriptData && scriptData.length > 0) {
                     NSString *scriptString = [weakSelf decryptData:scriptData];
                     if (!scriptString.length) {
-                        MFLog(@"AES128 decrypt error!");
+                        MFLog(@"Decrypt error!");
                         return;
                     }
                     [weakSelf startInterpret:scriptString];
                     MFLog(@"The latest patch is successfully executed!");
-                    [weakSelf activatePatchWithFileId:fileId];
+                    [weakSelf requestActivatePatch:fileId];
                 }
             }
         }
         else {
             MFLog(@"Failed to save the latest patch!");
         }
-    } fail:nil];
+    } fail:^(NSString *msg) {
+        MFLog(@"%@", msg);
+    }];
 }
 
-- (void)activateDevice {
-    
+- (void)requestActivateDevice:(NSString*)fileId
+{
     if (_debug) return;
+    if (_isSimpleMode) return;
+    if (fileId.length == 0) return;
     
     NSString *key = MFDeviceKey(MFBundleIdentifier, MFBundleShortVersion);
     NSString *value = [MFKeyChainUtil load:key];
-    
-    if (value.intValue == 1) {
-        return;
-    }
-    
+    if (value.intValue == 1) return;
     MFLog(@"Device not activated!");
-    
-    [self requestPostWithUrl:MF_Url_ActivateDevice params:nil succ:^(id resp) {
-        NSDictionary *dict = resp;
-        NSString *msg = dict[@"msg"];
-        NSInteger code = [dict[@"code"] intValue];
-        if (code == 500) {
-            MFLog(@"%@", msg);
+    [self requestPostWithUrl:MF_Url_ActivateDevice params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+        if ([dict[@"code"] intValue] == 500) {
+            MFLog(@"%@", dict[@"msg"]);
         }
         else {
             [MFKeyChainUtil save:key data:@"1"];
             MFLog(@"Device is activate successfully!");
         }
-    } fail:nil];
+    } fail:^(NSString *msg) {
+        MFLog(@"%@", msg);
+    }];
 }
 
-- (void)activatePatchWithFileId:(NSString*)fileId {
-        
-    if (_debug || MFStringIsEmpty(fileId)) {
-        return;
-    }
+- (void)requestActivatePatch:(NSString*)fileId
+{
+    if (_debug) return;
+    if (_isSimpleMode) return;
+    if (fileId.length == 0) return;
     
     NSString *key = MFPatchKey(fileId);
     NSString *value = [MFKeyChainUtil load:key];
-    
-    if (value.intValue == 1) {
-        return;
-    }
-    
+    if (value.intValue == 1) return;
     MFLog(@"Patch not activated!");
     
-    [self requestPostWithUrl:MF_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(id resp) {
-        NSDictionary *dict = resp;
-        NSString *msg = dict[@"msg"];
-        NSInteger code = [dict[@"code"] intValue];
-        if (code == 500) {
-            MFLog(@"%@", msg);
+    [self requestPostWithUrl:MF_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+        if ([dict[@"code"] intValue] == 500) {
+            MFLog(@"%@", dict[@"msg"]);
         }
         else {
             [MFKeyChainUtil save:key data:@"1"];
             MFLog(@"Patch is activate successfully!");
         }
-    } fail:nil];
+    } fail:^(NSString *msg) {
+        MFLog(@"%@", msg);
+    }];
 }
 
 - (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail {
     
     __weak typeof(self) weakSelf = self;
-    
-    NSString *bodyString = @"";
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict addEntriesFromDictionary:self.baseParams];
-    [dict addEntriesFromDictionary:params];
-    for (NSString *key in dict.allKeys) {
-        NSString *value = [dict valueForKey:key];
-        bodyString = [NSString stringWithFormat:@"%@%@=%@&", bodyString, key, value];
+    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:params];
+    [mutableDict addEntriesFromDictionary:self.baseParams];
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    for (NSString *key in mutableDict.allKeys) {
+        [mutableArray addObject:[NSString stringWithFormat:@"%@=%@", key, [mutableDict valueForKey:key]]];
     }
-    bodyString = [bodyString substringWithRange:NSMakeRange(0, bodyString.length-1)];
+    NSString *bodyStr = [mutableArray componentsJoinedByString:@"&"];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
             if (data && httpResponse.statusCode == 201) {
                 if (succ) succ(data);
             }
             else if (httpResponse.statusCode == 200) {
-                NSString *resultStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                NSDictionary *dict = [weakSelf jsonString2Dictionary:resultStr];
+                NSString *jsonStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+                NSDictionary *dict = [weakSelf jsonString2Dictionary:jsonStr];
                 if (succ) succ(dict);
             }
             else {
                 if (fail) fail(error.localizedDescription);
-                MFLog(@"%@", error.localizedDescription);
             }
         });
-    }];
-    [task resume];
+    }] resume];
 }
 
 - (NSMutableDictionary*)baseParams {
