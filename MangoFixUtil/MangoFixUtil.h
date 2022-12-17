@@ -19,19 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MangoFixUtil : NSObject
 
-+ (instancetype)sharedUtil;
-
 /**
- * APP更新版本后是否清除本地旧版本补丁
- * 需重启APP生效
- * 默认为 YES
+ * true 简易模式：不统计日活量、补丁激活数、设备数量等
+ * false 完整模式
  */
-@property (nonatomic, assign) BOOL clearLastPathAfterVersionUpdateEnabled;
-
-/**
- * 是否统计日活量，默认为 YES
- */
-@property (nonatomic, assign) BOOL dailyActiveUserEnabled;
+@property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
  * 扩展字段，暂未使用
@@ -39,10 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *extend;
 
 /**
- * true 简易模式：不统计日活量、补丁激活数、设备数量等
- * false 完整模式
+ * 单例
  */
-@property(nonatomic, assign) BOOL isSimpleMode;
++ (instancetype)sharedUtil;
 
 /**
  * 初始化

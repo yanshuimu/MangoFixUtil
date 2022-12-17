@@ -67,8 +67,6 @@ typedef void(^Fail)(NSString *msg);
 {
     if (self = [super init]) {
         _interpreter = [[MFInterpreter alloc] init];
-        _clearLastPathAfterVersionUpdateEnabled = YES;
-        _dailyActiveUserEnabled = YES;
         _uuid = [MFKeyChainUtil load:MFUUIDKey(MFBundleIdentifier)];
         if (_uuid.length == 0) {
             _uuid = [self createUUID];
@@ -221,6 +219,7 @@ typedef void(^Fail)(NSString *msg);
             }
             [self startInterpret:scriptString];
             MFLog(@"The last patch is successfully executed!");
+            [self requestActivatePatch:[self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)]];
         }
         else {
             MFLog(@"The last patch content is empty!");
@@ -419,8 +418,8 @@ typedef void(^Fail)(NSString *msg);
     }];
 }
 
-- (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail {
-    
+- (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail
+{
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:params];
     [mutableDict addEntriesFromDictionary:self.baseParams];
@@ -452,7 +451,8 @@ typedef void(^Fail)(NSString *msg);
     }] resume];
 }
 
-- (NSMutableDictionary*)baseParams {
+- (NSMutableDictionary*)baseParams
+{
     if (!_baseParams) {
         _baseParams = [NSMutableDictionary dictionary];
         _baseParams[@"appid"] = _appId;
