@@ -1,8 +1,8 @@
 //
 //  MangoFixUtil.h
 //
-//  Created by 许鸿桂 on 2020/4/9.
-//  Copyright © 2020 许鸿桂. All rights reserved.
+//  Created by xhg on 2020/4/9.
+//  Copyright © 2020 xhg. All rights reserved.
 //
 
 // 注意：本库需搭配补丁管理后台一起使用

@@ -2,7 +2,7 @@
 //  BugFixController.h
 //  MangoFixUtil
 //
-//  Created by 许鸿桂 on 2021/5/15.
+//  Created by xhg on 2021/5/15.
 //
 
 #import <UIKit/UIKit.h>

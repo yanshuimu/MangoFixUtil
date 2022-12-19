@@ -1,15 +1,15 @@
 //
-//  MFKeyChainUtil.h
+//  MFKeyChain.h
 //  MangoFixUtil
 //
-//  Created by 许鸿桂 on 2021/9/18.
+//  Created by xhg on 2021/9/18.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MFKeyChainUtil : NSObject
+@interface MFKeyChain : NSObject
 
 /**
  * 保存数据

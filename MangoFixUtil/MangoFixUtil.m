@@ -1,14 +1,13 @@
 //
 //  MangoFixUtil.m
 //
-//  Created by 许鸿桂 on 2020/4/9.
-//  Copyright © 2020 许鸿桂. All rights reserved.
+//  Created by xhg on 2020/4/9.
+//  Copyright © 2020 xhg. All rights reserved.
 //
 
 #import "MangoFixUtil.h"
-#import "MFKeyChainUtil.h"
-#import "MFNetworkDefine.h"
-#import "MFMacroDefine.h"
+#import "MFKeyChain.h"
+#import "MFMacrosConstant.h"
 #import <MangoFix/MangoFix.h>
 
 typedef void(^Succ)(id resp);
@@ -67,27 +66,19 @@ typedef void(^Fail)(NSString *msg);
 {
     if (self = [super init]) {
         _interpreter = [[MFInterpreter alloc] init];
-        _uuid = [MFKeyChainUtil load:MFUUIDKey(MFBundleIdentifier)];
-        if (_uuid.length == 0) {
-            _uuid = [self createUUID];
-            [MFKeyChainUtil save:MFUUIDKey(MFBundleIdentifier) data:_uuid];
-        }
+        _uuid = [self loadUUID];
     }
     return self;
 }
 
 + (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
 {
-    MangoFixUtil *util = [self sharedUtil];
-    [util startWithAppId:appId aesKey:aesKey debug:NO];
-    return util;
+    return [[self sharedUtil] startWithAppId:appId aesKey:aesKey debug:NO];
 }
 
 + (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
 {
-    MangoFixUtil *util = [self sharedUtil];
-    [util startWithUserId:userId aesKey:aesKey debug:NO];
-    return util;
+    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:NO];
 }
 
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
@@ -219,7 +210,7 @@ typedef void(^Fail)(NSString *msg);
             }
             [self startInterpret:scriptString];
             MFLog(@"The last patch is successfully executed!");
-            [self requestActivatePatch:[self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)]];
+            [self requestActivatePatch:[self userDefaultsGet:[self localPatchKey]]];
         }
         else {
             MFLog(@"The last patch content is empty!");
@@ -258,6 +249,17 @@ typedef void(^Fail)(NSString *msg);
 
 #pragma mark - Other
 
+- (NSString*)loadUUID
+{
+    NSString *uuid = [MFKeyChain load:[self UUIDKey]];
+    if (uuid.length == 0) {
+        uuid = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if(uuid.length > 16) uuid = [uuid substringToIndex:16];
+        [MFKeyChain save:[self UUIDKey] data:uuid];
+    }
+    return uuid;
+}
+
 - (NSString*)documentsPath
 {
     return (NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
@@ -282,13 +284,6 @@ typedef void(^Fail)(NSString *msg);
     return dict;
 }
 
-- (NSString*)createUUID
-{
-    NSString *string = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    if(string.length > 16) string = [string substringToIndex:16];
-    return string;
-}
-
 - (NSString*)userDefaultsGet:(NSString*)key
 {
     return [[NSUserDefaults standardUserDefaults] valueForKey:key];
@@ -306,11 +301,31 @@ typedef void(^Fail)(NSString *msg);
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSString*)UUIDKey
+{
+    return [NSString stringWithFormat:@"MFUUIDKey:%@", MFBundleIdentifier];
+}
+
+- (NSString*)localPatchKey
+{
+    return [NSString stringWithFormat:@"MFLocalPatchKey:%@", MFBundleIdentifier];
+}
+
+- (NSString*)deviceKey
+{
+    return [NSString stringWithFormat:@"MFDeviceKey:%@:%@", MFBundleIdentifier, MFBundleShortVersion];
+}
+
+- (NSString*)patchKey:(NSString*)fileId
+{
+    return [NSString stringWithFormat:@"MFPatchKey:%@", fileId];
+}
+
 #pragma mark - Network
 
 - (void)requestCheckRemotePatch
 {
-    NSString *fileId = [self userDefaultsGet:MFLocalPatchKey(MFBundleIdentifier)];
+    NSString *fileId = [self userDefaultsGet:[self localPatchKey]];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"fileid"] = fileId;
@@ -319,24 +334,25 @@ typedef void(^Fail)(NSString *msg);
         params[@"extend"] = _extend;
     }
     
-    __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:MF_Url_CheckMangoFile params:params succ:^(NSDictionary *dict) {
+    @MFWeakSelf
+    [self requestPostWithUrl:MFCheckMangoFileUrl params:params succ:^(NSDictionary *dict) {
+        @MFStrongSelf
         NSDictionary *rows = dict[@"rows"];
         NSInteger code = [dict[@"code"] intValue];
         MFLog(@"%@", dict[@"msg"]);
         if (code == 202) {
             //The current patch is up to date...
-            [weakSelf requestActivateDevice:fileId];
+            [self requestActivateDevice:fileId];
         }
         else if (code == 500) {
             //No new patch was detected...
-            [weakSelf deleteLocalMangoScript];
-            [weakSelf userDefaultsRemove:MFLocalPatchKey(MFBundleIdentifier)];
+            [self deleteLocalMangoScript];
+            [self userDefaultsRemove:[self localPatchKey]];
         }
         else if (code == 200){
             //A new patch was detected...
-            [weakSelf requestActivateDevice:fileId];
-            [weakSelf requestGetRemotePatch:MFStringWithFormat(@"%@", rows[@"fileid"])];
+            [self requestActivateDevice:fileId];
+            [self requestGetRemotePatch:[NSString stringWithFormat:@"%@", rows[@"fileid"]]];
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
@@ -345,21 +361,22 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)requestGetRemotePatch:(NSString*)fileId
 {
-    __weak typeof(self) weakSelf = self;
-    [self requestPostWithUrl:MF_Url_GetMangoFile params:nil succ:^(NSData *scriptData) {
+    @MFWeakSelf
+    [self requestPostWithUrl:MFGetMangoFileUrl params:nil succ:^(NSData *scriptData) {
+        @MFStrongSelf
         NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
         if ([scriptData writeToFile:filePath atomically:YES]) {
-            [weakSelf userDefaultsSave:fileId value:MFLocalPatchKey(MFBundleIdentifier)];
+            [self userDefaultsSave:fileId value:[self localPatchKey]];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 if (scriptData && scriptData.length > 0) {
-                    NSString *scriptString = [weakSelf decryptData:scriptData];
+                    NSString *scriptString = [self decryptData:scriptData];
                     if (!scriptString.length) {
                         MFLog(@"Decrypt error!");
                         return;
                     }
-                    [weakSelf startInterpret:scriptString];
+                    [self startInterpret:scriptString];
                     MFLog(@"The latest patch is successfully executed!");
-                    [weakSelf requestActivatePatch:fileId];
+                    [self requestActivatePatch:fileId];
                 }
             }
         }
@@ -377,16 +394,16 @@ typedef void(^Fail)(NSString *msg);
     if (_isSimpleMode) return;
     if (fileId.length == 0) return;
     
-    NSString *key = MFDeviceKey(MFBundleIdentifier, MFBundleShortVersion);
-    NSString *value = [MFKeyChainUtil load:key];
+    NSString *key = [self deviceKey];
+    NSString *value = [MFKeyChain load:key];
     if (value.intValue == 1) return;
     MFLog(@"Device not activated!");
-    [self requestPostWithUrl:MF_Url_ActivateDevice params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+    [self requestPostWithUrl:MFActivateDeviceUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
         if ([dict[@"code"] intValue] == 500) {
             MFLog(@"%@", dict[@"msg"]);
         }
         else {
-            [MFKeyChainUtil save:key data:@"1"];
+            [MFKeyChain save:key data:@"1"];
             MFLog(@"Device is activate successfully!");
         }
     } fail:^(NSString *msg) {
@@ -400,17 +417,17 @@ typedef void(^Fail)(NSString *msg);
     if (_isSimpleMode) return;
     if (fileId.length == 0) return;
     
-    NSString *key = MFPatchKey(fileId);
-    NSString *value = [MFKeyChainUtil load:key];
+    NSString *key = [self patchKey:fileId];
+    NSString *value = [MFKeyChain load:key];
     if (value.intValue == 1) return;
     MFLog(@"Patch not activated!");
     
-    [self requestPostWithUrl:MF_Url_ActivatePatch params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+    [self requestPostWithUrl:MFActivatePatchUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
         if ([dict[@"code"] intValue] == 500) {
             MFLog(@"%@", dict[@"msg"]);
         }
         else {
-            [MFKeyChainUtil save:key data:@"1"];
+            [MFKeyChain save:key data:@"1"];
             MFLog(@"Patch is activate successfully!");
         }
     } fail:^(NSString *msg) {
@@ -421,6 +438,7 @@ typedef void(^Fail)(NSString *msg);
 - (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail
 {
     __weak typeof(self) weakSelf = self;
+    url = [NSString stringWithFormat:@"%@%@", MFBaseUrl, url];
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:params];
     [mutableDict addEntriesFromDictionary:self.baseParams];
     NSMutableArray *mutableArray = [NSMutableArray array];
@@ -461,6 +479,7 @@ typedef void(^Fail)(NSString *msg);
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
         _baseParams[@"bundleid"] = MFBundleIdentifier;
+        _baseParams[@"sdk"] = @"2.1.2";
     }
     return _baseParams;
 }

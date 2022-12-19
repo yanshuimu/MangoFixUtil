@@ -18,7 +18,7 @@
 		7B7432582715995200F10C5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7432572715995200F10C5C /* README.md */; };
 		7B9A2435278D1376007B419C /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A2434278D1376007B419C /* demo.mg */; };
 		7B9A24392791632D007B419C /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A24382791632D007B419C /* encrypted_demo.mg */; };
-		7BA94D6F271173C200872060 /* MFKeyChainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA94D6C271173C200872060 /* MFKeyChainUtil.m */; };
+		7BA94D6F271173C200872060 /* MFKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA94D6C271173C200872060 /* MFKeyChain.m */; };
 		7BDA8869294C07EE001BA155 /* MangoFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA8868294C07EE001BA155 /* MangoFix.framework */; };
 		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
 		EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E12AD264FE8D6008E7F4D /* BugFixController.m */; };
@@ -43,10 +43,9 @@
 		7B7432572715995200F10C5C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7B9A2434278D1376007B419C /* demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.mg; sourceTree = "<group>"; };
 		7B9A24382791632D007B419C /* encrypted_demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = encrypted_demo.mg; sourceTree = "<group>"; };
-		7BA94D6B271173C100872060 /* MFKeyChainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyChainUtil.h; sourceTree = "<group>"; };
-		7BA94D6C271173C200872060 /* MFKeyChainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyChainUtil.m; sourceTree = "<group>"; };
-		7BA94D6D271173C200872060 /* MFNetworkDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFNetwork\U0010Define.h"; sourceTree = "<group>"; };
-		7BA94D6E271173C200872060 /* MFMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMacroDefine.h; sourceTree = "<group>"; };
+		7BA94D6B271173C100872060 /* MFKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyChain.h; sourceTree = "<group>"; };
+		7BA94D6C271173C200872060 /* MFKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyChain.m; sourceTree = "<group>"; };
+		7BA94D6E271173C200872060 /* MFMacrosConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMacrosConstant.h; sourceTree = "<group>"; };
 		7BDA8868294C07EE001BA155 /* MangoFix.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MangoFix.framework; sourceTree = "<group>"; };
 		D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -94,10 +93,9 @@
 				7BDA8868294C07EE001BA155 /* MangoFix.framework */,
 				045839AB25E8A13300BBACF2 /* MangoFixUtil.h */,
 				045839AA25E8A13300BBACF2 /* MangoFixUtil.m */,
-				7BA94D6E271173C200872060 /* MFMacroDefine.h */,
-				7BA94D6B271173C100872060 /* MFKeyChainUtil.h */,
-				7BA94D6C271173C200872060 /* MFKeyChainUtil.m */,
-				7BA94D6D271173C200872060 /* MFNetworkDefine.h */,
+				7BA94D6E271173C200872060 /* MFMacrosConstant.h */,
+				7BA94D6B271173C100872060 /* MFKeyChain.h */,
+				7BA94D6C271173C200872060 /* MFKeyChain.m */,
 			);
 			path = MangoFixUtil;
 			sourceTree = "<group>";
@@ -259,7 +257,7 @@
 			files = (
 				045839A725E8A11D00BBACF2 /* AppDelegate.m in Sources */,
 				045839AC25E8A13400BBACF2 /* MangoFixUtil.m in Sources */,
-				7BA94D6F271173C200872060 /* MFKeyChainUtil.m in Sources */,
+				7BA94D6F271173C200872060 /* MFKeyChain.m in Sources */,
 				045839A625E8A11D00BBACF2 /* main.m in Sources */,
 				045839A225E8A11D00BBACF2 /* ViewController.m in Sources */,
 				EF2E12AE264FE8D6008E7F4D /* BugFixController.m in Sources */,
