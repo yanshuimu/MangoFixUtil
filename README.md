@@ -48,7 +48,7 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY
 // exec mangofix file from network
 [mangoFixUtil evalRemoteMangoScript];
 
-// exec local mangofix file
+// exec local encrypted mangofix file
 [mangoFixUtil evalLocalEncryptedMangoScript];
 
 // exec local unEncrypted mangofix file
