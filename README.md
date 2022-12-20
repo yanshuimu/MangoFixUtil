@@ -1,10 +1,8 @@
 # MangoFixUtil
 
-依赖[MangoFix](https://github.com/YPLiang19/Mango)，封装补丁拉取、执行、设备激活、补丁激活完整流程，具体使用方法请下载Demo参考。
+对[MangoFix](https://github.com/YPLiang19/Mango)做了简单的封装，该库在OC项目中实战已经近2年多，经过多次迭代，比较成熟。
 
-该库在项目中实战已经近2年多，经过多次迭代，比较成熟。
-
-另有自己维护的[补丁管理后台](http://patchhub.top/mangofix/login)，目前已经有40+个已上架AppStore的应用在使用，且有日活1w的应用，欢迎小伙伴们使用。
+另有自己维护的[补丁管理后台](http://patchhub.top/mangofix/login)，目前已经有40+个已上架AppStore的应用在使用，且有日活1w+的应用，欢迎小伙伴们使用。
 
 ## Example
 
@@ -68,13 +66,13 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 2. 简化代码，优化流程。
 
 #### V2.1.1
-1. 支持通过UserId、BundleId识别唯一应用。
+1. 支持通过UserId、BundleId识别唯一App。
 
 #### V2.1.0
-1. 增加AES加密方式，支持MangoFix 1.5.0版本。
+1. 支持AES加密方式，适配MangoFix 1.5.0以上版本。
 
 #### V2.0.4
-1. 支持统计日活量。
+1. 支持日活量统计。
 
 #### V2.0.3
 1. 优化流程。
@@ -86,10 +84,10 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 1. 优化。
 
 #### V2.0.0
-1. 增加激活设备、激活补丁统计。
+1. 支持设备数、激活数统计。
 
 #### V1.0.6
-1. 增加开发预览、全量下发模式。
+1. 发布支持开发设备、全量设备。
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
