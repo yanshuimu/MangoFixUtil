@@ -1,8 +1,8 @@
 # MangoFixUtil
 
-对[MangoFix](https://github.com/YPLiang19/Mango)做了简单的封装，该库在OC项目中实战已经近2年多，经过多次迭代，比较成熟。
+MangoFixUtil是对[MangoFix](https://github.com/YPLiang19/Mango)进行了简单的封装，该库在OC项目中实战已经近2年多，经过多次迭代，比较成熟。需要搭配
 
-另有自己维护的[补丁管理后台](http://patchhub.top/mangofix/login)，目前已经有40+个已上架AppStore的应用在使用，且有日活1w+的应用，欢迎小伙伴们使用。
+[补丁管理后台](http://patchhub.top/mangofix/login)一起使用，后台由作者开发维护，目前已经有40+个已上架AppStore的应用在使用，且有日活1w+的应用，欢迎小伙伴们使用。
 
 ## Example
 

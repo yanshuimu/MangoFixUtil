@@ -5,13 +5,20 @@
 //  Copyright © 2020 xhg. All rights reserved.
 //
 
-// 注意：本库需搭配补丁管理后台一起使用
-// http://patchhub.top
-// Github地址：
-// https://github.com/yanshuimu/MangoFixUtil
-// 脚本语法参考：
-// https://github.com/YPLiang19/Mango
-// 如需帮助，请联系QQ：593692553
+/**
+ * 本库需搭配补丁管理后台一起使用
+ * http://patchhub.top
+ *
+ * Github地址：
+ * https://github.com/yanshuimu/MangoFixUtil
+ *
+ * 脚本语法参考：
+ * https://github.com/YPLiang19/Mango
+ *
+ * 注意：AES128密钥长度需为16的倍数，举个栗子：xWx2TilxtpHlvQrT
+ *
+ * 如需帮助，请联系QQ：593692553
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -82,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 加密补丁，查找项目中文件名为<demo.mg>的补丁，加密后保存至沙盒Documents目录中
- * @return 已加密补丁路径
+ * @result 已加密补丁路径
  */
 - (NSString*)encryptPlainScriptToDocument;
 

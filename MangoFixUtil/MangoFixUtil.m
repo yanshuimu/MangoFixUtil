@@ -19,12 +19,12 @@ typedef void(^Fail)(NSString *msg);
 @property(nonatomic, strong) MFInterpreter *interpreter;
 
 /**
- * 应用id
+ * appId
  */
 @property (nonatomic, copy) NSString *appId;
 
 /**
- * 用户id
+ * userId
  */
 @property (nonatomic, copy) NSString *userId;
 
@@ -365,23 +365,23 @@ typedef void(^Fail)(NSString *msg);
     [self postWithUrl:MFGetMangoFileUrl params:nil succ:^(NSData *scriptData) {
         @MFStrongSelf
         NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
-        if ([scriptData writeToFile:filePath atomically:YES]) {
-            [self userDefaultsSave:fileId value:[self fileIdKey]];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-                if (scriptData && scriptData.length > 0) {
-                    NSString *scriptString = [self decryptData:scriptData];
-                    if (!scriptString.length) {
-                        MFLog(@"Decrypt error!");
-                        return;
-                    }
-                    [self startInterpret:scriptString];
-                    MFLog(@"The latest patch is successfully executed!");
-                    [self requestActivatePatch:fileId];
-                }
-            }
-        }
-        else {
+        if (![scriptData writeToFile:filePath atomically:YES]) {
             MFLog(@"Failed to save the latest patch!");
+            return;
+        }
+        if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            return;
+        }
+        [self userDefaultsSave:fileId value:[self fileIdKey]];
+        if (scriptData && scriptData.length > 0) {
+            NSString *scriptString = [self decryptData:scriptData];
+            if (!scriptString.length) {
+                MFLog(@"Decrypt error!");
+                return;
+            }
+            [self startInterpret:scriptString];
+            MFLog(@"The latest patch is successfully executed!");
+            [self requestActivatePatch:fileId];
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);

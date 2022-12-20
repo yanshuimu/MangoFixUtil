@@ -9,14 +9,6 @@
 #import "ViewController.h"
 #import "MangoFixUtil.h"
 
-// 注意：本库需搭配补丁管理后台一起使用
-// http://patchhub.top
-// Github地址：
-// https://github.com/yanshuimu/MangoFixUtil
-// 脚本语法参考：
-// https://github.com/YPLiang19/Mango
-
-
 @interface AppDelegate ()
 
 @end
@@ -39,7 +31,7 @@
 
 - (void)setupMangoFixUtil {
     
-    [[MangoFixUtil startWithAppId:APPID aesKey:AES128KEY] encryptPlainScriptToDocument];
+    [[MangoFixUtil startWithAppId:APPID aesKey:AES128KEY] evalRemoteMangoScript];
 }
 
 @end
