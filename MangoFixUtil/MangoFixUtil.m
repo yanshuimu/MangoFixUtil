@@ -29,7 +29,7 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *userId;
 
 /**
- * 规则 YES 开发设备 NO 全量设备
+ * 分发规则  YES 开发设备  NO 全量设备
  */
 @property (nonatomic, assign) BOOL debug;
 
@@ -210,7 +210,7 @@ typedef void(^Fail)(NSString *msg);
             }
             [self startInterpret:scriptString];
             MFLog(@"The last patch is successfully executed!");
-            [self requestActivatePatch:[self userDefaultsGet:[self localPatchKey]]];
+            [self requestActivatePatch:[self userDefaultsGet:[self fileIdKey]]];
         }
         else {
             MFLog(@"The last patch content is empty!");
@@ -303,29 +303,29 @@ typedef void(^Fail)(NSString *msg);
 
 - (NSString*)UUIDKey
 {
-    return [NSString stringWithFormat:@"MFUUIDKey:%@", MFBundleIdentifier];
+    return [NSString stringWithFormat:@"%@.mfu.uuid", MFBundleIdentifier];
 }
 
-- (NSString*)localPatchKey
+- (NSString*)fileIdKey
 {
-    return [NSString stringWithFormat:@"MFLocalPatchKey:%@", MFBundleIdentifier];
+    return [NSString stringWithFormat:@"%@.mfu.fileid", MFBundleIdentifier];
 }
 
 - (NSString*)deviceKey
 {
-    return [NSString stringWithFormat:@"MFDeviceKey:%@:%@", MFBundleIdentifier, MFBundleShortVersion];
+    return [NSString stringWithFormat:@"%@.%@.device", MFBundleIdentifier, MFBundleShortVersion];
 }
 
 - (NSString*)patchKey:(NSString*)fileId
 {
-    return [NSString stringWithFormat:@"MFPatchKey:%@", fileId];
+    return [NSString stringWithFormat:@"%@.patch", fileId];
 }
 
 #pragma mark - Network
 
 - (void)requestCheckRemotePatch
 {
-    NSString *fileId = [self userDefaultsGet:[self localPatchKey]];
+    NSString *fileId = [self userDefaultsGet:[self fileIdKey]];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"fileid"] = fileId;
@@ -335,7 +335,7 @@ typedef void(^Fail)(NSString *msg);
     }
     
     @MFWeakSelf
-    [self requestPostWithUrl:MFCheckMangoFileUrl params:params succ:^(NSDictionary *dict) {
+    [self postWithUrl:MFCheckMangoFileUrl params:params succ:^(NSDictionary *dict) {
         @MFStrongSelf
         NSDictionary *rows = dict[@"rows"];
         NSInteger code = [dict[@"code"] intValue];
@@ -347,7 +347,7 @@ typedef void(^Fail)(NSString *msg);
         else if (code == 500) {
             //No new patch was detected...
             [self deleteLocalMangoScript];
-            [self userDefaultsRemove:[self localPatchKey]];
+            [self userDefaultsRemove:[self fileIdKey]];
         }
         else if (code == 200){
             //A new patch was detected...
@@ -362,11 +362,11 @@ typedef void(^Fail)(NSString *msg);
 - (void)requestGetRemotePatch:(NSString*)fileId
 {
     @MFWeakSelf
-    [self requestPostWithUrl:MFGetMangoFileUrl params:nil succ:^(NSData *scriptData) {
+    [self postWithUrl:MFGetMangoFileUrl params:nil succ:^(NSData *scriptData) {
         @MFStrongSelf
         NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
         if ([scriptData writeToFile:filePath atomically:YES]) {
-            [self userDefaultsSave:fileId value:[self localPatchKey]];
+            [self userDefaultsSave:fileId value:[self fileIdKey]];
             if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
                 if (scriptData && scriptData.length > 0) {
                     NSString *scriptString = [self decryptData:scriptData];
@@ -398,7 +398,8 @@ typedef void(^Fail)(NSString *msg);
     NSString *value = [MFKeyChain load:key];
     if (value.intValue == 1) return;
     MFLog(@"Device not activated!");
-    [self requestPostWithUrl:MFActivateDeviceUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+    
+    [self postWithUrl:MFActivateDeviceUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
         if ([dict[@"code"] intValue] == 500) {
             MFLog(@"%@", dict[@"msg"]);
         }
@@ -422,7 +423,7 @@ typedef void(^Fail)(NSString *msg);
     if (value.intValue == 1) return;
     MFLog(@"Patch not activated!");
     
-    [self requestPostWithUrl:MFActivatePatchUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
+    [self postWithUrl:MFActivatePatchUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
         if ([dict[@"code"] intValue] == 500) {
             MFLog(@"%@", dict[@"msg"]);
         }
@@ -435,9 +436,9 @@ typedef void(^Fail)(NSString *msg);
     }];
 }
 
-- (void)requestPostWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail
+- (void)postWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail
 {
-    __weak typeof(self) weakSelf = self;
+    @MFWeakSelf
     url = [NSString stringWithFormat:@"%@%@", MFBaseUrl, url];
     NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:params];
     [mutableDict addEntriesFromDictionary:self.baseParams];
@@ -452,6 +453,7 @@ typedef void(^Fail)(NSString *msg);
     request.HTTPBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        @MFStrongSelf
         dispatch_async(dispatch_get_main_queue(), ^{
             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
             if (data && httpResponse.statusCode == 201) {
@@ -459,7 +461,7 @@ typedef void(^Fail)(NSString *msg);
             }
             else if (httpResponse.statusCode == 200) {
                 NSString *jsonStr = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-                NSDictionary *dict = [weakSelf jsonString2Dictionary:jsonStr];
+                NSDictionary *dict = [self jsonString2Dictionary:jsonStr];
                 if (succ) succ(dict);
             }
             else {
@@ -475,11 +477,11 @@ typedef void(^Fail)(NSString *msg);
         _baseParams = [NSMutableDictionary dictionary];
         _baseParams[@"appid"] = _appId;
         _baseParams[@"userid"] = _userId;
-        _baseParams[@"version"] = MFBundleShortVersion;
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
-        _baseParams[@"bundleid"] = MFBundleIdentifier;
         _baseParams[@"sdk"] = @"2.1.2";
+        _baseParams[@"bundleid"] = MFBundleIdentifier;
+        _baseParams[@"version"] = MFBundleShortVersion;
     }
     return _baseParams;
 }

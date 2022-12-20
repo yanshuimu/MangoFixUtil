@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MangoFixUtil : NSObject
 
 /**
- * true 简易模式：不统计日活量、补丁激活数、设备数量等
- * false 完整模式
+ * YES  简易模式 - 不统计日活量、补丁激活数、设备数量等
+ * NO    完整模式 - 默认该方式
  */
 @property(nonatomic, assign) BOOL isSimpleMode;
 
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 初始化
- * 通过UserId、BundleId识别唯一应用
+ * 通过UserId、BundleId可识别唯一App
  */
 + (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
 
@@ -53,20 +53,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 初始化
- * 通过UserId、BundleId识别唯一应用
+ * 通过UserId、BundleId可识别唯一App
  */
 - (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
 
 /**
  * 初始化
- * @param debug YES 开发预览 NO 全量下发
+ * @param debug  分发规则 - YES 开发设备  NO 全量设备
  */
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 初始化
- * @param debug YES 开发预览 NO 全量下发
- * 通过UserId、BundleId识别唯一应用
+ * 通过UserId、BundleId可识别唯一应用
+ * @param debug  分发规则 - YES 开发设备  NO 全量设备
  */
 - (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 

@@ -25,9 +25,7 @@
 
 - (void)setupMangoFixUtil {
     
-    MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-    [mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
-    [mangoFixUtil evalRemoteMangoScript];
+    [[MangoFixUtil startWithAppId:APPID aesKey:AES128KEY] evalRemoteMangoScript];
 }
 
 @end
@@ -38,18 +36,13 @@
 
 ```ruby
 # Your Podfile
-pod 'MangoFix'
 pod 'MangoFixUtil'
 ```
-
-### Manually
-
-Copy `MangoFixUtil.m` `MangoFixUtil.h` in `MangoFixUtil/` to your project.
 
 ## Usage
 
 ### Objective-C
-1. `#import "MangoFixUtil.h"`
+1. `#import <MangoFixUtil/MangoFixUtil.h>`
 
 ```objc
 MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
@@ -59,7 +52,7 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 [mangoFixUtil evalRemoteMangoScript];
 
 // exec local mangofix file
-[mangoFixUtil evalLocalMangoScript];
+[mangoFixUtil evalLocalEncryptedMangoScript];
 
 // exec local unEncrypted mangofix file
 [mangoFixUtil evalLocalUnEncryptedMangoScript];
@@ -70,29 +63,33 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 ```
 ## Update
 
+#### V2.1.2
+1. 使用MangoFix.framework（版本：1.5.2）替换CocoaPods依赖以支持Swift项目使用。
+2. 简化代码，优化流程。
+
 #### V2.1.1
-1. 支持通过UserId、BundleId识别唯一应用
+1. 支持通过UserId、BundleId识别唯一应用。
 
 #### V2.1.0
-1. 增加AES加密方式，支持MangoFix 1.5.0版本
+1. 增加AES加密方式，支持MangoFix 1.5.0版本。
 
 #### V2.0.4
-1. 支持统计日活量
+1. 支持统计日活量。
 
 #### V2.0.3
-1. 优化流程
+1. 优化流程。
 
 #### V2.0.2
-1. 支持线上加密补丁
+1. 支持线上加密补丁。
 
 #### V2.0.1
-1. 优化
+1. 优化。
 
 #### V2.0.0
-1. 增加激活设备、激活补丁统计
+1. 增加激活设备、激活补丁统计。
 
 #### V1.0.6
-1. 增加开发预览、全量下发模式
+1. 增加开发预览、全量下发模式。
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
