@@ -43,8 +43,7 @@ pod 'MangoFixUtil'
 1. `#import <MangoFixUtil/MangoFixUtil.h>`
 
 ```objc
-MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
-[mangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
+MangoFixUtil *mangoFixUtil = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
 
 // exec mangofix file from network
 [mangoFixUtil evalRemoteMangoScript];
@@ -55,7 +54,7 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 // exec local unEncrypted mangofix file
 [mangoFixUtil evalLocalUnEncryptedMangoScript];
 
-// encrypt plain mangofix file to documentDirectory
+// encrypt plain mangofix file to document directory
 [mangoFixUtil encryptPlainScriptToDocument];
 
 ```
@@ -87,7 +86,7 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil sharedUtil];
 1. 支持设备数、激活数统计。
 
 #### v1.0.6
-1. 发布支持开发设备、全量设备。
+1. 支持开发设备、全量设备。
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
