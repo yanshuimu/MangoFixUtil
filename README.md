@@ -60,9 +60,9 @@ MangoFixUtil *mangoFixUtil = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY
 ```
 ## Update
 
-#### v2.1.2
+#### v2.1.2（待发布）
 1. 使用MangoFix.framework（v1.5.2）替换CocoaPods依赖以支持Swift项目使用。
-2. 支持简易模式、解密后补丁内容打印。
+2. 支持简易模式、补丁内容打印。
 3. 简化代码，优化流程。
 
 #### v2.1.1
