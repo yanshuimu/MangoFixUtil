@@ -81,6 +81,16 @@ typedef void(^Fail)(NSString *msg);
     return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:NO];
 }
 
++ (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
+{
+    return [[self sharedUtil] startWithAppId:appId aesKey:aesKey debug:debug];
+}
+
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
+{
+    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:debug];
+}
+
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
 {
     return [self startWithAppId:appId aesKey:aesKey debug:NO];
@@ -193,7 +203,7 @@ typedef void(^Fail)(NSString *msg);
             MFLog(@"%@", error.localizedDescription);
             return;
         }
-        MFLog(@"The local patch was successfully deleted! Please restart the app!");
+        MFLog(@"The local patch was successfully deleted! Please restart app!");
     }
 }
 
@@ -225,6 +235,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)startInterpret:(NSString*)scriptString
 {
+    if (_isLogScript) MFLog(@"The patch content: \n%@", scriptString);
     @autoreleasepool {
         mf_set_current_compile_util(self.interpreter);
         mf_add_built_in(self.interpreter);
@@ -311,9 +322,9 @@ typedef void(^Fail)(NSString *msg);
     return [NSString stringWithFormat:@"%@.mfu.fileid", MFBundleIdentifier];
 }
 
-- (NSString*)deviceKey
+- (NSString*)deviceKey:(NSString*)fileId
 {
-    return [NSString stringWithFormat:@"%@.%@.device", MFBundleIdentifier, MFBundleShortVersion];
+    return [NSString stringWithFormat:@"%@.device", fileId];
 }
 
 - (NSString*)patchKey:(NSString*)fileId
@@ -351,8 +362,9 @@ typedef void(^Fail)(NSString *msg);
         }
         else if (code == 200){
             //A new patch was detected...
+            NSString *fileId = [NSString stringWithFormat:@"%@", rows[@"fileid"]];
             [self requestActivateDevice:fileId];
-            [self requestGetRemotePatch:[NSString stringWithFormat:@"%@", rows[@"fileid"]]];
+            [self requestGetRemotePatch:fileId];
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
@@ -372,7 +384,7 @@ typedef void(^Fail)(NSString *msg);
         if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
             return;
         }
-        [self userDefaultsSave:fileId value:[self fileIdKey]];
+        [self userDefaultsSave:[self fileIdKey] value:fileId];
         if (scriptData && scriptData.length > 0) {
             NSString *scriptString = [self decryptData:scriptData];
             if (!scriptString.length) {
@@ -394,7 +406,7 @@ typedef void(^Fail)(NSString *msg);
     if (_isSimpleMode) return;
     if (fileId.length == 0) return;
     
-    NSString *key = [self deviceKey];
+    NSString *key = [self deviceKey:fileId];
     NSString *value = [MFKeyChain load:key];
     if (value.intValue == 1) return;
     MFLog(@"Device not activated!");

@@ -45,7 +45,7 @@
     
     NSLog(@"测试数组越界闪退");
     
-    NSArray *array = @[@"元素1", @"元素2", @"元素3"];
+    NSArray *array = @[@"元素1", @"元素2", @"元素3", @"元素4"];
     for (NSString *string in array) {
         NSLog(@"%@", string);
     }

@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
+ * 控制是否打印补丁内容
+ */
+@property(nonatomic, assign) BOOL isLogScript;
+
+/**
  * 扩展字段，暂未使用
  */
 @property (nonatomic, strong) NSString *extend;
@@ -52,6 +57,19 @@ NS_ASSUME_NONNULL_BEGIN
  * 通过UserId、BundleId可识别唯一App
  */
 + (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
+
+/**
+ * 初始化
+ * @param debug  分发规则 - YES 开发设备  NO 全量设备
+ */
++ (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
+
+/**
+ * 初始化
+ * 通过UserId、BundleId可识别唯一应用
+ * @param debug  分发规则 - YES 开发设备  NO 全量设备
+ */
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
  * 初始化
