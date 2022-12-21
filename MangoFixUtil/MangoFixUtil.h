@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MangoFixUtil : NSObject
 
 /**
- * YES  简易模式 - 不统计日活量、补丁激活数、设备数量等
- * NO    完整模式 - 默认该方式
+ * 控制是否简易模式，默认NO
+ * 简易模式 - 不统计日活量、补丁激活数、设备数量等
  */
 @property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
- * 控制是否打印补丁内容
+ * 控制是否打印补丁内容，默认YES
  */
 @property(nonatomic, assign) BOOL isLogScript;
 

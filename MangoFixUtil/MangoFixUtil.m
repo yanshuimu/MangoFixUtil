@@ -65,6 +65,7 @@ typedef void(^Fail)(NSString *msg);
 - (instancetype)init
 {
     if (self = [super init]) {
+        _isLogScript = YES;
         _interpreter = [[MFInterpreter alloc] init];
         _uuid = [self loadUUID];
     }
@@ -235,7 +236,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)startInterpret:(NSString*)scriptString
 {
-    if (_isLogScript) MFLog(@"The patch content: \n%@", scriptString);
+    if (_isLogScript) MFLog(@"The patch content: %@", scriptString);
     @autoreleasepool {
         mf_set_current_compile_util(self.interpreter);
         mf_add_built_in(self.interpreter);
