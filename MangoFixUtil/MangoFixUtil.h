@@ -12,7 +12,7 @@
  * Github地址：
  * https://github.com/yanshuimu/MangoFixUtil
  *
- * 脚本语法参考：
+ * 语法参考：
  * https://github.com/YPLiang19/Mango
  *
  * 注意：AES128密钥长度需为16的倍数，举个栗子：xWx2TilxtpHlvQrT
@@ -33,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
- * 控制是否打印补丁内容，默认YES
+ * 控制是否Debug打印模式，默认YES
  */
-@property(nonatomic, assign) BOOL isLogScript;
+@property(nonatomic, assign) BOOL isLogModeDebug;
 
 /**
  * 扩展字段，暂未使用
@@ -48,51 +48,28 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedUtil;
 
 /**
- * 初始化
+ * 以 AppId 初始化
+ * debug  控制分发规则  YES 开发设备  NO 全量设备
  */
 + (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
-/**
- * 初始化
- * 通过UserId、BundleId可识别唯一App
- */
-+ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
-
-/**
- * 初始化
- * @param debug  分发规则 - YES 开发设备  NO 全量设备
- */
 + (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
-/**
- * 初始化
- * 通过UserId、BundleId可识别唯一应用
- * @param debug  分发规则 - YES 开发设备  NO 全量设备
- */
-+ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
-
-/**
- * 初始化
- */
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
-/**
- * 初始化
- * 通过UserId、BundleId可识别唯一App
- */
-- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
-
-/**
- * 初始化
- * @param debug  分发规则 - YES 开发设备  NO 全量设备
- */
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**
- * 初始化
- * 通过UserId、BundleId可识别唯一应用
- * @param debug  分发规则 - YES 开发设备  NO 全量设备
+ * 以 UserId 初始化
+ * debug  控制分发规则  YES 开发设备  NO 全量设备
+ * 注意：以该方式初始化，需登录后台 -> 应用管理 -> 编辑 -> 填写BundleId
  */
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
+
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
+
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
+
 - (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug;
 
 /**

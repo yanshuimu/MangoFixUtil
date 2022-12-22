@@ -65,7 +65,7 @@ typedef void(^Fail)(NSString *msg);
 - (instancetype)init
 {
     if (self = [super init]) {
-        _isLogScript = YES;
+        _isLogModeDebug = YES;
         _interpreter = [[MFInterpreter alloc] init];
         _uuid = [self loadUUID];
     }
@@ -236,7 +236,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)startInterpret:(NSString*)scriptString
 {
-    if (_isLogScript) MFLog(@"The patch content: %@", scriptString);
+    if (_isLogModeDebug) MFLog(@"The patch content: %@", scriptString);
     @autoreleasepool {
         mf_set_current_compile_util(self.interpreter);
         mf_add_built_in(self.interpreter);
@@ -349,7 +349,6 @@ typedef void(^Fail)(NSString *msg);
     @MFWeakSelf
     [self postWithUrl:MFCheckMangoFileUrl params:params succ:^(NSDictionary *dict) {
         @MFStrongSelf
-        NSDictionary *rows = dict[@"rows"];
         NSInteger code = [dict[@"code"] intValue];
         MFLog(@"%@", dict[@"msg"]);
         if (code == 202) {
@@ -363,6 +362,7 @@ typedef void(^Fail)(NSString *msg);
         }
         else if (code == 200){
             //A new patch was detected...
+            NSDictionary *rows = dict[@"rows"];
             NSString *fileId = [NSString stringWithFormat:@"%@", rows[@"fileid"]];
             [self requestActivateDevice:fileId];
             [self requestGetRemotePatch:fileId];
