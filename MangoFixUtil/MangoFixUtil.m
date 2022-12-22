@@ -29,7 +29,7 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *userId;
 
 /**
- * 分发规则  YES 开发设备  NO 全量设备
+ * 控制分发规则  YES 开发设备  NO 全量设备
  */
 @property (nonatomic, assign) BOOL debug;
 
@@ -65,9 +65,9 @@ typedef void(^Fail)(NSString *msg);
 - (instancetype)init
 {
     if (self = [super init]) {
-        _isLogModeDebug = YES;
         _interpreter = [[MFInterpreter alloc] init];
         _uuid = [self loadUUID];
+        _isLogModeDebug = YES;
     }
     return self;
 }
@@ -77,29 +77,14 @@ typedef void(^Fail)(NSString *msg);
     return [[self sharedUtil] startWithAppId:appId aesKey:aesKey debug:NO];
 }
 
-+ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
-{
-    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:NO];
-}
-
 + (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
 {
     return [[self sharedUtil] startWithAppId:appId aesKey:aesKey debug:debug];
 }
 
-+ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
-{
-    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:debug];
-}
-
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey
 {
     return [self startWithAppId:appId aesKey:aesKey debug:NO];
-}
-
-- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
-{
-    return [self startWithUserId:userId aesKey:aesKey debug:NO];
 }
 
 - (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey debug:(BOOL)debug
@@ -111,6 +96,21 @@ typedef void(^Fail)(NSString *msg);
     _debug = debug;
     _aesKey = aesKey;
     return self;
+}
+
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
+{
+    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:NO];
+}
+
++ (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
+{
+    return [[self sharedUtil] startWithUserId:userId aesKey:aesKey debug:debug];
+}
+
+- (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey
+{
+    return [self startWithUserId:userId aesKey:aesKey debug:NO];
 }
 
 - (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey debug:(BOOL)debug
@@ -160,7 +160,7 @@ typedef void(^Fail)(NSString *msg);
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"encrypted_demo" ofType:@"mg"];
     NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
     if (scriptData && scriptData.length > 0) {
-        NSString *scriptString = [self decryptData:scriptData];
+        NSString *scriptString = [self decrypt:scriptData];
         if (scriptString.length == 0) {
             MFLog(@"Decrypt error!");
             return;
@@ -183,7 +183,7 @@ typedef void(^Fail)(NSString *msg);
         MFLog(@"%@", error.localizedDescription);
         return scriptPath;
     }
-    NSData *scriptData = [self encryptString:scriptString];
+    NSData *scriptData = [self encrypt:scriptString];
     scriptPath = [[self documentsPath] stringByAppendingPathComponent:@"encrypted_demo.mg"];
     [scriptData writeToFile:scriptPath options:NSDataWritingAtomic error:&error];
     if (error) {
@@ -214,7 +214,7 @@ typedef void(^Fail)(NSString *msg);
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
         if (scriptData && scriptData.length > 0) {
-            NSString *scriptString = [self decryptData:scriptData];
+            NSString *scriptString = [self decrypt:scriptData];
             if (!scriptString.length) {
                 MFLog(@"Decrypt error!");
                 return;
@@ -246,17 +246,30 @@ typedef void(^Fail)(NSString *msg);
     }
 }
 
-- (NSString*)decryptData:(NSData*)data
+- (NSData*)encrypt:(NSString*)string
+{
+    NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
+    return [scriptData AES128ParmEncryptWithKey:_aesKey iv:@""];
+}
+
+- (NSString*)decrypt:(NSData*)data
 {
     NSData *scriptData = [data AES128ParmDecryptWithKey:_aesKey iv:@""];
     NSString *scriptString = [[NSString alloc] initWithData:scriptData encoding:NSUTF8StringEncoding];
     return scriptString;
 }
 
-- (id)encryptString:(NSString*)string
++ (NSData*)encrypt:(NSString*)string key:(NSString*)key iv:(NSString*)iv
 {
     NSData *scriptData = [string dataUsingEncoding:NSUTF8StringEncoding];
-    return [scriptData AES128ParmEncryptWithKey:_aesKey iv:@""];
+    return [scriptData AES128ParmEncryptWithKey:key iv:iv];
+}
+
++ (NSString*)decrypt:(NSData*)data key:(NSString*)key iv:(NSString*)iv
+{
+    NSData *scriptData = [data AES128ParmDecryptWithKey:key iv:iv];
+    NSString *scriptString = [[NSString alloc] initWithData:scriptData encoding:NSUTF8StringEncoding];
+    return scriptString;
 }
 
 #pragma mark - Other
@@ -387,7 +400,7 @@ typedef void(^Fail)(NSString *msg);
         }
         [self userDefaultsSave:[self fileIdKey] value:fileId];
         if (scriptData && scriptData.length > 0) {
-            NSString *scriptString = [self decryptData:scriptData];
+            NSString *scriptString = [self decrypt:scriptData];
             if (!scriptString.length) {
                 MFLog(@"Decrypt error!");
                 return;

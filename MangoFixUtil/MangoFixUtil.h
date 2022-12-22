@@ -98,6 +98,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)deleteLocalMangoScript;
 
+/**
+ *  AES128加密
+ */
++ (NSData*)encrypt:(NSString*)string key:(NSString*)key iv:(NSString*)iv;
+
+/**
+ * AES128解密
+ */
++ (NSString*)decrypt:(NSData*)data key:(NSString*)key iv:(NSString*)iv;
+
 @end
 
 NS_ASSUME_NONNULL_END
