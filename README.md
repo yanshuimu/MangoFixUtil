@@ -79,7 +79,7 @@ util.evalRemoteMangoScript()
 
 ```
 
-配置：Build Settings -> Other Linker Flags -> -ObjC 
+需配置：Build Settings -> Other Linker Flags -> -ObjC 
 
 ## Update
 
