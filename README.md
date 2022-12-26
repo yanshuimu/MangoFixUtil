@@ -43,25 +43,48 @@ pod 'MangoFixUtil'
 1. `#import <MangoFixUtil/MangoFixUtil.h>`
 
 ```objc
-MangoFixUtil *mangoFixUtil = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
-
-// exec mangofix file from network
-[mangoFixUtil evalRemoteMangoScript];
-
-// exec local encrypted mangofix file
-[mangoFixUtil evalLocalEncryptedMangoScript];
+MangoFixUtil *util = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
 
 // exec local unEncrypted mangofix file
-[mangoFixUtil evalLocalUnEncryptedMangoScript];
+[util evalLocalUnEncryptedMangoScript];
 
 // encrypt plain mangofix file to document directory
-[mangoFixUtil encryptPlainScriptToDocument];
+[util encryptPlainScriptToDocument];
+
+// exec local encrypted mangofix file
+[util evalLocalEncryptedMangoScript];
+
+// exec mangofix file from network
+[util evalRemoteMangoScript];
 
 ```
+
+### Swift
+2. `import MangoFixUtil`
+
+```swift
+let util = MangoFixUtil.start(withAppId: kAppId, aesKey: kAesKey)
+
+// exec local unEncrypted mangofix file
+util.evalLocalUnEncryptedMangoScript()
+
+// encrypt plain mangofix file to document directory
+util.encryptPlainScriptToDocument()
+
+// exec local encrypted mangofix file
+util.evalLocalEncryptedMangoScript()
+
+// exec mangofix file from network
+util.evalRemoteMangoScript()
+
+```
+
+配置：Build Settings -> Other Linker Flags -> -ObjC 
+
 ## Update
 
 #### v2.1.2
-1. 使用MangoFix.framework（v1.5.2）替换CocoaPods依赖。
+1. 使用MangoFix.framework（v1.5.2）替换CocoaPods依赖以支持Swift项目使用。
 2. 支持简易模式、补丁内容打印。
 3. 简化代码，优化流程。
 
