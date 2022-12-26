@@ -1,16 +1,20 @@
 PODS:
+  - Masonry (1.1.0)
   - symdl (0.9.0)
 
 DEPENDENCIES:
+  - Masonry
   - symdl
 
 SPEC REPOS:
   trunk:
+    - Masonry
     - symdl
 
 SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   symdl: b199c582777d9abb0dc324c308f358502ca2c190
 
-PODFILE CHECKSUM: 932d342d5ec7db2781f34b646abf2efb573bbf5a
+PODFILE CHECKSUM: dcabf71d060905a76001927d8a672534f81d6a63
 
 COCOAPODS: 1.11.3

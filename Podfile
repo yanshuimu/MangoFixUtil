@@ -4,5 +4,6 @@ inhibit_all_warnings!
 target 'MangoFixUtil' do
   
 pod 'symdl'
+pod 'Masonry'
 
 end

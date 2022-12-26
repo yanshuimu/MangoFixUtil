@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 //APPID，请登录后台新建应用后获取APPID
-#define APPID @"234394f5a25142d8"
+#define APPID @"330eb766152b4c9a"
 
 #define USERID @"10000"
 

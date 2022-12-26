@@ -8,7 +8,7 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import "MangoFixUtil.h"
-#import "BugFixController.h"
+#import "DemoViewController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 //
@@ -22,8 +22,6 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"MangoFixUtil";
-    
-    [self setupRightBarItem];
     [self setupSubviews];
 }
 
@@ -36,15 +34,6 @@
 - (void)setupSubviews {
     
     [self.view addSubview:self.tableView];
-}
-
-- (void)setupRightBarItem {
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"测试页面" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(rightBarItemClick) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -79,16 +68,16 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.textLabel.text = @"执行本地未加密补丁";
+            cell.textLabel.text = @"- (void)evalLocalUnEncryptedMangoScript";
             break;
         case 1:
-            cell.textLabel.text = @"生成加密补丁";
+            cell.textLabel.text = @"- (void)encryptPlainScriptToDocument";
             break;
         case 2:
-            cell.textLabel.text = @"执行本地已加密补丁";
+            cell.textLabel.text = @"- (void)evalLocalEncryptedMangoScript";
             break;
         case 3:
-            cell.textLabel.text = @"执行远程补丁";
+            cell.textLabel.text = @"- (void)evalRemoteMangoScript";
             break;
         default:
             break;
@@ -104,24 +93,27 @@
     switch (indexPath.row) {
         case 0:
             [mangoFixUtil evalLocalUnEncryptedMangoScript];
+            [self gotoDemoCtrl];
             break;
         case 1:
             [mangoFixUtil encryptPlainScriptToDocument];
             break;
         case 2:
             [mangoFixUtil evalLocalEncryptedMangoScript];
+            [self gotoDemoCtrl];
             break;
         case 3:
             [mangoFixUtil evalRemoteMangoScript];
+            [self gotoDemoCtrl];
             break;
         default:
             break;
     }
 }
 
-- (void)rightBarItemClick {
+- (void)gotoDemoCtrl {
     
-    BugFixController *ctrl = [[BugFixController alloc] init];
+    DemoViewController *ctrl = [[DemoViewController alloc] init];
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
