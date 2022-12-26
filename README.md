@@ -40,7 +40,7 @@ pod 'MangoFixUtil'
 ## Usage
 
 ### Objective-C
-1. `#import <MangoFixUtil/MangoFixUtil.h>`
+`#import <MangoFixUtil/MangoFixUtil.h>`
 
 ```objc
 MangoFixUtil *util = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
@@ -60,7 +60,7 @@ MangoFixUtil *util = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
 ```
 
 ### Swift
-2. `import MangoFixUtil`
+`import MangoFixUtil`
 
 ```swift
 let util = MangoFixUtil.start(withAppId: kAppId, aesKey: kAesKey)
