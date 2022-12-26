@@ -1,6 +1,6 @@
 ## Introduce
 
-MangoFixUtil是对[MangoFix](https://github.com/YPLiang19/Mango)进行了简单的封装，该库在OC项目中实战已经近2年多，经过多次迭代，比较成熟。但需要搭配[补丁管理后台](http://patchhub.top/mangofix/login)一起使用，后台由作者开发维护，目前大致功能有：自动加密、设备数和激活数统计、日活量统计等。已经有40+个已上架AppStore的应用在使用，且有日活1w+的应用，欢迎小伙伴们使用。
+MangoFixUtil是对[MangoFix](https://github.com/YPLiang19/Mango)进行了简单的封装，该库在OC项目中实战已经近2年多，经过多次迭代，比较成熟。但需要搭配[补丁管理后台](http://patchhub.top/mangofix/login)一起使用，后台由作者开发维护，目前有40+个已上架AppStore的应用在使用，且有日活1w+的应用，欢迎小伙伴们使用。
 
 如果你觉得不错，可以给个小星星，在此表示感谢^_^。
 
