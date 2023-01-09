@@ -29,7 +29,7 @@ NSString * const MFActivateDeviceUrl = @"/api/activatedevice";
 #ifdef RELEASE
     #define MFLog(FORMAT, ...) nil
 #else
-    #define MFLog(FORMAT, ...) NSLog(FORMAT, ##__VA_ARGS__)
+    #define MFLog(FORMAT, ...) NSLog((@"MangoFixUtil：" FORMAT), ##__VA_ARGS__)
 #endif
 
 #define MFWeakSelf try{}@finally{} __weak typeof(self) self##Weak = self;
