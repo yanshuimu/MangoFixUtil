@@ -82,6 +82,12 @@ util.evalRemoteMangoScript()
 ## Update
 
 #### v2.1.4
+1. 优化
+
+#### v2.1.3
+1. 优化
+
+#### v2.1.2
 1. 使用MangoFix.framework（v1.5.2）替换CocoaPods依赖以支持Swift项目使用。
 2. 支持简易模式、补丁内容打印。
 3. 简化代码，优化流程。

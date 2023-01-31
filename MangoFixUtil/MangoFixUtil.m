@@ -505,7 +505,7 @@ typedef void(^Fail)(NSString *msg);
         _baseParams[@"userid"] = _userId;
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
-        _baseParams[@"sdk"] = @"2.1.2";
+        _baseParams[@"sdk"] = @"2.1.4";
         _baseParams[@"bundleid"] = MFBundleIdentifier;
         _baseParams[@"version"] = MFBundleShortVersion;
     }
