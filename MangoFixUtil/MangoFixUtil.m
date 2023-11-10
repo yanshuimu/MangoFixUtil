@@ -8,7 +8,10 @@
 #import "MangoFixUtil.h"
 #import "MFKeyChain.h"
 #import "MFMacrosConstant.h"
-#import <MangoFix/MangoFix.h>
+#import "MangoFix.h"
+#import "MFInterpreter.h"
+#import "execute.h"
+#import "create.h"
 
 typedef void(^Succ)(id resp);
 

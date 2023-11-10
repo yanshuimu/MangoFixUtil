@@ -15,11 +15,45 @@
 		045839B525E8A27C00BBACF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B325E8A27C00BBACF2 /* LaunchScreen.storyboard */; };
 		045839B625E8A27C00BBACF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045839B425E8A27C00BBACF2 /* Main.storyboard */; };
 		045839BF25E8A68200BBACF2 /* MangoFixUtil.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */; };
+		7B6495772AFE36AA00766AD3 /* util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495202AFE36AA00766AD3 /* util.m */; };
+		7B6495782AFE36AA00766AD3 /* NSData+AESEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495222AFE36AA00766AD3 /* NSData+AESEncryption.m */; };
+		7B6495792AFE36AA00766AD3 /* eval.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495242AFE36AA00766AD3 /* eval.m */; };
+		7B64957A2AFE36AA00766AD3 /* built-in.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495262AFE36AA00766AD3 /* built-in.m */; };
+		7B64957B2AFE36AA00766AD3 /* execute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495272AFE36AA00766AD3 /* execute.m */; };
+		7B64957C2AFE36AA00766AD3 /* MFContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495282AFE36AA00766AD3 /* MFContext.m */; };
+		7B64957D2AFE36AA00766AD3 /* MFBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64952F2AFE36AA00766AD3 /* MFBlock.m */; };
+		7B64957E2AFE36AA00766AD3 /* MFStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495322AFE36AA00766AD3 /* MFStack.m */; };
+		7B64957F2AFE36AA00766AD3 /* MFStatementResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495332AFE36AA00766AD3 /* MFStatementResult.m */; };
+		7B6495802AFE36AA00766AD3 /* MFStructDeclareTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495342AFE36AA00766AD3 /* MFStructDeclareTable.m */; };
+		7B6495812AFE36AA00766AD3 /* MFMethodMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495372AFE36AA00766AD3 /* MFMethodMapTable.m */; };
+		7B6495822AFE36AA00766AD3 /* MFWeakPropertyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495382AFE36AA00766AD3 /* MFWeakPropertyBox.m */; };
+		7B6495832AFE36AA00766AD3 /* MFStaticVarTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495392AFE36AA00766AD3 /* MFStaticVarTable.m */; };
+		7B6495842AFE36AA00766AD3 /* MFPropertyMapTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64953A2AFE36AA00766AD3 /* MFPropertyMapTable.m */; };
+		7B6495852AFE36AA00766AD3 /* MFVarDeclareChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64953D2AFE36AA00766AD3 /* MFVarDeclareChain.m */; };
+		7B6495862AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64953E2AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.m */; };
+		7B6495872AFE36AA00766AD3 /* MFScopeChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495422AFE36AA00766AD3 /* MFScopeChain.m */; };
+		7B6495882AFE36AA00766AD3 /* MFValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495432AFE36AA00766AD3 /* MFValue.m */; };
+		7B6495892AFE36AA00766AD3 /* errror.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495472AFE36AA00766AD3 /* errror.m */; };
+		7B64958A2AFE36AA00766AD3 /* create.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495492AFE36AA00766AD3 /* create.m */; };
+		7B64958B2AFE36AA00766AD3 /* MFTypedefTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64954B2AFE36AA00766AD3 /* MFTypedefTable.m */; };
+		7B64958C2AFE36AA00766AD3 /* MFExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495502AFE36AA00766AD3 /* MFExpression.m */; };
+		7B64958D2AFE36AA00766AD3 /* MFClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495512AFE36AA00766AD3 /* MFClassDefinition.m */; };
+		7B64958E2AFE36AA00766AD3 /* MFStructDeclare.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495532AFE36AA00766AD3 /* MFStructDeclare.m */; };
+		7B64958F2AFE36AA00766AD3 /* MFFunctionDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495552AFE36AA00766AD3 /* MFFunctionDefinition.m */; };
+		7B6495902AFE36AA00766AD3 /* MFAnnotationableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495562AFE36AA00766AD3 /* MFAnnotationableDefinition.m */; };
+		7B6495912AFE36AA00766AD3 /* MFAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495572AFE36AA00766AD3 /* MFAnnotation.m */; };
+		7B6495922AFE36AA00766AD3 /* MFStatement.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64955A2AFE36AA00766AD3 /* MFStatement.m */; };
+		7B6495932AFE36AA00766AD3 /* MFBlockBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B64955D2AFE36AA00766AD3 /* MFBlockBody.m */; };
+		7B6495942AFE36AA00766AD3 /* MFTypeSpecifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495622AFE36AA00766AD3 /* MFTypeSpecifier.m */; };
+		7B6495952AFE36AA00766AD3 /* MFDeclaration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495632AFE36AA00766AD3 /* MFDeclaration.m */; };
+		7B6495962AFE36AA00766AD3 /* MFInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495652AFE36AA00766AD3 /* MFInterpreter.m */; };
+		7B6495972AFE36AA00766AD3 /* mango.y in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495682AFE36AA00766AD3 /* mango.y */; };
+		7B6495982AFE36AA00766AD3 /* mango.l in Sources */ = {isa = PBXBuildFile; fileRef = 7B6495692AFE36AA00766AD3 /* mango.l */; };
+		7B64959A2AFE36AA00766AD3 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6495742AFE36AA00766AD3 /* libffi.a */; };
 		7B7432582715995200F10C5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7B7432572715995200F10C5C /* README.md */; };
 		7B9A2435278D1376007B419C /* demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A2434278D1376007B419C /* demo.mg */; };
 		7B9A24392791632D007B419C /* encrypted_demo.mg in Resources */ = {isa = PBXBuildFile; fileRef = 7B9A24382791632D007B419C /* encrypted_demo.mg */; };
 		7BA94D6F271173C200872060 /* MFKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA94D6C271173C200872060 /* MFKeyChain.m */; };
-		7BDA8869294C07EE001BA155 /* MangoFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BDA8868294C07EE001BA155 /* MangoFix.framework */; };
 		7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */; };
 		EF2E12AE264FE8D6008E7F4D /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2E12AD264FE8D6008E7F4D /* DemoViewController.m */; };
 /* End PBXBuildFile section */
@@ -40,13 +74,92 @@
 		045839BE25E8A68200BBACF2 /* MangoFixUtil.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MangoFixUtil.podspec; sourceTree = "<group>"; };
 		298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.release.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.release.xcconfig"; sourceTree = "<group>"; };
 		6F5829E19C2FC63ABBA96CEE /* Pods-MangoFixUtil.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MangoFixUtil.debug.xcconfig"; path = "Target Support Files/Pods-MangoFixUtil/Pods-MangoFixUtil.debug.xcconfig"; sourceTree = "<group>"; };
+		7B64951D2AFE36AA00766AD3 /* MangoFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangoFix.h; sourceTree = "<group>"; };
+		7B64951F2AFE36AA00766AD3 /* NSData+AESEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AESEncryption.h"; sourceTree = "<group>"; };
+		7B6495202AFE36AA00766AD3 /* util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = util.m; sourceTree = "<group>"; };
+		7B6495212AFE36AA00766AD3 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		7B6495222AFE36AA00766AD3 /* NSData+AESEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AESEncryption.m"; sourceTree = "<group>"; };
+		7B6495242AFE36AA00766AD3 /* eval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eval.m; sourceTree = "<group>"; };
+		7B6495252AFE36AA00766AD3 /* MFContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFContext.h; sourceTree = "<group>"; };
+		7B6495262AFE36AA00766AD3 /* built-in.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "built-in.m"; sourceTree = "<group>"; };
+		7B6495272AFE36AA00766AD3 /* execute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = execute.m; sourceTree = "<group>"; };
+		7B6495282AFE36AA00766AD3 /* MFContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFContext.m; sourceTree = "<group>"; };
+		7B6495292AFE36AA00766AD3 /* execute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = execute.h; sourceTree = "<group>"; };
+		7B64952B2AFE36AA00766AD3 /* MFPropertyMapTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPropertyMapTable.h; sourceTree = "<group>"; };
+		7B64952C2AFE36AA00766AD3 /* MFStaticVarTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStaticVarTable.h; sourceTree = "<group>"; };
+		7B64952D2AFE36AA00766AD3 /* MFWeakPropertyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFWeakPropertyBox.h; sourceTree = "<group>"; };
+		7B64952E2AFE36AA00766AD3 /* runenv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = runenv.h; sourceTree = "<group>"; };
+		7B64952F2AFE36AA00766AD3 /* MFBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBlock.m; sourceTree = "<group>"; };
+		7B6495302AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSwfitClassNameAlisTable.h; sourceTree = "<group>"; };
+		7B6495312AFE36AA00766AD3 /* MFVarDeclareChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFVarDeclareChain.h; sourceTree = "<group>"; };
+		7B6495322AFE36AA00766AD3 /* MFStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStack.m; sourceTree = "<group>"; };
+		7B6495332AFE36AA00766AD3 /* MFStatementResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStatementResult.m; sourceTree = "<group>"; };
+		7B6495342AFE36AA00766AD3 /* MFStructDeclareTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStructDeclareTable.m; sourceTree = "<group>"; };
+		7B6495352AFE36AA00766AD3 /* MFValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFValue.h; sourceTree = "<group>"; };
+		7B6495362AFE36AA00766AD3 /* MFScopeChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFScopeChain.h; sourceTree = "<group>"; };
+		7B6495372AFE36AA00766AD3 /* MFMethodMapTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFMethodMapTable.m; sourceTree = "<group>"; };
+		7B6495382AFE36AA00766AD3 /* MFWeakPropertyBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFWeakPropertyBox.m; sourceTree = "<group>"; };
+		7B6495392AFE36AA00766AD3 /* MFStaticVarTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStaticVarTable.m; sourceTree = "<group>"; };
+		7B64953A2AFE36AA00766AD3 /* MFPropertyMapTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPropertyMapTable.m; sourceTree = "<group>"; };
+		7B64953B2AFE36AA00766AD3 /* MFStatementResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStatementResult.h; sourceTree = "<group>"; };
+		7B64953C2AFE36AA00766AD3 /* MFStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStack.h; sourceTree = "<group>"; };
+		7B64953D2AFE36AA00766AD3 /* MFVarDeclareChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFVarDeclareChain.m; sourceTree = "<group>"; };
+		7B64953E2AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSwfitClassNameAlisTable.m; sourceTree = "<group>"; };
+		7B64953F2AFE36AA00766AD3 /* MFBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBlock.h; sourceTree = "<group>"; };
+		7B6495402AFE36AA00766AD3 /* MFValue+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MFValue+Private.h"; sourceTree = "<group>"; };
+		7B6495412AFE36AA00766AD3 /* MFMethodMapTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMethodMapTable.h; sourceTree = "<group>"; };
+		7B6495422AFE36AA00766AD3 /* MFScopeChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFScopeChain.m; sourceTree = "<group>"; };
+		7B6495432AFE36AA00766AD3 /* MFValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFValue.m; sourceTree = "<group>"; };
+		7B6495442AFE36AA00766AD3 /* MFStructDeclareTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStructDeclareTable.h; sourceTree = "<group>"; };
+		7B6495462AFE36AA00766AD3 /* errror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = errror.h; sourceTree = "<group>"; };
+		7B6495472AFE36AA00766AD3 /* errror.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = errror.m; sourceTree = "<group>"; };
+		7B6495492AFE36AA00766AD3 /* create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = create.m; sourceTree = "<group>"; };
+		7B64954B2AFE36AA00766AD3 /* MFTypedefTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTypedefTable.m; sourceTree = "<group>"; };
+		7B64954C2AFE36AA00766AD3 /* MFTypedefTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTypedefTable.h; sourceTree = "<group>"; };
+		7B64954E2AFE36AA00766AD3 /* MFBlockBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFBlockBody.h; sourceTree = "<group>"; };
+		7B64954F2AFE36AA00766AD3 /* MFDeclarationModifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDeclarationModifier.h; sourceTree = "<group>"; };
+		7B6495502AFE36AA00766AD3 /* MFExpression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFExpression.m; sourceTree = "<group>"; };
+		7B6495512AFE36AA00766AD3 /* MFClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFClassDefinition.m; sourceTree = "<group>"; };
+		7B6495522AFE36AA00766AD3 /* MFStatement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStatement.h; sourceTree = "<group>"; };
+		7B6495532AFE36AA00766AD3 /* MFStructDeclare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStructDeclare.m; sourceTree = "<group>"; };
+		7B6495542AFE36AA00766AD3 /* MFTypeSpecifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFTypeSpecifier.h; sourceTree = "<group>"; };
+		7B6495552AFE36AA00766AD3 /* MFFunctionDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFFunctionDefinition.m; sourceTree = "<group>"; };
+		7B6495562AFE36AA00766AD3 /* MFAnnotationableDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAnnotationableDefinition.m; sourceTree = "<group>"; };
+		7B6495572AFE36AA00766AD3 /* MFAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFAnnotation.m; sourceTree = "<group>"; };
+		7B6495582AFE36AA00766AD3 /* MFInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFInterpreter.h; sourceTree = "<group>"; };
+		7B6495592AFE36AA00766AD3 /* MFDeclaration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFDeclaration.h; sourceTree = "<group>"; };
+		7B64955A2AFE36AA00766AD3 /* MFStatement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFStatement.m; sourceTree = "<group>"; };
+		7B64955B2AFE36AA00766AD3 /* MFClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFClassDefinition.h; sourceTree = "<group>"; };
+		7B64955C2AFE36AA00766AD3 /* MFExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFExpression.h; sourceTree = "<group>"; };
+		7B64955D2AFE36AA00766AD3 /* MFBlockBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFBlockBody.m; sourceTree = "<group>"; };
+		7B64955E2AFE36AA00766AD3 /* MFStructDeclare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFStructDeclare.h; sourceTree = "<group>"; };
+		7B64955F2AFE36AA00766AD3 /* MFAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAnnotation.h; sourceTree = "<group>"; };
+		7B6495602AFE36AA00766AD3 /* MFAnnotationableDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFAnnotationableDefinition.h; sourceTree = "<group>"; };
+		7B6495612AFE36AA00766AD3 /* MFFunctionDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFFunctionDefinition.h; sourceTree = "<group>"; };
+		7B6495622AFE36AA00766AD3 /* MFTypeSpecifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFTypeSpecifier.m; sourceTree = "<group>"; };
+		7B6495632AFE36AA00766AD3 /* MFDeclaration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFDeclaration.m; sourceTree = "<group>"; };
+		7B6495642AFE36AA00766AD3 /* mf_ast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mf_ast.h; sourceTree = "<group>"; };
+		7B6495652AFE36AA00766AD3 /* MFInterpreter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFInterpreter.m; sourceTree = "<group>"; };
+		7B6495662AFE36AA00766AD3 /* create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = create.h; sourceTree = "<group>"; };
+		7B6495682AFE36AA00766AD3 /* mango.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; path = mango.y; sourceTree = "<group>"; };
+		7B6495692AFE36AA00766AD3 /* mango.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = mango.l; sourceTree = "<group>"; };
+		7B64956C2AFE36AA00766AD3 /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
+		7B64956D2AFE36AA00766AD3 /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		7B64956E2AFE36AA00766AD3 /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
+		7B64956F2AFE36AA00766AD3 /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
+		7B6495702AFE36AA00766AD3 /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
+		7B6495712AFE36AA00766AD3 /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
+		7B6495722AFE36AA00766AD3 /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
+		7B6495732AFE36AA00766AD3 /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
+		7B6495742AFE36AA00766AD3 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+		7B6495752AFE36AA00766AD3 /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		7B6495762AFE36AA00766AD3 /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
 		7B7432572715995200F10C5C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7B9A2434278D1376007B419C /* demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.mg; sourceTree = "<group>"; };
 		7B9A24382791632D007B419C /* encrypted_demo.mg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = encrypted_demo.mg; sourceTree = "<group>"; };
 		7BA94D6B271173C100872060 /* MFKeyChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFKeyChain.h; sourceTree = "<group>"; };
 		7BA94D6C271173C200872060 /* MFKeyChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFKeyChain.m; sourceTree = "<group>"; };
 		7BA94D6E271173C200872060 /* MFMacrosConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFMacrosConstant.h; sourceTree = "<group>"; };
-		7BDA8868294C07EE001BA155 /* MangoFix.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MangoFix.framework; sourceTree = "<group>"; };
 		D08EED8108246BD87578AFB4 /* libPods-MangoFixUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MangoFixUtil.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2E12A2264FB51A008E7F4D /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		EF2E12AC264FE8D5008E7F4D /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
@@ -59,7 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FFDCE3CE6E7A7C7AC011827 /* libPods-MangoFixUtil.a in Frameworks */,
-				7BDA8869294C07EE001BA155 /* MangoFix.framework in Frameworks */,
+				7B64959A2AFE36AA00766AD3 /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +203,7 @@
 		0458397525E89B8000BBACF2 /* MangoFixUtil */ = {
 			isa = PBXGroup;
 			children = (
-				7BDA8868294C07EE001BA155 /* MangoFix.framework */,
+				7B64951C2AFE36AA00766AD3 /* MangoFix */,
 				045839AB25E8A13300BBACF2 /* MangoFixUtil.h */,
 				045839AA25E8A13300BBACF2 /* MangoFixUtil.m */,
 				7BA94D6E271173C200872060 /* MFMacrosConstant.h */,
@@ -136,6 +249,165 @@
 				298AED8F4B37D6876E475B04 /* Pods-MangoFixUtil.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		7B64951C2AFE36AA00766AD3 /* MangoFix */ = {
+			isa = PBXGroup;
+			children = (
+				7B64951D2AFE36AA00766AD3 /* MangoFix.h */,
+				7B64951E2AFE36AA00766AD3 /* Util */,
+				7B6495232AFE36AA00766AD3 /* Execute */,
+				7B6495452AFE36AA00766AD3 /* Error */,
+				7B6495482AFE36AA00766AD3 /* Compiler */,
+				7B64956B2AFE36AA00766AD3 /* libffi */,
+			);
+			path = MangoFix;
+			sourceTree = "<group>";
+		};
+		7B64951E2AFE36AA00766AD3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				7B64951F2AFE36AA00766AD3 /* NSData+AESEncryption.h */,
+				7B6495202AFE36AA00766AD3 /* util.m */,
+				7B6495212AFE36AA00766AD3 /* util.h */,
+				7B6495222AFE36AA00766AD3 /* NSData+AESEncryption.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		7B6495232AFE36AA00766AD3 /* Execute */ = {
+			isa = PBXGroup;
+			children = (
+				7B6495242AFE36AA00766AD3 /* eval.m */,
+				7B6495252AFE36AA00766AD3 /* MFContext.h */,
+				7B6495262AFE36AA00766AD3 /* built-in.m */,
+				7B6495272AFE36AA00766AD3 /* execute.m */,
+				7B6495282AFE36AA00766AD3 /* MFContext.m */,
+				7B6495292AFE36AA00766AD3 /* execute.h */,
+				7B64952A2AFE36AA00766AD3 /* RunEnv */,
+			);
+			path = Execute;
+			sourceTree = "<group>";
+		};
+		7B64952A2AFE36AA00766AD3 /* RunEnv */ = {
+			isa = PBXGroup;
+			children = (
+				7B64952B2AFE36AA00766AD3 /* MFPropertyMapTable.h */,
+				7B64952C2AFE36AA00766AD3 /* MFStaticVarTable.h */,
+				7B64952D2AFE36AA00766AD3 /* MFWeakPropertyBox.h */,
+				7B64952E2AFE36AA00766AD3 /* runenv.h */,
+				7B64952F2AFE36AA00766AD3 /* MFBlock.m */,
+				7B6495302AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.h */,
+				7B6495312AFE36AA00766AD3 /* MFVarDeclareChain.h */,
+				7B6495322AFE36AA00766AD3 /* MFStack.m */,
+				7B6495332AFE36AA00766AD3 /* MFStatementResult.m */,
+				7B6495342AFE36AA00766AD3 /* MFStructDeclareTable.m */,
+				7B6495352AFE36AA00766AD3 /* MFValue.h */,
+				7B6495362AFE36AA00766AD3 /* MFScopeChain.h */,
+				7B6495372AFE36AA00766AD3 /* MFMethodMapTable.m */,
+				7B6495382AFE36AA00766AD3 /* MFWeakPropertyBox.m */,
+				7B6495392AFE36AA00766AD3 /* MFStaticVarTable.m */,
+				7B64953A2AFE36AA00766AD3 /* MFPropertyMapTable.m */,
+				7B64953B2AFE36AA00766AD3 /* MFStatementResult.h */,
+				7B64953C2AFE36AA00766AD3 /* MFStack.h */,
+				7B64953D2AFE36AA00766AD3 /* MFVarDeclareChain.m */,
+				7B64953E2AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.m */,
+				7B64953F2AFE36AA00766AD3 /* MFBlock.h */,
+				7B6495402AFE36AA00766AD3 /* MFValue+Private.h */,
+				7B6495412AFE36AA00766AD3 /* MFMethodMapTable.h */,
+				7B6495422AFE36AA00766AD3 /* MFScopeChain.m */,
+				7B6495432AFE36AA00766AD3 /* MFValue.m */,
+				7B6495442AFE36AA00766AD3 /* MFStructDeclareTable.h */,
+			);
+			path = RunEnv;
+			sourceTree = "<group>";
+		};
+		7B6495452AFE36AA00766AD3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				7B6495462AFE36AA00766AD3 /* errror.h */,
+				7B6495472AFE36AA00766AD3 /* errror.m */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		7B6495482AFE36AA00766AD3 /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				7B6495492AFE36AA00766AD3 /* create.m */,
+				7B64954A2AFE36AA00766AD3 /* Table */,
+				7B64954D2AFE36AA00766AD3 /* AST */,
+				7B6495662AFE36AA00766AD3 /* create.h */,
+				7B6495672AFE36AA00766AD3 /* lex_yacc */,
+			);
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		7B64954A2AFE36AA00766AD3 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				7B64954B2AFE36AA00766AD3 /* MFTypedefTable.m */,
+				7B64954C2AFE36AA00766AD3 /* MFTypedefTable.h */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		7B64954D2AFE36AA00766AD3 /* AST */ = {
+			isa = PBXGroup;
+			children = (
+				7B64954E2AFE36AA00766AD3 /* MFBlockBody.h */,
+				7B64954F2AFE36AA00766AD3 /* MFDeclarationModifier.h */,
+				7B6495502AFE36AA00766AD3 /* MFExpression.m */,
+				7B6495512AFE36AA00766AD3 /* MFClassDefinition.m */,
+				7B6495522AFE36AA00766AD3 /* MFStatement.h */,
+				7B6495532AFE36AA00766AD3 /* MFStructDeclare.m */,
+				7B6495542AFE36AA00766AD3 /* MFTypeSpecifier.h */,
+				7B6495552AFE36AA00766AD3 /* MFFunctionDefinition.m */,
+				7B6495562AFE36AA00766AD3 /* MFAnnotationableDefinition.m */,
+				7B6495572AFE36AA00766AD3 /* MFAnnotation.m */,
+				7B6495582AFE36AA00766AD3 /* MFInterpreter.h */,
+				7B6495592AFE36AA00766AD3 /* MFDeclaration.h */,
+				7B64955A2AFE36AA00766AD3 /* MFStatement.m */,
+				7B64955B2AFE36AA00766AD3 /* MFClassDefinition.h */,
+				7B64955C2AFE36AA00766AD3 /* MFExpression.h */,
+				7B64955D2AFE36AA00766AD3 /* MFBlockBody.m */,
+				7B64955E2AFE36AA00766AD3 /* MFStructDeclare.h */,
+				7B64955F2AFE36AA00766AD3 /* MFAnnotation.h */,
+				7B6495602AFE36AA00766AD3 /* MFAnnotationableDefinition.h */,
+				7B6495612AFE36AA00766AD3 /* MFFunctionDefinition.h */,
+				7B6495622AFE36AA00766AD3 /* MFTypeSpecifier.m */,
+				7B6495632AFE36AA00766AD3 /* MFDeclaration.m */,
+				7B6495642AFE36AA00766AD3 /* mf_ast.h */,
+				7B6495652AFE36AA00766AD3 /* MFInterpreter.m */,
+			);
+			path = AST;
+			sourceTree = "<group>";
+		};
+		7B6495672AFE36AA00766AD3 /* lex_yacc */ = {
+			isa = PBXGroup;
+			children = (
+				7B6495682AFE36AA00766AD3 /* mango.y */,
+				7B6495692AFE36AA00766AD3 /* mango.l */,
+			);
+			path = lex_yacc;
+			sourceTree = "<group>";
+		};
+		7B64956B2AFE36AA00766AD3 /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				7B64956C2AFE36AA00766AD3 /* ffitarget_arm64.h */,
+				7B64956D2AFE36AA00766AD3 /* ffitarget.h */,
+				7B64956E2AFE36AA00766AD3 /* ffi_arm.h */,
+				7B64956F2AFE36AA00766AD3 /* ffi_i386.h */,
+				7B6495702AFE36AA00766AD3 /* ffitarget_x86_64.h */,
+				7B6495712AFE36AA00766AD3 /* ffi_x86_64.h */,
+				7B6495722AFE36AA00766AD3 /* ffitarget_arm.h */,
+				7B6495732AFE36AA00766AD3 /* ffitarget_i386.h */,
+				7B6495742AFE36AA00766AD3 /* libffi.a */,
+				7B6495752AFE36AA00766AD3 /* ffi.h */,
+				7B6495762AFE36AA00766AD3 /* ffi_arm64.h */,
+			);
+			path = libffi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,11 +528,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				045839A725E8A11D00BBACF2 /* AppDelegate.m in Sources */,
+				7B64958A2AFE36AA00766AD3 /* create.m in Sources */,
+				7B6495902AFE36AA00766AD3 /* MFAnnotationableDefinition.m in Sources */,
+				7B64958D2AFE36AA00766AD3 /* MFClassDefinition.m in Sources */,
+				7B6495802AFE36AA00766AD3 /* MFStructDeclareTable.m in Sources */,
+				7B64958E2AFE36AA00766AD3 /* MFStructDeclare.m in Sources */,
+				7B6495872AFE36AA00766AD3 /* MFScopeChain.m in Sources */,
+				7B64957B2AFE36AA00766AD3 /* execute.m in Sources */,
+				7B6495922AFE36AA00766AD3 /* MFStatement.m in Sources */,
+				7B6495822AFE36AA00766AD3 /* MFWeakPropertyBox.m in Sources */,
+				7B6495772AFE36AA00766AD3 /* util.m in Sources */,
+				7B64958F2AFE36AA00766AD3 /* MFFunctionDefinition.m in Sources */,
+				7B6495842AFE36AA00766AD3 /* MFPropertyMapTable.m in Sources */,
+				7B6495862AFE36AA00766AD3 /* MFSwfitClassNameAlisTable.m in Sources */,
+				7B64958B2AFE36AA00766AD3 /* MFTypedefTable.m in Sources */,
+				7B6495892AFE36AA00766AD3 /* errror.m in Sources */,
 				045839AC25E8A13400BBACF2 /* MangoFixUtil.m in Sources */,
+				7B6495782AFE36AA00766AD3 /* NSData+AESEncryption.m in Sources */,
 				7BA94D6F271173C200872060 /* MFKeyChain.m in Sources */,
+				7B6495832AFE36AA00766AD3 /* MFStaticVarTable.m in Sources */,
+				7B64957D2AFE36AA00766AD3 /* MFBlock.m in Sources */,
+				7B6495792AFE36AA00766AD3 /* eval.m in Sources */,
+				7B6495812AFE36AA00766AD3 /* MFMethodMapTable.m in Sources */,
+				7B6495962AFE36AA00766AD3 /* MFInterpreter.m in Sources */,
 				045839A625E8A11D00BBACF2 /* main.m in Sources */,
+				7B64957E2AFE36AA00766AD3 /* MFStack.m in Sources */,
+				7B6495952AFE36AA00766AD3 /* MFDeclaration.m in Sources */,
+				7B6495982AFE36AA00766AD3 /* mango.l in Sources */,
+				7B6495912AFE36AA00766AD3 /* MFAnnotation.m in Sources */,
+				7B64957F2AFE36AA00766AD3 /* MFStatementResult.m in Sources */,
+				7B64957A2AFE36AA00766AD3 /* built-in.m in Sources */,
 				045839A225E8A11D00BBACF2 /* ViewController.m in Sources */,
+				7B6495932AFE36AA00766AD3 /* MFBlockBody.m in Sources */,
+				7B6495882AFE36AA00766AD3 /* MFValue.m in Sources */,
+				7B6495972AFE36AA00766AD3 /* mango.y in Sources */,
+				7B64958C2AFE36AA00766AD3 /* MFExpression.m in Sources */,
+				7B6495852AFE36AA00766AD3 /* MFVarDeclareChain.m in Sources */,
+				7B64957C2AFE36AA00766AD3 /* MFContext.m in Sources */,
 				EF2E12AE264FE8D6008E7F4D /* DemoViewController.m in Sources */,
+				7B6495942AFE36AA00766AD3 /* MFTypeSpecifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +624,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -371,7 +677,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -389,19 +695,25 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G2Y832M5KJ;
 				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MangoFixUtil",
 				);
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MangoFixUtil/MangoFix/libffi",
+				);
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
@@ -424,15 +736,20 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/MangoFixUtil",
 				);
+				GCC_INPUT_FILETYPE = sourcecode.c.objc;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Example/PrefixHeader.pch";
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MangoFixUtil/MangoFix/libffi",
+				);
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.superapp.gyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Gyun_Dev_Superapp;
