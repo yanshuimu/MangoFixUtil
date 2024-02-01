@@ -7,7 +7,7 @@
 
 /**
  * 本库需搭配补丁管理后台一起使用
- * http://patchhub.top
+ * https://patchhub.top
  *
  * Github地址：
  * https://github.com/yanshuimu/MangoFixUtil
@@ -15,9 +15,6 @@
  * 语法参考：
  * https://github.com/YPLiang19/Mango
  *
- * 注意：AES128密钥长度需为16的倍数，举个栗子：xWx2TilxtpHlvQrT
- *
- * 如需帮助，请联系QQ：593692553
  */
 
 #import <Foundation/Foundation.h>
@@ -27,13 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MangoFixUtil : NSObject
 
 /**
- * 控制是否简易模式，默认NO
+ * 是否简易模式，默认NO
  * 简易模式 - 不统计日活量、补丁激活数、设备数量等
  */
 @property(nonatomic, assign) BOOL isSimpleMode;
 
 /**
- * 控制是否Debug打印模式，默认YES
+ * 是否Debug打印模式，默认YES
  */
 @property(nonatomic, assign) BOOL isLogModeDebug;
 
@@ -49,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 以 AppId 初始化
- * debug  控制分发规则  YES 开发设备  NO 全量设备
+ * debug  控制分发规则  YES 开发模式  NO 生产模式
  */
 + (instancetype)startWithAppId:(NSString*)appId aesKey:(NSString *)aesKey;
 
@@ -61,8 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 以 UserId 初始化
- * debug  控制分发规则  YES 开发设备  NO 全量设备
- * 注意：以该方式初始化，需登录后台 -> 应用管理 -> 编辑 -> 填写BundleId
+ * debug  控制分发规则  YES 开发模式  NO 生产模式
+ * 注意：以该方式初始化，需登录后台 -> 应用管理 -> 设置 -> 填写Bundle ID
  */
 + (instancetype)startWithUserId:(NSString*)userId aesKey:(NSString *)aesKey;
 
@@ -97,6 +94,13 @@ NS_ASSUME_NONNULL_BEGIN
  * 删除沙盒Caches目录中文件名为<demo.mg>的补丁，重启App后生效
  */
 - (void)deleteLocalMangoScript;
+
+/**
+ * 云端日志
+ * @object 路径
+ * @msg 详细信息
+ */
+- (void)log:(id)object msg:(NSString*)msg;
 
 /**
  *  AES128加密

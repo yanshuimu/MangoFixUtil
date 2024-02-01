@@ -46,7 +46,7 @@
         make.right.mas_equalTo(-20);
         make.top.mas_equalTo(640);
     }];
-    _label.text = @"布衣饭菜，可乐终身111。——沈复《浮生六记》";
+    _label.text = @"布衣饭菜，可乐终身。——沈复《浮生六记》";
 }
 
 @end

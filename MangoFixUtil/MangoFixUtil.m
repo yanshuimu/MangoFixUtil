@@ -32,7 +32,7 @@ typedef void(^Fail)(NSString *msg);
 @property (nonatomic, copy) NSString *userId;
 
 /**
- * 控制分发规则  YES 开发设备  NO 全量设备
+ * 控制分发规则  YES 开发模式  NO 生产模式
  */
 @property (nonatomic, assign) BOOL debug;
 
@@ -165,7 +165,7 @@ typedef void(^Fail)(NSString *msg);
     if (scriptData && scriptData.length > 0) {
         NSString *scriptString = [self decrypt:scriptData];
         if (scriptString.length == 0) {
-            MFLog(@"Decrypt error!");
+            MFLog(@"AES decrypt error!");
             return;
         }
         [self startInterpret:scriptString];
@@ -219,7 +219,7 @@ typedef void(^Fail)(NSString *msg);
         if (scriptData && scriptData.length > 0) {
             NSString *scriptString = [self decrypt:scriptData];
             if (!scriptString.length) {
-                MFLog(@"Decrypt error!");
+                MFLog(@"AES decrypt error!");
                 return;
             }
             [self startInterpret:scriptString];
@@ -233,6 +233,11 @@ typedef void(^Fail)(NSString *msg);
     else {
         MFLog(@"The last patch does not exist!");
     }
+}
+
+- (void)log:(id)object msg:(NSString*)msg 
+{
+    [self requestLog:object msg:msg];
 }
 
 #pragma mark - MangoFix
@@ -331,12 +336,12 @@ typedef void(^Fail)(NSString *msg);
 
 - (NSString*)UUIDKey
 {
-    return [NSString stringWithFormat:@"%@.mfu.uuid", MFBundleIdentifier];
+    return [NSString stringWithFormat:@"%@.mfu.uuid", [self bundleIdentifier]];
 }
 
 - (NSString*)fileIdKey
 {
-    return [NSString stringWithFormat:@"%@.mfu.fileid", MFBundleIdentifier];
+    return [NSString stringWithFormat:@"%@.mfu.fileid", [self bundleIdentifier]];
 }
 
 - (NSString*)deviceKey:(NSString*)fileId
@@ -347,6 +352,21 @@ typedef void(^Fail)(NSString *msg);
 - (NSString*)patchKey:(NSString*)fileId
 {
     return [NSString stringWithFormat:@"%@.patch", fileId];
+}
+
+- (NSString*)bundleIdentifier
+{
+    return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleIdentifier"];
+}
+
+- (NSString*)bundleVersion
+{
+    return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+}
+
+- (NSString*)bundleDisplayName
+{
+    return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"];
 }
 
 #pragma mark - Network
@@ -405,7 +425,7 @@ typedef void(^Fail)(NSString *msg);
         if (scriptData && scriptData.length > 0) {
             NSString *scriptString = [self decrypt:scriptData];
             if (!scriptString.length) {
-                MFLog(@"Decrypt error!");
+                MFLog(@"AES decrypt error!");
                 return;
             }
             [self startInterpret:scriptString];
@@ -465,6 +485,25 @@ typedef void(^Fail)(NSString *msg);
     }];
 }
 
+- (void)requestLog:(id)sender msg:(NSString*)msg {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if ([sender isKindOfClass:NSString.class]) {
+        params[@"path"] = sender;
+    } else if ([sender isKindOfClass:NSObject.class]){
+        NSObject *object = sender;
+        params[@"path"] = NSStringFromClass(object.class);
+    } else {
+        params[@"path"] = sender;
+    }
+    params[@"detailMsg"] = msg;
+    [[MangoFixUtil sharedUtil] postWithUrl:MFInsertUserLogUrl params:params succ:^(NSDictionary *dict) {
+        MFLog(@"%@", dict[@"msg"]);
+    } fail:^(NSString *msg) {
+        MFLog(@"%@", msg);
+    }];
+}
+
 - (void)postWithUrl:(NSString*)url params:(NSDictionary*)params succ:(Succ)succ fail:(Fail)fail
 {
     @MFWeakSelf
@@ -508,9 +547,10 @@ typedef void(^Fail)(NSString *msg);
         _baseParams[@"userid"] = _userId;
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
-        _baseParams[@"sdk"] = @"2.1.4";
-        _baseParams[@"bundleid"] = MFBundleIdentifier;
-        _baseParams[@"version"] = MFBundleShortVersion;
+        _baseParams[@"sdk"] = @"2.1.5";
+        _baseParams[@"bundleid"] = [self bundleIdentifier];
+        _baseParams[@"version"] = [self bundleVersion];
+        _baseParams[@"appname"] = [self bundleDisplayName];
     }
     return _baseParams;
 }

@@ -9,7 +9,7 @@
 #define MFMacrosConstant_h
 
 
-NSString * const MFBaseUrl = @"http://patchhub.top/mangofix";
+NSString * const MFBaseUrl = @"https://patchhub.top/mangofix";
 
 NSString * const MFCheckMangoFileUrl = @"/api/checkmangofile";
 
@@ -19,12 +19,7 @@ NSString * const MFActivatePatchUrl = @"/api/activatepatch";
 
 NSString * const MFActivateDeviceUrl = @"/api/activatedevice";
 
-
-#define MFBundleShortVersion [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]
-
-#define MFBundleIdentifier [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleIdentifier"]
-
-#define MFBundleDisplayName [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"]
+NSString * const MFInsertUserLogUrl = @"/api/insertUserLog";
 
 #ifdef RELEASE
     #define MFLog(FORMAT, ...) nil

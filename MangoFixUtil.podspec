@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'MangoFixUtil'
   s.version          = '2.1.5-dev'
-  s.summary          = '该库是对MangoFix做了二次封装，需搭配后台（http://patchhub.top）使用。'
+  s.summary          = '该库是对MangoFix做了二次封装，需搭配后台（https://patchhub.top）使用。'
   s.homepage         = 'https://github.com/yanshuimu/MangoFixUtil'
   s.license          = 'MIT'
   s.author           = { 'yanshuimu' => '593692553@qq.com' }

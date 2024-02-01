@@ -83,6 +83,10 @@ util.evalRemoteMangoScript()
 
 ## Update
 
+#### v2.1.5
+1. 更新MangoFix SDK版本至1.5.5。
+2. 新增云端日志功能。
+
 #### v2.1.4
 1. 优化
 
@@ -116,7 +120,7 @@ util.evalRemoteMangoScript()
 1. 支持设备数、激活数统计。
 
 #### v1.0.6
-1. 支持开发设备、全量设备。
+1. 支持开发模式、生产模式。
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
