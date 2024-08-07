@@ -8,6 +8,8 @@ MangoFixUtil是对[MangoFix](https://github.com/YPLiang19/Mango)进行了简单�
 
 【平台声明】该项目不管现在还是以后都不会有任何形式的收费，也不需要打赏。如果你觉得不错，可以给个小星星支持，在此表示感谢^_^
 
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)
+[![Platform](https://img.shields.io/cocoapods/p/MangoFixUtil.svg?style=flat)](http://cocoadocs.org/docsets/MangoFixUtil)
 ## Example
 
 ```objc
