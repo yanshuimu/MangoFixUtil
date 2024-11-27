@@ -21,35 +21,15 @@ typedef void(^Fail)(NSString *msg);
 
 @property(nonatomic, strong) MFInterpreter *interpreter;
 
-/**
- * appId
- */
-@property (nonatomic, copy) NSString *appId;
-
-/**
- * userId
- */
-@property (nonatomic, copy) NSString *userId;
-
-/**
- * 控制分发规则  YES 开发模式  NO 生产模式
- */
-@property (nonatomic, assign) BOOL debug;
-
-/**
- * AES128密钥，长度需为16的倍数，举个栗子：xWx2TilxtpHlvQrT
- */
-@property (nonatomic, copy) NSString *aesKey;
-
-/**
- * uuid
- */
-@property (nonatomic, copy) NSString *uuid;
-
-/**
- * 公共参数
- */
 @property (nonatomic, strong) NSMutableDictionary *baseParams;
+
+@property (nonatomic, copy) NSString *appId;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *aesKey;
+@property (nonatomic, copy) NSString *deviceUUID;
+
+@property (nonatomic, assign) BOOL debug;
+@property (nonatomic, assign) BOOL delayActivatePatch;
 
 @end
 
@@ -69,7 +49,7 @@ typedef void(^Fail)(NSString *msg);
 {
     if (self = [super init]) {
         _interpreter = [[MFInterpreter alloc] init];
-        _uuid = [self loadUUID];
+        _deviceUUID = [self loadDeviceUUID];
         _isLogModeDebug = YES;
     }
     return self;
@@ -134,6 +114,10 @@ typedef void(^Fail)(NSString *msg);
     }
     @catch (NSException *exception) {
         MFLog(@"%@", exception);
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(mangoFixUtil:didCatchException:)]) {
+            [self.delegate mangoFixUtil:self didCatchException:exception];
+        }
     }
     @finally {
         [self requestCheckRemotePatch];
@@ -187,7 +171,7 @@ typedef void(^Fail)(NSString *msg);
         return scriptPath;
     }
     NSData *scriptData = [self encrypt:scriptString];
-    scriptPath = [[self documentsPath] stringByAppendingPathComponent:@"encrypted_demo.mg"];
+    scriptPath = [[self documentDirectory] stringByAppendingPathComponent:@"encrypted_demo.mg"];
     [scriptData writeToFile:scriptPath options:NSDataWritingAtomic error:&error];
     if (error) {
         MFLog(@"%@", error.localizedDescription);
@@ -200,7 +184,7 @@ typedef void(^Fail)(NSString *msg);
 - (void)deleteLocalMangoScript
 {
     NSError *error = nil;
-    NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
+    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
         if (error) {
@@ -213,7 +197,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)evalLastPatch
 {
-    NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
+    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
         if (scriptData && scriptData.length > 0) {
@@ -224,10 +208,17 @@ typedef void(^Fail)(NSString *msg);
             }
             [self startInterpret:scriptString];
             MFLog(@"The last patch is successfully executed!");
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(didExecuteLastPatch:)]) {
+                [self.delegate didExecuteLastPatch:self];
+            }
+            
             [self requestActivatePatch:[self userDefaultsGet:[self fileIdKey]]];
         }
         else {
             MFLog(@"The last patch content is empty!");
+            
+            [self requestActivatePatch:[self userDefaultsGet:[self fileIdKey]]];
         }
     }
     else {
@@ -241,6 +232,12 @@ typedef void(^Fail)(NSString *msg);
 }
 
 #pragma mark - MangoFix
+
+- (BOOL)deviceActivated:(NSString*)key
+{
+    NSString *value = [MFKeyChain load:key];
+    return value.intValue == 1;
+}
 
 - (void)startInterpret:(NSString*)scriptString
 {
@@ -282,25 +279,20 @@ typedef void(^Fail)(NSString *msg);
 
 #pragma mark - Other
 
-- (NSString*)loadUUID
+- (NSString*)loadDeviceUUID
 {
-    NSString *uuid = [MFKeyChain load:[self UUIDKey]];
-    if (uuid.length == 0) {
-        uuid = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
-        if(uuid.length > 16) uuid = [uuid substringToIndex:16];
-        [MFKeyChain save:[self UUIDKey] data:uuid];
+    NSString *deviceUUID = [MFKeyChain load:[self UUIDKey]];
+    if (deviceUUID.length == 0) {
+        deviceUUID = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if(deviceUUID.length > 16) deviceUUID = [deviceUUID substringToIndex:16];
+        [MFKeyChain save:[self UUIDKey] data:deviceUUID];
     }
-    return uuid;
+    return deviceUUID;
 }
 
-- (NSString*)documentsPath
+- (NSString*)documentDirectory
 {
     return (NSString *)[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-}
-
-- (NSString*)cachesPath
-{
-    return (NSString *)[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 - (NSDictionary *)jsonString2Dictionary:(NSString *)jsonString
@@ -378,7 +370,7 @@ typedef void(^Fail)(NSString *msg);
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"fileid"] = fileId;
     if (_isSimpleMode == NO) {
-        params[@"uuid"] = _uuid;
+        params[@"uuid"] = _deviceUUID;
         params[@"extend"] = _extend;
     }
     
@@ -388,16 +380,16 @@ typedef void(^Fail)(NSString *msg);
         NSInteger code = [dict[@"code"] intValue];
         MFLog(@"%@", dict[@"msg"]);
         if (code == 202) {
-            //The current patch is up to date...
+            // The current patch is up to date...
             [self requestActivateDevice:fileId];
         }
         else if (code == 500) {
-            //No new patch was detected...
+            // No new patch was detected...
             [self deleteLocalMangoScript];
             [self userDefaultsRemove:[self fileIdKey]];
         }
         else if (code == 200){
-            //A new patch was detected...
+            // A new patch was detected...
             NSDictionary *rows = dict[@"rows"];
             NSString *fileId = [NSString stringWithFormat:@"%@", rows[@"fileid"]];
             [self requestActivateDevice:fileId];
@@ -413,7 +405,12 @@ typedef void(^Fail)(NSString *msg);
     @MFWeakSelf
     [self postWithUrl:MFGetMangoFileUrl params:nil succ:^(NSData *scriptData) {
         @MFStrongSelf
-        NSString *filePath = [[self cachesPath] stringByAppendingPathComponent:@"demo.mg"];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didDownloadRemotePatch:)]) {
+            [self.delegate didDownloadRemotePatch:self];
+        }
+        
+        NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
         if (![scriptData writeToFile:filePath atomically:YES]) {
             MFLog(@"Failed to save the latest patch!");
             return;
@@ -430,6 +427,16 @@ typedef void(^Fail)(NSString *msg);
             }
             [self startInterpret:scriptString];
             MFLog(@"The latest patch is successfully executed!");
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(didExecuteRemotePatch:)]) {
+                [self.delegate didExecuteRemotePatch:self];
+            }
+            
+            [self requestActivatePatch:fileId];
+        }
+        else {
+            MFLog(@"The latest patch content is empty!");
+            
             [self requestActivatePatch:fileId];
         }
     } fail:^(NSString *msg) {
@@ -444,8 +451,9 @@ typedef void(^Fail)(NSString *msg);
     if (fileId.length == 0) return;
     
     NSString *key = [self deviceKey:fileId];
-    NSString *value = [MFKeyChain load:key];
-    if (value.intValue == 1) return;
+    if ([self deviceActivated:key]) {
+        return;
+    }
     MFLog(@"Device not activated!");
     
     [self postWithUrl:MFActivateDeviceUrl params:@{@"fileid": fileId} succ:^(NSDictionary *dict) {
@@ -455,6 +463,10 @@ typedef void(^Fail)(NSString *msg);
         else {
             [MFKeyChain save:key data:@"1"];
             MFLog(@"Device is activate successfully!");
+            
+            if (self.delayActivatePatch) {
+                [self requestActivatePatch:fileId];
+            }
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
@@ -466,6 +478,12 @@ typedef void(^Fail)(NSString *msg);
     if (_debug) return;
     if (_isSimpleMode) return;
     if (fileId.length == 0) return;
+    
+    if (![self deviceActivated:[self deviceKey:fileId]]) {
+        // device not activated, delayed activation patch
+        _delayActivatePatch = YES;
+        return;
+    }
     
     NSString *key = [self patchKey:fileId];
     NSString *value = [MFKeyChain load:key];
@@ -479,6 +497,8 @@ typedef void(^Fail)(NSString *msg);
         else {
             [MFKeyChain save:key data:@"1"];
             MFLog(@"Patch is activate successfully!");
+            
+            self.delayActivatePatch = NO;
         }
     } fail:^(NSString *msg) {
         MFLog(@"%@", msg);
@@ -547,7 +567,7 @@ typedef void(^Fail)(NSString *msg);
         _baseParams[@"userid"] = _userId;
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
-        _baseParams[@"sdk"] = @"2.1.5";
+        _baseParams[@"sdk"] = @"2.1.6";
         _baseParams[@"bundleid"] = [self bundleIdentifier];
         _baseParams[@"version"] = [self bundleVersion];
         _baseParams[@"appname"] = [self bundleDisplayName];
