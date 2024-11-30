@@ -101,5 +101,11 @@ util.evalRemoteMangoScript()
 
 ```
 
+## 最新 2.1.6 @2024.11.27
+### SDK
+- 新增代理方法
+- 修复偶现补丁激活数大于设备数的问题
+- 修复偶现补丁失效的问题
+
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
