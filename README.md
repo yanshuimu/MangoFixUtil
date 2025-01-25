@@ -5,13 +5,13 @@
 
 MangoFixUtil是一个iOS平台的热更新库，基于[MangoFix](https://github.com/YPLiang19/Mango)，拓展增加了统计激活数、应用日活量、在线日志等功能。该库在项目中经过多年实战并多次迭代，已可以满足线上应用的日常问题修复。
 
-注意：模拟器运行需用Rosetta方式
-
 需搭配补丁管理后台[PatchHub](https://patchhub.top/mangofix/login)使用，目前AppStore中使用MangoFixUtil的有效应用数量已达140+，尚未出现因此库导致审核被拒的情况，平台已稳定运行4年，且会一直坚持不会有任何形式的收费。
 
 <div align="center">
     <img src="Assets/demoImage.png" width=900>
 </div>
+
+注意：模拟器运行需用Rosetta方式
 
 ## Example
 
