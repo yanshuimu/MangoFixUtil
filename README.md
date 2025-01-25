@@ -10,7 +10,7 @@ MangoFixUtil是一个iOS平台的热更新库，基于[MangoFix](https://github.
 需搭配补丁管理后台[PatchHub](https://patchhub.top/mangofix/login)使用，目前AppStore中使用MangoFixUtil的有效应用数量已达140+，尚未出现因此库导致审核被拒的情况，平台已稳定运行4年，且会一直坚持不会有任何形式的收费。
 
 <div align="center">
-    <img src="Assets/demoImage.png" width=600>
+    <img src="Assets/demoImage.png" width=900>
 </div>
 
 ## Example
