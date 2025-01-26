@@ -1,18 +1,31 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)
 [![Platform](https://img.shields.io/cocoapods/p/MangoFixUtil.svg?style=flat)](http://cocoadocs.org/docsets/MangoFixUtil)
 
-## Introduce
+## 项目简介
 
-MangoFixUtil是一个iOS平台的热更新库，基于[MangoFix](https://github.com/YPLiang19/Mango)，拓展增加了统计激活数、应用日活量、在线日志等功能。该库在项目中经过多年实战并多次迭代，已可以满足线上应用的日常问题修复。
+一个简单、好用、稳定的iOS热更新平台，目前能正常过审。
+    
+在中大型项目中经过多年实战迭代，能满足App日常的Bug修复、功能更新。
 
-需搭配补丁管理后台[PatchHub](https://patchhub.top/mangofix/login)使用，目前AppStore中使用MangoFixUtil的有效应用数量已达140+，尚未出现因此库导致审核被拒的情况，平台已稳定运行4年，且会一直坚持不会有任何形式的收费。
+拥有一批忠实、活跃的老用户。
 
+累计已服务 150+ AppStore应用。
+
+## 主要功能
+
+[PatchHub](https://patchhub.top/mangofix/login) 主要功能有 应用管理 | 版本管理 | 补丁管理 | 日活统计| 在线日志 | 系统设置，具体如图：
+  
 <div align="center">
     <img src="Assets/demoImage.png" width=900>
 </div>
 
-注意：模拟器运行需用Rosetta方式
+<br>
 
+# 最近更新
+- 2024.11.27: 新增代理方法 | 修复偶现补丁激活数大于设备数的问题 | 修复偶现补丁失效的问题
+
+<br>
+  
 ## Example
 
 ```objc
@@ -105,11 +118,7 @@ util.evalRemoteMangoScript()
 
 ```
 
-## 最新 2.1.6 @2024.11.27
-### SDK
-- 新增代理方法
-- 修复偶现补丁激活数大于设备数的问题
-- 修复偶现补丁失效的问题
+注意：模拟器运行需用Rosetta方式
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
