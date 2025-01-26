@@ -7,17 +7,21 @@
     
 在中大型项目中经过多年实战迭代，能满足App日常的Bug修复、功能更新。
 
-拥有一批忠实、活跃的老用户。
+拥有一批忠实、活跃的老用户，最早2021年5月使用至今。
 
 累计已服务 150+ AppStore应用。
 
 ## 主要功能
 
-[PatchHub](https://patchhub.top/mangofix/login) 主要功能有 应用管理 | 版本管理 | 补丁管理 | 日活统计| 在线日志 | 系统设置，具体如图：
+主要功能有 应用管理 | 版本管理 | 补丁管理 | 日活统计| 在线日志 | 系统设置，具体如图：
   
 <div align="center">
     <img src="Assets/demoImage.png" width=900>
 </div>
+
+<br>
+
+平台地址：https://patchhub.top/mangofix/login
 
 <br>
 
