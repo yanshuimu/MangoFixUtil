@@ -22,7 +22,7 @@
 <br>
 
 平台地址：https://patchhub.top/mangofix/login
-
+QQ群：1028778036
 <br>
 
 ## 最近更新
