@@ -24,6 +24,9 @@
 平台地址：https://patchhub.top/mangofix/login
 <br>
 
+Gitee：[https://gitee.com/xhg8131/mango-fix-util](https://gitee.com/xhg8131/mango-fix-util)
+<br>
+
 QQ群：1028778036
 <br>
 
