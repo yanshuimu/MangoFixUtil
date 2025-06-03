@@ -1,21 +1,61 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)
 [![Platform](https://img.shields.io/cocoapods/p/MangoFixUtil.svg?style=flat)](http://cocoadocs.org/docsets/MangoFixUtil)
 
-## Introduce
+## 项目简介
 
-MangoFixUtil是一个iOS平台的热更新库，基于[MangoFix](https://github.com/YPLiang19/Mango)，拓展增加了统计激活数、应用日活量、在线日志等功能。该库在项目中经过多年实战并多次迭代，已可以满足线上应用的日常问题修复。
+一个简单、好用、稳定的iOS热更新平台，目前能正常过审。
+    
+在中大型项目中经过多年实战迭代，能满足App日常的Bug修复、功能更新。
 
-注意：模拟器运行需用Rosetta方式
+拥有一批忠实、活跃的老用户，最早2021年5月使用至今。
 
-热更新补丁的分发管理由[PatchHub](https://patchhub.top/mangofix/login)提供技术支持，截至24年8月，AppStore中使用MangoFixUtil的有效应用数量已达140+，该平台已稳定运营3年，且会一直坚持不会有任何形式的收费。如果你觉得不错，可以给个小星星支持！
+累计已服务 150+ AppStore应用。
 
-## Example
+## 主要功能
+
+主要功能有 应用管理 | 版本管理 | 补丁管理 | 日活统计 | 在线日志 | 系统设置，具体如图：
+  
+<div align="center">
+    <img src="Assets/demoImage.png" width=900>
+</div>
+
+<br>
+
+平台地址：https://patchhub.top/mangofix/login
+<br>
+
+Gitee：[https://gitee.com/xhg8131/mango-fix-util](https://gitee.com/xhg8131/mango-fix-util)
+<br>
+
+QQ群：1028778036
+<br>
+
+## 最近更新
+- 2024.11.27: 新增代理方法 | 修复偶现补丁激活数大于设备数的问题 | 修复偶现补丁失效的问题
+
+<br>
+  
+## 准备工作
+
+### CocoaPods
+
+推荐使用[CocoaPods](http://cocoapods.org)方式添加MangoFixUtil到您的项目中
+
+```ruby
+# Podfile
+pod 'MangoFixUtil', '~> 2.1.6'
+```
+
+<br>
+
+## 示例
 
 ```objc
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
+    // 我们把初始化放在最前面，这样的好处是在该方法后面执行的代码都可以被修复
     [self setupMangoFixUtil];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -33,56 +73,10 @@ MangoFixUtil是一个iOS平台的热更新库，基于[MangoFix](https://github.
 
 @end
 ```
-## Installation
 
-### CocoaPods
+注意：模拟器运行需用Rosetta方式
 
-```ruby
-# Your Podfile
-pod 'MangoFixUtil'
-```
-
-## Usage
-
-### Objective-C
-`#import <MangoFixUtil/MangoFixUtil.h>`
-
-```objc
-MangoFixUtil *util = [MangoFixUtil startWithAppId:APPID aesKey:AES128KEY];
-
-// exec local unEncrypted mangofix file
-[util evalLocalUnEncryptedMangoScript];
-
-// encrypt plain mangofix file to document directory
-[util encryptPlainScriptToDocument];
-
-// exec local encrypted mangofix file
-[util evalLocalEncryptedMangoScript];
-
-// exec mangofix file from network
-[util evalRemoteMangoScript];
-
-```
-
-### Swift
-`import MangoFixUtil`
-
-```swift
-let util = MangoFixUtil.start(withAppId: kAppId, aesKey: kAesKey)
-
-// exec local unEncrypted mangofix file
-util.evalLocalUnEncryptedMangoScript()
-
-// encrypt plain mangofix file to document directory
-util.encryptPlainScriptToDocument()
-
-// exec local encrypted mangofix file
-util.evalLocalEncryptedMangoScript()
-
-// exec mangofix file from network
-util.evalRemoteMangoScript()
-
-```
+<br>
 
 ## Thanks for
 [Mango](https://github.com/YPLiang19/Mango)
