@@ -6,15 +6,19 @@
 //
 
 /**
- * 本库需搭配补丁管理后台一起使用
+ * 平台地址：
  * https://patchhub.top
  *
- * Github地址：
+ * Github：
  * https://github.com/yanshuimu/MangoFixUtil
+ *
+ * Gitee：
+ * https://gitee.com/xhg8131/mango-fix-util
  *
  * 语法参考：
  * https://github.com/YPLiang19/Mango
  *
+ * QQ群：1028778036
  */
 
 #import <Foundation/Foundation.h>

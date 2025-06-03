@@ -184,7 +184,7 @@ typedef void(^Fail)(NSString *msg);
 - (void)deleteLocalMangoScript
 {
     NSError *error = nil;
-    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
+    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:[self patchFileName]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
         if (error) {
@@ -197,7 +197,7 @@ typedef void(^Fail)(NSString *msg);
 
 - (void)evalLastPatch
 {
-    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
+    NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:[self patchFileName]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *scriptData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:filePath]];
         if (scriptData && scriptData.length > 0) {
@@ -353,12 +353,18 @@ typedef void(^Fail)(NSString *msg);
 
 - (NSString*)bundleVersion
 {
-    return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+    return [version stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (NSString*)bundleDisplayName
 {
     return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"];
+}
+
+- (NSString*)patchFileName
+{
+    return [NSString stringWithFormat:@"demo_%@_%@.mg", [self bundleVersion], (_debug ? @"debug" : @"release")];
 }
 
 #pragma mark - Network
@@ -410,7 +416,7 @@ typedef void(^Fail)(NSString *msg);
             [self.delegate didDownloadRemotePatch:self];
         }
         
-        NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:@"demo.mg"];
+        NSString *filePath = [[self documentDirectory] stringByAppendingPathComponent:[self patchFileName]];
         if (![scriptData writeToFile:filePath atomically:YES]) {
             MFLog(@"Failed to save the latest patch!");
             return;
@@ -567,7 +573,7 @@ typedef void(^Fail)(NSString *msg);
         _baseParams[@"userid"] = _userId;
         _baseParams[@"debug"] = @(_debug);
         _baseParams[@"encrypt"] = @"1";
-        _baseParams[@"sdk"] = @"2.1.6";
+        _baseParams[@"sdk"] = @"2.1.7";
         _baseParams[@"bundleid"] = [self bundleIdentifier];
         _baseParams[@"version"] = [self bundleVersion];
         _baseParams[@"appname"] = [self bundleDisplayName];

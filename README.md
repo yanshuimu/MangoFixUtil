@@ -43,7 +43,7 @@ QQ群：1028778036
 
 ```ruby
 # Podfile
-pod 'MangoFixUtil', '~> 2.1.6'
+pod 'MangoFixUtil', '~> 2.1.7'
 ```
 
 <br>

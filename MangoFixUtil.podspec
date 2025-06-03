@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'MangoFixUtil'
-  s.version          = '2.1.6'
+  s.version          = '2.1.7'
   s.summary          = '此库基于MangoFix封装，需搭配后台（https://patchhub.top）使用，具备应用管理、补丁管理、版本管理、日活统计、在线日志等功能。'
   s.homepage         = 'https://github.com/yanshuimu/MangoFixUtil'
   s.license          = 'MIT'
