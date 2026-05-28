@@ -92,34 +92,6 @@ MangoFixUtil *util = [MangoFixUtil sharedUtil];
 
 ---
 
-## 🛠 平台技术栈
-
-| 层 | 技术 |
-|----|------|
-| 前端 | HTML5 + CSS3 + JavaScript |
-| UI 框架 | Bootstrap 5 + jQuery 3.5 |
-| 代码高亮 | Prism.js |
-| 图标 | Font Awesome 6 |
-| 后端 API | 加密传输 (RSA) |
-| 引擎 | MangoFix |
-
----
-
-## 📂 项目结构
-
-```
-website/
-├── index.html          # 官方网站主页
-├── css/
-│   └── style.css       # 样式文件
-├── js/
-│   └── main.js         # 交互脚本
-├── img/                # 图片资源
-└── README.md
-```
-
----
-
 ## 🌐 在线访问
 
 | 入口 | 链接 |
