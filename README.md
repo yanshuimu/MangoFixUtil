@@ -1,84 +1,150 @@
-[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)](https://img.shields.io/cocoapods/v/MangoFixUtil.svg)
-[![Platform](https://img.shields.io/cocoapods/p/MangoFixUtil.svg?style=flat)](http://cocoadocs.org/docsets/MangoFixUtil)
-
-## 项目简介
-
-一个简单、好用、稳定的iOS热更新平台，目前能正常过审。
-    
-在中大型项目中经过多年实战迭代，能满足App日常的Bug修复、功能更新。
-
-拥有一批忠实、活跃的老用户，最早2021年5月使用至今。
-
-累计已服务 150+ AppStore应用。
-
-## 主要功能
-
-主要功能有 应用管理 | 版本管理 | 补丁管理 | 日活统计 | 在线日志 | 系统设置，具体如图：
-  
 <div align="center">
-    <img src="Assets/demoImage.png" width=900>
+  <img src="https://img.shields.io/badge/platform-iOS-blue?style=flat-square&logo=apple" />
+  <img src="https://img.shields.io/badge/language-Objective--C-orange?style=flat-square" />
+  <img src="https://img.shields.io/badge/SDK-MangoFixUtil%202.1.7-brightgreen?style=flat-square" />
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square" />
 </div>
 
-<br>
+<br />
 
-平台地址：https://patchhub.top/mangofix/login
-<br>
+<p align="center">
+  <h1 align="center">🔧 PatchHub</h1>
+  <p align="center"><strong>MangoFix 热修复平台 · 让 iOS 应用修复快人一步</strong></p>
+</p>
 
-Gitee：[https://gitee.com/xhg8131/mango-fix-util](https://gitee.com/xhg8131/mango-fix-util)
-<br>
+---
 
-QQ群：1028778036
-<br>
+## 📖 简介
 
-## 最近更新
-- 2025.06.03: 优化缓存补丁命名规则，使得版本升级或分发规则切换更加自然
+**PatchHub** 是基于 [MangoFix](https://github.com) 引擎构建的 iOS 热修复管理平台，为 iOS 开发者提供**一站式热修复解决方案**。
 
-- 2024.11.27: 新增代理方法 | 修复偶现补丁激活数大于设备数的问题 | 修复偶现补丁失效的问题
+无需 App Store 审核，无需用户主动更新，**分钟级修复线上 Bug**，真正做到零感知、零等待。
 
-<br>
-  
-## 准备工作
+| 特性 | 说明 |
+|------|------|
+| 🚀 **极速修复** | 从发现问题到全量修复，分钟级完成 |
+| 🔒 **安全可靠** | AES + RSA 双重加密，保障补丁传输安全 |
+| 📊 **全程可视** | 激活量、日活、日志全链路追踪 |
+| 🎯 **精准控制** | 按应用、版本、规则灵活下发 |
 
-### CocoaPods
+---
 
-推荐使用[CocoaPods](http://cocoapods.org)方式添加MangoFixUtil到您的项目中
+## 🧩 核心功能
+
+### 📱 应用管理
+一键创建和管理多个 iOS 应用，支持 Bundle ID 配置、独立 RSA/AES 密钥管理、批量导出应用数据。
+
+### 🔨 补丁管理
+支持**开发模式**（单设备验证）和**生产模式**（全量下发）双模式发布。AES + RSA 双重加密，一键撤回或重新发布，实时查看补丁激活状态和下发量。
+
+### 📈 日活统计
+近 7 日滚动窗口实时展示各应用日活用户数，直观掌握应用健康度和用户活跃趋势。
+
+### 🐛 在线日志
+全量记录用户操作路径和页面详情，支持 IP 归属地追踪，按时间/应用筛选，精准定位问题场景。
+
+### 📚 帮助文档
+从 CocoaPods 接入到补丁开发发布，完整文档 + 常用 OC 代码片段 + 转换工具，开箱即用。
+
+### 💬 用户反馈
+内置反馈系统，支持富文本编辑提交，开发者可实时查看和处理用户反馈。
+
+---
+
+## ⚡ 快速接入
+
+### 1. 安装 SDK
 
 ```ruby
 # Podfile
-pod 'MangoFixUtil', '~> 2.1.7'
+target 'YourApp' do
+  pod 'MangoFixUtil', '~> 2.1.7'
+end
 ```
 
-<br>
-
-## 示例
+### 2. 初始化
 
 ```objc
-@implementation AppDelegate
+// 获取单例对象
+MangoFixUtil *util = [MangoFixUtil sharedUtil];
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+// 使用 AppId 初始化 SDK
+[util startWithAppId:@"您的AppId"];
+```
 
-    // 我们把初始化放在最前面，这样的好处是在该方法后面执行的代码都可以被修复
-    [self setupMangoFixUtil];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[ViewController alloc] init];
-    [self.window makeKeyAndVisible];
-            
-    return YES;
-}
+### 3. 开发补丁
 
-- (void)setupMangoFixUtil {
-    
-    [[MangoFixUtil startWithAppId:APPID aesKey:AES128KEY] evalRemoteMangoScript];
+```objc
+// 修复示例：修正某个页面的标题
+@implementation YourViewController (Fix)
+
+- (void)viewDidLoad {
+    [self viewDidLoad];
+    self.title = @"正确的标题";
 }
 
 @end
 ```
 
-注意：模拟器运行需用Rosetta方式
+### 4. 发布上线
 
-<br>
+登录 [PatchHub 控制台](https://patchhub.top/mangofix/login.html)，上传 `.mg` 补丁文件，选择目标应用和版本，一键发布即可生效。
 
-## Thanks for
-[Mango](https://github.com/YPLiang19/Mango)
+---
+
+## 🛠 平台技术栈
+
+| 层 | 技术 |
+|----|------|
+| 前端 | HTML5 + CSS3 + JavaScript |
+| UI 框架 | Bootstrap 5 + jQuery 3.5 |
+| 代码高亮 | Prism.js |
+| 图标 | Font Awesome 6 |
+| 后端 API | 加密传输 (RSA) |
+| 引擎 | MangoFix |
+
+---
+
+## 📂 项目结构
+
+```
+website/
+├── index.html          # 官方网站主页
+├── css/
+│   └── style.css       # 样式文件
+├── js/
+│   └── main.js         # 交互脚本
+├── img/                # 图片资源
+└── README.md
+```
+
+---
+
+## 🌐 在线访问
+
+| 入口 | 链接 |
+|------|------|
+| 🏠 官方网站 | 本地 `index.html` |
+| 🖥️ 管理控制台 | [patchhub.top/mangofix](https://patchhub.top/mangofix/login.html) |
+| 📖 帮助文档 | [接入文档](https://patchhub.top/mangofix/helpInit) |
+
+---
+
+## 📞 联系我们
+
+| 方式 | 信息 |
+|------|------|
+| 📧 邮箱 | `262316248@qq.com` |
+
+---
+
+## 📄 备案信息
+
+- 粤ICP备2021037764号-1
+- 粤公网安备 44190002005513号
+
+---
+
+<p align="center">
+  <sub>Made with ❤️ for iOS Developers</sub>
+</p>
